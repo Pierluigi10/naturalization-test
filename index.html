@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einbürgerungstest - Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 16px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #1f2937;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .option:hover:not(.disabled) {
+            border-color: #667eea;
+            background: #f3f4ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #f3f4ff;
+        }
+
+        .option.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+
+        .option.wrong {
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+        }
+
+        .option-letter {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid #9ca3af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .option-text {
+            flex: 1;
+            line-height: 1.5;
+        }
+
+        .icon {
+            margin-left: 8px;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            flex: 1;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #e5e7eb;
+        }
+
+        .btn-stats {
+            background: transparent;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 12px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            padding: 20px;
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .import-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .import-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .code-example {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .answer-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 16px;
+        }
+
+        .answer-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .answer-item.unanswered {
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+        }
+
+        .answer-item.correct {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+        }
+
+        .answer-item.incorrect {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 12px;
+                padding-bottom: 60px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .question {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+
+    <!-- Carica le domande -->
+    <script src="questions.js"></script>
+
+    <script>
+        class QuizApp {
+            constructor() {
+                this.questions = [];
+                this.currentIndex = 0;
+                this.answers = {};
+                this.view = 'quiz';
+                this.showResult = false;
+                this.selectedAnswer = null;
+                
+                this.loadData();
+                this.render();
+            }
+
+            loadData() {
+                // Prima prova a caricare dal localStorage
+                const stored = localStorage.getItem('quiz-questions');
+
+                if (typeof QUESTIONS_DATA !== 'undefined') {
+                    // Se abbiamo QUESTIONS_DATA, confronta con localStorage
+                    if (stored) {
+                        const storedQuestions = JSON.parse(stored);
+                        // Se il numero di domande è diverso, aggiorna dal file
+                        if (storedQuestions.length !== QUESTIONS_DATA.length) {
+                            console.log(`Aggiornamento: ${storedQuestions.length} → ${QUESTIONS_DATA.length} domande`);
+                            this.questions = QUESTIONS_DATA;
+                            this.saveQuestions();
+                        } else {
+                            this.questions = storedQuestions;
+                        }
+                    } else {
+                        // Se non c'è niente in localStorage, carica da questions.js
+                        this.questions = QUESTIONS_DATA;
+                        this.saveQuestions();
+                    }
+                } else if (stored) {
+                    // Fallback: usa solo localStorage se non c'è QUESTIONS_DATA
+                    this.questions = JSON.parse(stored);
+                }
+
+                const storedAnswers = localStorage.getItem('quiz-answers');
+                if (storedAnswers) {
+                    this.answers = JSON.parse(storedAnswers);
+                }
+            }
+
+            saveQuestions() {
+                localStorage.setItem('quiz-questions', JSON.stringify(this.questions));
+            }
+
+            saveAnswers() {
+                localStorage.setItem('quiz-answers', JSON.stringify(this.answers));
+            }
+
+            handleAnswer(index) {
+                if (this.showResult) return;
+                
+                this.selectedAnswer = index;
+                this.showResult = true;
+                
+                const correct = index === this.questions[this.currentIndex].correct;
+                this.answers[this.currentIndex] = {
+                    selected: index,
+                    correct: correct,
+                    timestamp: Date.now()
+                };
+                
+                this.saveAnswers();
+                this.render();
+            }
+
+            nextQuestion() {
+                if (this.currentIndex < this.questions.length - 1) {
+                    this.currentIndex++;
+                    this.selectedAnswer = null;
+                    this.showResult = false;
+                    this.render();
+                }
+            }
+
+            prevQuestion() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                    this.selectedAnswer = null;
+                    this.showResult = false;
+                    this.render();
+                }
+            }
+
+            resetProgress() {
+                if (confirm('Vuoi davvero resettare tutti i progressi?')) {
+                    this.answers = {};
+                    this.saveAnswers();
+                    this.selectedAnswer = null;
+                    this.showResult = false;
+                    this.render();
+                }
+            }
+
+            reloadQuestions() {
+                if (confirm('Vuoi ricaricare le domande originali? Questo manterrà i tuoi progressi.')) {
+                    if (typeof QUESTIONS_DATA !== 'undefined') {
+                        this.questions = QUESTIONS_DATA;
+                        this.saveQuestions();
+                        alert('Domande ricaricate con successo!');
+                        this.render();
+                    }
+                }
+            }
+
+            importFile(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const imported = JSON.parse(e.target.result);
+                        this.questions = imported;
+                        this.saveQuestions();
+                        alert(`${imported.length} domande importate con successo!`);
+                        this.view = 'quiz';
+                        this.render();
+                    } catch (error) {
+                        alert('Errore nel file JSON. Verifica il formato.');
+                    }
+                };
+                reader.readAsText(file);
+            }
+
+            getStats() {
+                const answered = Object.keys(this.answers).length;
+                const correct = Object.values(this.answers).filter(a => a.correct).length;
+                const percentage = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+                return { answered, correct, percentage, total: this.questions.length };
+            }
+
+            render() {
+                const app = document.getElementById('app');
+                
+                if (this.questions.length === 0) {
+                    app.innerHTML = this.renderImport();
+                } else if (this.view === 'stats') {
+                    app.innerHTML = this.renderStats();
+                } else {
+                    app.innerHTML = this.renderQuiz();
+                }
+
+                this.attachEventListeners();
+            }
+
+            renderImport() {
+                // Se QUESTIONS_DATA è disponibile, mostra un messaggio diverso
+                if (typeof QUESTIONS_DATA !== 'undefined') {
+                    return `
+                        <div class="card">
+                            <div class="import-section">
+                                <div class="import-icon">⚠️</div>
+                                <h1>Errore Caricamento</h1>
+                                <p style="color: #6b7280; margin-bottom: 24px;">
+                                    Le domande dovrebbero caricarsi automaticamente.<br>
+                                    Se vedi questo messaggio, prova a ricaricare la pagina.
+                                </p>
+
+                                <button class="btn btn-primary" onclick="location.reload()">
+                                    🔄 Ricarica Pagina
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="card">
+                        <div class="import-section">
+                            <div class="import-icon">📚</div>
+                            <h1>Quiz Orientamento</h1>
+                            <p style="color: #6b7280; margin-bottom: 24px;">
+                                Importa le domande del test per iniziare a esercitarti
+                            </p>
+
+                            <div class="code-example">
+[
+  {
+    "id": 1,
+    "question": "Testo domanda?",
+    "options": [
+      "Risposta A",
+      "Risposta B",
+      "Risposta C",
+      "Risposta D"
+    ],
+    "correct": 0
+  }
+]
+                            </div>
+
+                            <label class="btn btn-primary" style="display: inline-flex; cursor: pointer;">
+                                📤 Importa Domande (JSON)
+                                <input type="file" accept=".json" class="file-input" id="fileInput">
+                            </label>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderQuiz() {
+                const question = this.questions[this.currentIndex];
+                const progress = ((this.currentIndex + 1) / this.questions.length) * 100;
+
+                return `
+                    <div class="card">
+                        <div class="header">
+                            <div style="font-size: 14px; font-weight: 600; color: #6b7280;">
+                                Domanda ${question.id} di ${this.questions.length}
+                            </div>
+                            <button class="btn-stats" onclick="app.view = 'stats'; app.render();">
+                                📊 Statistiche
+                            </button>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progress}%"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        ${question.image ? `<div style="text-align: center; margin-bottom: 20px;"><img src="${question.image}" alt="Domanda ${question.id}" style="max-width: 100%; height: auto; border-radius: 8px;"></div>` : ''}
+                        <div class="question">${question.question}</div>
+                        <div>
+                            ${question.options.map((option, idx) => {
+                                const isSelected = this.selectedAnswer === idx;
+                                const isCorrect = idx === question.correct;
+                                const showCorrect = this.showResult && isCorrect;
+                                const showWrong = this.showResult && isSelected && !isCorrect;
+                                
+                                let className = 'option';
+                                if (showCorrect) className += ' correct';
+                                else if (showWrong) className += ' wrong';
+                                else if (isSelected) className += ' selected';
+                                if (this.showResult) className += ' disabled';
+
+                                return `
+                                    <div class="${className}" onclick="${this.showResult ? '' : `app.handleAnswer(${idx})`}">
+                                        <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                        <div class="option-text">${option}</div>
+                                        ${showCorrect ? '<span style="color: #10b981; font-weight: bold;">✓</span>' : ''}
+                                        ${showWrong ? '<span style="color: #ef4444; font-weight: bold;">✗</span>' : ''}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="navigation">
+                            <button class="btn btn-secondary" onclick="app.prevQuestion()" ${this.currentIndex === 0 ? 'disabled' : ''}>
+                                ← Precedente
+                            </button>
+                            <button class="btn btn-primary" onclick="app.nextQuestion()" ${this.currentIndex === this.questions.length - 1 ? 'disabled' : ''}>
+                                Successiva →
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderStats() {
+                const stats = this.getStats();
+                
+                return `
+                    <div class="card">
+                        <button class="btn-stats" onclick="app.view = 'quiz'; app.render();" style="margin-bottom: 16px;">
+                            ← Torna al Quiz
+                        </button>
+                        
+                        <h1>📊 Statistiche</h1>
+
+                        <div class="stats-grid">
+                            <div class="stat-card" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                                <div class="stat-value">${stats.answered}</div>
+                                <div class="stat-label">Risposte date</div>
+                            </div>
+                            <div class="stat-card" style="background: linear-gradient(135deg, #10b981, #059669);">
+                                <div class="stat-value">${stats.correct}</div>
+                                <div class="stat-label">Corrette</div>
+                            </div>
+                            <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                <div class="stat-value">${stats.percentage}%</div>
+                                <div class="stat-label">Percentuale</div>
+                            </div>
+                            <div class="stat-card" style="background: linear-gradient(135deg, #6b7280, #4b5563);">
+                                <div class="stat-value">${stats.total}</div>
+                                <div class="stat-label">Totale domande</div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-bottom: 12px; color: #374151;">Dettaglio Risposte</h3>
+                        <div class="answer-list">
+                            ${this.questions.map((q, idx) => {
+                                const answer = this.answers[idx];
+                                let className = 'answer-item ';
+                                let badge = '';
+                                
+                                if (!answer) {
+                                    className += 'unanswered';
+                                    badge = '<span class="badge" style="background: #e5e7eb; color: #374151;">Non risposta</span>';
+                                } else if (answer.correct) {
+                                    className += 'correct';
+                                    badge = '<span class="badge" style="background: #10b981; color: white;">✓ Corretta</span>';
+                                } else {
+                                    className += 'incorrect';
+                                    badge = '<span class="badge" style="background: #ef4444; color: white;">✗ Errata</span>';
+                                }
+
+                                return `
+                                    <div class="${className}">
+                                        <span style="font-weight: 600;">Domanda ${q.id}</span>
+                                        ${badge}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+
+                        <button class="btn" onclick="app.resetProgress()" style="width: 100%; background: #ef4444; color: white; margin-top: 24px;">
+                            🔄 Reset Progressi
+                        </button>
+
+                        ${typeof QUESTIONS_DATA !== 'undefined' ? `
+                        <button class="btn" onclick="app.reloadQuestions()" style="width: 100%; background: #667eea; color: white; margin-top: 12px;">
+                            🔄 Ricarica Domande Originali
+                        </button>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            attachEventListeners() {
+                const fileInput = document.getElementById('fileInput');
+                if (fileInput) {
+                    fileInput.addEventListener('change', (e) => this.importFile(e));
+                }
+            }
+        }
+
+        const app = new QuizApp();
+    </script>
+</body>
+</html>
