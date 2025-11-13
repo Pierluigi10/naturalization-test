@@ -12,7 +12,7 @@ const QUESTIONS_DATA = [
       "die Menschen das Wahlrecht haben.",
       "hier Meinungsfreiheit gilt."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 2,
@@ -23,13 +23,13 @@ const QUESTIONS_DATA = [
       "Politikunterricht teilnimmt.",
       "Sprachunterricht teilnimmt."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 3,
-    "question": "Deutschland ist ein Rechtsstaat. Was ist damit gemeint?  Alle Einwohnerinnen/Einwohner und der Staat müssen sich an die Gesetze",
+    "question": "Deutschland ist ein Rechtsstaat. Was ist damit gemeint?",
     "options": [
-      "halten.",
+      "Alle Einwohnerinnen/Einwohner und der Staat müssen sich an die Gesetze halten.",
       "Der Staat muss sich nicht an die Gesetze halten.",
       "Nur Deutsche müssen die Gesetze befolgen.",
       "Die Gerichte machen die Gesetze."
@@ -45,18 +45,18 @@ const QUESTIONS_DATA = [
       "Meinungsfreiheit",
       "Selbstjustiz"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 5,
-    "question": "Wahlen in Deutschland sind frei. Was bedeutet das?  Man darf Geld annehmen, wenn man dafür eine bestimmte Kandidatin/einen bestimmten Kandidaten wählt.  Nur Personen, die noch nie im Gefängnis waren, dürfen wählen.",
+    "question": "Wahlen in Deutschland sind frei. Was bedeutet das?",
     "options": [
-      "Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer",
-      "bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
-      "Wahl haben.",
+      "Man darf Geld annehmen, wenn man dafür einen bestimmten Kandidaten / eine bestimmte Kandidatin wählt.",
+      "Nur Personen, die noch nie im Gefängnis waren, dürfen wählen.",
+      "Der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die Wahl haben.",
       "Alle wahlberechtigten Personen müssen wählen."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 6,
@@ -67,7 +67,7 @@ const QUESTIONS_DATA = [
       "Deutsches Gesetz",
       "Grundgesetz"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 7,
@@ -89,7 +89,7 @@ const QUESTIONS_DATA = [
       "Jeder Mensch darf seine Meinung sagen.",
       "Alle sind vor dem Gesetz gleich."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 9,
@@ -100,7 +100,7 @@ const QUESTIONS_DATA = [
       "Asyl",
       "Meinungsfreiheit"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 10,
@@ -111,7 +111,7 @@ const QUESTIONS_DATA = [
       "die Todesstrafe",
       "die Geldstrafe"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 11,
@@ -126,36 +126,36 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 12,
-    "question": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich?  Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind.",
+    "question": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich?",
     "options": [
+      "Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind.",
       "Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein.",
-      "Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
-      "werden.",
+      "Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft werden.",
       "Nein, denn nur der Bundesrat kann die Pressefreiheit abschaffen."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 13,
-    "question": "Im Parlament steht der Begriff \"Opposition\" für …  die regierenden Parteien.",
+    "question": "Im Parlament steht der Begriff \"Opposition\" für …",
     "options": [
+      "die regierenden Parteien.",
       "die Fraktion mit den meisten Abgeordneten.",
       "alle Parteien, die bei der letzten Wahl die 5%-Hürde erreichen konnten.",
-      "alle Abgeordneten, die nicht zu der Regierungspartei/den Regierungsparteien",
-      "gehören."
+      "alle Abgeordneten, die nicht zu der Regierungspartei/den Regierungsparteien gehören."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 14,
-    "question": "Meinungsfreiheit in Deutschland heißt, dass ich …  Passanten auf der Straße beschimpfen darf.",
+    "question": "Meinungsfreiheit in Deutschland heißt, dass ich … ",
     "options": [
+      "Passanten auf der Straße beschimpfen darf.",
       "meine Meinung im Internet äußern kann.",
       "Nazi-, Hamas- oder Islamischer Staat-Symbole öffentlich tragen darf.",
-      "meine Meinung nur dann äußern darf, solange ich der Regierung nicht",
-      "widerspreche."
+      "meine Meinung nur dann äußern darf, solange ich der Regierung nicht widerspreche."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 15,
@@ -166,13 +166,13 @@ const QUESTIONS_DATA = [
       "freie Berufswahl",
       "Arbeit im Ausland"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 16,
-    "question": "Wann ist die Meinungsfreiheit in Deutschland eingeschränkt?  bei der öffentlichen Verbreitung falscher Behauptungen über einzelne",
+    "question": "Wann ist die Meinungsfreiheit in Deutschland eingeschränkt?",
     "options": [
-      "Personen",
+      "bei der öffentlichen Verbreitung falscher Behauptungen über einzelne Personen",
       "bei Meinungsäußerungen über die Bundesregierung",
       "bei Diskussionen über Religionen",
       "bei Kritik am Staat"
@@ -188,7 +188,7 @@ const QUESTIONS_DATA = [
       "Versammlungsfreiheit der Einwohnerinnen und Einwohner.",
       "Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 18,
@@ -221,7 +221,7 @@ const QUESTIONS_DATA = [
       "gesetzestreu.",
       "verfassungswidrig."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 21,
@@ -244,7 +244,7 @@ const QUESTIONS_DATA = [
       "Republik",
       "Fürstentum"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 23,
@@ -255,7 +255,7 @@ const QUESTIONS_DATA = [
       "selbstständig mit einer eigenen Firma tätig.",
       "bei einer Firma oder Behörde beschäftigt."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 24,
@@ -266,7 +266,7 @@ const QUESTIONS_DATA = [
       "16",
       "17"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 25,
@@ -288,7 +288,7 @@ const QUESTIONS_DATA = [
       "eine kapitalistische und soziale Monarchie.",
       "ein sozialer und sozialistischer Bundesstaat."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 27,
@@ -299,7 +299,7 @@ const QUESTIONS_DATA = [
       "eine Diktatur.",
       "eine Monarchie."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 28,
@@ -310,7 +310,7 @@ const QUESTIONS_DATA = [
       "das wahlberechtigte Volk",
       "die Verwaltung"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 29,
@@ -321,7 +321,7 @@ const QUESTIONS_DATA = [
       "Bär",
       "Pferd"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 30,
@@ -332,7 +332,7 @@ const QUESTIONS_DATA = [
       "Meinungsfreiheit",
       "verschiedene Parteien"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 31,
@@ -343,7 +343,7 @@ const QUESTIONS_DATA = [
       "Ministerium.",
       "Fraktion."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 32,
@@ -354,7 +354,7 @@ const QUESTIONS_DATA = [
       "Presse",
       "Rechtsprechung"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 33,
@@ -376,7 +376,7 @@ const QUESTIONS_DATA = [
       "eine Monarchie",
       "ein Sozialstaat"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 35,
@@ -387,7 +387,7 @@ const QUESTIONS_DATA = [
       "Spendengeldern",
       "Vereinsbeiträgen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 36,
@@ -409,7 +409,7 @@ const QUESTIONS_DATA = [
       "Senatorin/Senator",
       "Ministerpräsidentin/Ministerpräsident"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 38,
@@ -420,7 +420,7 @@ const QUESTIONS_DATA = [
       "Staatenbund.",
       "Zentralstaat."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 39,
@@ -431,7 +431,7 @@ const QUESTIONS_DATA = [
       "eine eigene Armee",
       "eine eigene Regierung"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 40,
@@ -442,13 +442,13 @@ const QUESTIONS_DATA = [
       "Freude schöner Götterfunken …",
       "Deutschland einig Vaterland …"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 41,
-    "question": "Warum gibt es in einer Demokratie mehr als eine Partei?  weil dadurch die unterschiedlichen Meinungen der Bürgerinnen und Bürger",
+    "question": "Warum gibt es in einer Demokratie mehr als eine Partei?",
     "options": [
-      "vertreten werden",
+      "weil dadurch die unterschiedlichen Meinungen der Bürgerinnen und Bürger vertreten werden",
       "damit Bestechung in der Politik begrenzt wird",
       "um politische Demonstrationen zu verhindern",
       "um wirtschaftlichen Wettbewerb anzuregen"
@@ -464,7 +464,7 @@ const QUESTIONS_DATA = [
       "die Gerichte",
       "die Polizei"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 43,
@@ -475,7 +475,7 @@ const QUESTIONS_DATA = [
       "wenn sie Kritik am Staatsoberhaupt äußert",
       "wenn ihr Programm eine neue Richtung vorschlägt"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 44,
@@ -486,7 +486,7 @@ const QUESTIONS_DATA = [
       "Landtagsabgeordnete",
       "Bundestagsabgeordnete"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 45,
@@ -530,7 +530,7 @@ const QUESTIONS_DATA = [
       "die Bürgerversammlung",
       "die Regierung"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 49,
@@ -541,7 +541,7 @@ const QUESTIONS_DATA = [
       "das Familienministerium",
       "die Universitäten"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 50,
@@ -552,7 +552,7 @@ const QUESTIONS_DATA = [
       "gelenkte Zentralwirtschaft.",
       "Planwirtschaft."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 51,
@@ -563,7 +563,7 @@ const QUESTIONS_DATA = [
       "Menschen von einer Privatpolizei ohne Grund verhaftet werden.",
       "jemand ein Verbrechen begeht und deshalb verhaftet wird."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 52,
@@ -585,7 +585,7 @@ const QUESTIONS_DATA = [
       "Die Bürgerinnen und Bürger entscheiden über Gesetze.",
       "Der Staat muss die Gesetze einhalten."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 54,
@@ -596,11 +596,11 @@ const QUESTIONS_DATA = [
       "Exekutive",
       "Direktive"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 55,
-    "question": "Was zeigt dieses Bild? © Deutscher Bundestag/Achim Melde",
+    "question": "Was zeigt dieses Bild?",
     "options": [
       "den Bundestagssitz in Berlin",
       "das Bundesverfassungsgericht in Karlsruhe",
@@ -619,7 +619,7 @@ const QUESTIONS_DATA = [
       "Finanzamt",
       "Auswärtiges Amt"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 57,
@@ -630,7 +630,7 @@ const QUESTIONS_DATA = [
       "eine ehemalige Bundeskanzlerin/ein ehemaliger Bundeskanzler",
       "eine Abgeordnete/ein Abgeordneter der stärksten Fraktion"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 58,
@@ -641,7 +641,7 @@ const QUESTIONS_DATA = [
       "die Bundesratspräsidentin/der Bundesratspräsident",
       "die Bundestagspräsidentin/der Bundestagspräsident"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 59,
@@ -652,7 +652,7 @@ const QUESTIONS_DATA = [
       "vor etwa 1150 Jahren",
       "vor etwa 1700 Jahren"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 60,
@@ -663,18 +663,18 @@ const QUESTIONS_DATA = [
       "Direktive.",
       "Judikative."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 61,
-    "question": "Was bedeutet \"Volkssouveränität\"?  Die Königin/der König herrscht über das Volk.",
+    "question": "Was bedeutet \"Volkssouveränität\"?",
     "options": [
+      "Die Königin/der König herrscht über das Volk.",
       "Das Bundesverfassungsgericht steht über der Verfassung.",
-      "Die Interessenverbände üben die Souveränität zusammen mit der Regierung",
-      "aus.",
+      "Die Interessenverbände üben die Souveränität zusammen mit der Regierung aus.",
       "Die Staatsgewalt geht vom Volke aus."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 62,
@@ -685,7 +685,7 @@ const QUESTIONS_DATA = [
       "Europawahl",
       "Bundestagswahl"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 63,
@@ -696,7 +696,7 @@ const QUESTIONS_DATA = [
       "das Finanzamt",
       "die Ministerien"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 64,
@@ -707,7 +707,7 @@ const QUESTIONS_DATA = [
       "16 Kantone.",
       "Bund, Länder und Kommunen."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 65,
@@ -718,7 +718,7 @@ const QUESTIONS_DATA = [
       "die Bundeskanzlerin/den Bundeskanzler zu wählen.",
       "das Bundeskabinett zu bilden."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 66,
@@ -740,7 +740,7 @@ const QUESTIONS_DATA = [
       "Wirtschaftspolitik",
       "Schulpolitik"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 68,
@@ -751,7 +751,7 @@ const QUESTIONS_DATA = [
       "weil es in den Bundesländern verschiedene Schulen gibt",
       "weil es nach dem Grundgesetz seine Aufgabe ist"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 69,
@@ -762,7 +762,7 @@ const QUESTIONS_DATA = [
       "Gemeinden",
       "Bezirksämter"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 70,
@@ -773,18 +773,18 @@ const QUESTIONS_DATA = [
       "Sie/Er wählt die Ministerinnen/Minister aus.",
       "Sie/Er schlägt die Kanzlerin/den Kanzler zur Wahl vor."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 71,
-    "question": "Wo hält sich die deutsche Bundeskanzlerin/der deutsche Bundeskanzler am häufigsten auf? Am häufigsten ist sie/er …  in Bonn, weil sich dort das Bundeskanzleramt und der Bundestag befinden.  auf Schloss Meseberg, dem Gästehaus der Bundesregierung, um Staatsgäste",
+    "question": "Wo hält sich die deutsche Bundeskanzlerin/der deutsche Bundeskanzler am häufigsten auf? Am häufigsten ist sie/er … ",
     "options": [
-      "zu empfangen.",
-      "auf Schloss Bellevue, dem Amtssitz der Bundespräsidentin/des",
-      "Bundespräsidenten, um Staatsgäste zu empfangen.",
+      "in Bonn, weil sich dort das Bundeskanzleramt und der Bundestag befinden.",
+      "auf Schloss Meseberg, dem Gästehaus der Bundesregierung, um Staatsgäste zu empfangen.",
+      "auf Schloss Bellevue, dem Amtssitz der Bundespräsidentin/des Bundespräsidenten, um Staatsgäste zu empfangen.",
       "in Berlin, weil sich dort das Bundeskanzleramt und der Bundestag befinden."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 72,
@@ -795,7 +795,7 @@ const QUESTIONS_DATA = [
       "Ursula von der Leyen",
       "Friedrich Merz"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 73,
@@ -817,7 +817,7 @@ const QUESTIONS_DATA = [
       "Bundestag",
       "Bundesgerichtshof"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 75,
@@ -839,7 +839,7 @@ const QUESTIONS_DATA = [
       "Christlicher Deutscher Umweltschutz",
       "Christlich Demokratische Union"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 77,
@@ -850,7 +850,7 @@ const QUESTIONS_DATA = [
       "eine deutsche Bürgerinitiative",
       "die deutsche Armee"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 78,
@@ -861,7 +861,7 @@ const QUESTIONS_DATA = [
       "Sozialdemokratische Partei Deutschlands",
       "Sozialgerechte Partei Deutschlands"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 79,
@@ -872,7 +872,7 @@ const QUESTIONS_DATA = [
       "Führende Demokratische Partei",
       "Freie Demokratische Partei"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 80,
@@ -883,7 +883,7 @@ const QUESTIONS_DATA = [
       "Bundesverfassungsgericht",
       "Verwaltungsgericht"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 81,
@@ -894,7 +894,7 @@ const QUESTIONS_DATA = [
       "das Volk",
       "der Bundestag"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 82,
@@ -905,7 +905,7 @@ const QUESTIONS_DATA = [
       "die Bundesratspräsidentin/der Bundesratspräsident",
       "die Bundeskanzlerin/der Bundeskanzler"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 83,
@@ -916,7 +916,7 @@ const QUESTIONS_DATA = [
       "der Bundestag",
       "die Bundesregierung"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 84,
@@ -927,7 +927,7 @@ const QUESTIONS_DATA = [
       "repräsentiert das Land.",
       "überwacht die Einhaltung der Gesetze."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 85,
@@ -938,7 +938,7 @@ const QUESTIONS_DATA = [
       "die Regierungsvertreter der Bundesländer",
       "die Parteimitglieder"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 86,
@@ -960,7 +960,7 @@ const QUESTIONS_DATA = [
       "die Bundesratspräsidentin/der Bundesratspräsident",
       "die Bundestagspräsidentin/der Bundestagspräsident"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 88,
@@ -982,7 +982,7 @@ const QUESTIONS_DATA = [
       "Fraktion",
       "Opposition"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 90,
@@ -1004,7 +1004,7 @@ const QUESTIONS_DATA = [
       "schwieriger, wenn dadurch die Mehrheit im Bundesrat verändert wird.",
       "leichter, wenn es sich um ein reiches Bundesland handelt."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 92,
@@ -1015,7 +1015,7 @@ const QUESTIONS_DATA = [
       "Christlich Sozialer Unternehmerverband",
       "Christlich Soziale Union"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 93,
@@ -1026,7 +1026,7 @@ const QUESTIONS_DATA = [
       "größer ist das Risiko, eine Koalition bilden zu müssen.",
       "mehr Sitze erhält die Partei im Parlament."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 94,
@@ -1037,7 +1037,7 @@ const QUESTIONS_DATA = [
       "21",
       "23"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 95,
@@ -1048,7 +1048,7 @@ const QUESTIONS_DATA = [
       "Schweigepflicht",
       "Religionspflicht"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 96,
@@ -1059,7 +1059,7 @@ const QUESTIONS_DATA = [
       "gar nicht, Holocaustleugnung ist erlaubt",
       "mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 97,
@@ -1074,14 +1074,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 98,
-    "question": "Wenn Abgeordnete im Deutschen Bundestag ihre Fraktion wechseln, …  dürfen sie nicht mehr an den Sitzungen des Parlaments teilnehmen.",
+    "question": "Wenn Abgeordnete im Deutschen Bundestag ihre Fraktion wechseln, …",
     "options": [
+      "dürfen sie nicht mehr an den Sitzungen des Parlaments teilnehmen.",
       "kann die Regierung ihre Mehrheit verlieren.",
-      "muss die Bundespräsidentin/der Bundespräsident zuvor ihr/sein",
-      "Einverständnis geben.",
+      "muss die Bundespräsidentin/der Bundespräsident zuvor ihr/sein Einverständnis geben.",
       "dürfen die Wählerinnen/Wähler dieser Abgeordneten noch einmal wählen."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 99,
@@ -1114,7 +1114,7 @@ const QUESTIONS_DATA = [
       "Rentnerinnen und Rentner.",
       "Arbeitgeberinnen und Arbeitgeber."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 102,
@@ -1136,7 +1136,7 @@ const QUESTIONS_DATA = [
       "von CSU, Die LINKE und Bündnis 90/Die Grünen in einer Regierung",
       "der Bundestagsfraktionen von CDU und SPD"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 104,
@@ -1147,7 +1147,7 @@ const QUESTIONS_DATA = [
       "Die Frau erledigt private Sachen während der Arbeitszeit.",
       "Die Frau bekommt ein Kind und ihr Chef weiß das."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 105,
@@ -1158,7 +1158,7 @@ const QUESTIONS_DATA = [
       "Sie geben Zwischenergebnisse an die Medien weiter.",
       "Sie zählen die Stimmen nach dem Ende der Wahl."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 106,
@@ -1169,7 +1169,7 @@ const QUESTIONS_DATA = [
       "Sie geben Zwischenergebnisse an Journalisten weiter.",
       "Sie zählen die Stimmen nach dem Ende der Wahl."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 107,
@@ -1180,18 +1180,18 @@ const QUESTIONS_DATA = [
       "6 Jahre",
       "8 Jahre"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 108,
-    "question": "Bei einer Bundestagswahl in Deutschland darf jede/jeder wählen, die/der …  in der Bundesrepublik Deutschland wohnt und wählen möchte.  Bürgerin/Bürger der Bundesrepublik Deutschland ist und mindestens 18 Jahre",
+    "question": "Bei einer Bundestagswahl in Deutschland darf jede/jeder wählen, die/der …",
     "options": [
-      "alt ist.",
+      "in der Bundesrepublik Deutschland wohnt und wählen möchte.",
+      "Bürgerin/Bürger der Bundesrepublik Deutschland ist und mindestens 18 Jahre alt ist.",
       "seit mindestens 3 Jahren in der Bundesrepublik Deutschland lebt.",
-      "Bürgerin/Bürger der Bundesrepublik Deutschland ist und mindestens 21 Jahre",
-      "alt ist."
+      "Bürgerin/Bürger der Bundesrepublik Deutschland ist und mindestens 21 Jahre alt ist."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 109,
@@ -1202,7 +1202,7 @@ const QUESTIONS_DATA = [
       "alle fünf Jahre",
       "alle sechs Jahre"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 110,
@@ -1213,7 +1213,7 @@ const QUESTIONS_DATA = [
       "4 Jahre",
       "5 Jahre"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 111,
@@ -1224,7 +1224,7 @@ const QUESTIONS_DATA = [
       "eine Diskussion über die Politik Israels",
       "der öffentliche Aufruf zur Vernichtung Israels"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 112,
@@ -1235,16 +1235,16 @@ const QUESTIONS_DATA = [
       "berufsbezogen.",
       "geschlechtsabhängig."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 113,
-    "question": "Wahlen in Deutschland gewinnt die Partei, die …  die meisten Stimmen bekommt.",
+    "question": "Wahlen in Deutschland gewinnt die Partei, die …",
     "options": [
+      "die meisten Stimmen bekommt.",
       "die meisten Männer mehrheitlich gewählt haben.",
       "die meisten Stimmen bei den Arbeiterinnen/Arbeitern bekommen hat.",
-      "die meisten Erststimmen für ihre Kanzlerkandidatin/ihren Kanzlerkandidaten",
-      "erhalten hat."
+      "die meisten Erststimmen für ihre Kanzlerkandidatin/ihren Kanzlerkandidaten erhalten hat."
     ],
     "correct": 0
   },
@@ -1257,7 +1257,7 @@ const QUESTIONS_DATA = [
       "ein Zwang.",
       "eine Last."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 115,
@@ -1268,7 +1268,7 @@ const QUESTIONS_DATA = [
       "Man kann wählen.",
       "Man muss zur Auszählung der Stimmen gehen."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 116,
@@ -1279,7 +1279,7 @@ const QUESTIONS_DATA = [
       "aktiver Wahlkampf.",
       "aktives Wahlrecht."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 117,
@@ -1290,7 +1290,7 @@ const QUESTIONS_DATA = [
       "5%",
       "6%"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 118,
@@ -1301,18 +1301,18 @@ const QUESTIONS_DATA = [
       "nur religiöse Menschen",
       "alle Menschen"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 119,
-    "question": "Wahlen in Deutschland sind frei. Was bedeutet das?  Alle verurteilten Straftäterinnen/Straftäter dürfen nicht wählen.  Wenn ich wählen gehen möchte, muss meine Arbeitgeberin/mein Arbeitgeber",
+    "question": "Wahlen in Deutschland sind frei. Was bedeutet das?",
     "options": [
-      "mir frei geben.",
-      "Jede Person kann ohne Zwang entscheiden, ob sie wählen möchte und wen",
-      "sie wählen möchte.",
+      "Alle verurteilten Straftäterinnen/Straftäter dürfen nicht wählen.",
+      "Wenn ich wählen gehen möchte, muss meine Arbeitgeberin/mein Arbeitgeber mir frei geben.",
+      "Jede Person kann ohne Zwang entscheiden, ob sie wählen möchte und wen sie wählen möchte.",
       "Ich kann frei entscheiden, wo ich wählen gehen möchte."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 120,
@@ -1323,7 +1323,7 @@ const QUESTIONS_DATA = [
       "Mehrheits- und Verhältniswahlrecht.",
       "allgemeines Männerwahlrecht."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 121,
@@ -1356,7 +1356,7 @@ const QUESTIONS_DATA = [
       "Mindestanteil an Wählerstimmen, um ins Parlament zu kommen",
       "Anwesenheitskontrolle im Bundesrat für Abstimmungen"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 124,
@@ -1367,18 +1367,18 @@ const QUESTIONS_DATA = [
       "des Parlaments für Deutschland.",
       "der Bundespräsidentin/des Bundespräsidenten."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 125,
-    "question": "In einer Demokratie ist eine Funktion von regelmäßigen Wahlen, …  die Bürgerinnen und Bürger zu zwingen, ihre Stimme abzugeben.",
+    "question": "In einer Demokratie ist eine Funktion von regelmäßigen Wahlen, …",
     "options": [
-      "nach dem Willen der Wählermehrheit den Wechsel der Regierung zu",
-      "ermöglichen.",
+      "die Bürgerinnen und Bürger zu zwingen, ihre Stimme abzugeben.",
+      "nach dem Willen der Wählermehrheit den Wechsel der Regierung zu ermöglichen.",
       "im Land bestehende Gesetze beizubehalten.",
       "den Armen mehr Macht zu geben."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 126,
@@ -1393,14 +1393,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 127,
-    "question": "Warum gibt es die 5%-Hürde im Wahlgesetz der Bundesrepublik Deutschland? Es gibt sie, weil …  die Programme von vielen kleinen Parteien viele Gemeinsamkeiten haben.  die Bürgerinnen und Bürger bei vielen kleinen Parteien die Orientierung",
+    "question": "Warum gibt es die 5%-Hürde im Wahlgesetz der Bundesrepublik Deutschland? Es gibt sie, weil …",
     "options": [
-      "verlieren können.",
+      "die Programme von vielen kleinen Parteien viele Gemeinsamkeiten haben.",
+      "die Bürgerinnen und Bürger bei vielen kleinen Parteien die Orientierung verlieren können.",
       "viele kleine Parteien die Regierungsbildung erschweren.",
-      "die kleinen Parteien nicht so viel Geld haben, um die Politikerinnen und",
-      "Politiker zu bezahlen."
+      "die kleinen Parteien nicht so viel Geld haben, um die Politikerinnen und Politiker zu bezahlen."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 128,
@@ -1422,7 +1422,7 @@ const QUESTIONS_DATA = [
       "der Bundestag.",
       "die Bundespräsidentin/der Bundespräsident."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 130,
@@ -1433,7 +1433,7 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 131,
@@ -1444,7 +1444,7 @@ const QUESTIONS_DATA = [
       "das Oberhaupt einer Gemeinde.",
       "die/der Vorsitzende einer Partei."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 132,
@@ -1455,7 +1455,7 @@ const QUESTIONS_DATA = [
       "Sie arbeiten in der Bundesregierung.",
       "Sie arbeiten in einem Krankenhaus und verdienen dabei Geld."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 133,
@@ -1466,15 +1466,15 @@ const QUESTIONS_DATA = [
       "Man kann am Wahltag telefonisch seine Stimme abgeben.",
       "Kinder ab dem Alter von 14 Jahren dürfen wählen."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 134,
-    "question": "Man will die Buslinie abschaffen, mit der Sie immer zur Arbeit fahren. Was können Sie machen, um die Buslinie zu erhalten?  Ich beteilige mich an einer Bürgerinitiative für die Erhaltung der Buslinie oder gründe selber eine Initiative.",
+    "question": "Man will die Buslinie abschaffen, mit der Sie immer zur Arbeit fahren. Was können Sie machen, um die Buslinie zu erhalten?",
     "options": [
+      "Ich beteilige mich an einer Bürgerinitiative für die Erhaltung der Buslinie oder gründe selber eine Initiative.",
       "Ich werde Mitglied in einem Sportverein und trainiere Radfahren.",
-      "Ich wende mich an das Finanzamt, weil ich als Steuerzahlerin/Steuerzahler",
-      "ein Recht auf die Buslinie habe.",
+      "Ich wende mich an das Finanzamt, weil ich als Steuerzahlerin/Steuerzahler ein Recht auf die Buslinie habe.",
       "Ich schreibe einen Brief an das Forstamt der Gemeinde."
     ],
     "correct": 0
@@ -1488,7 +1488,7 @@ const QUESTIONS_DATA = [
       "Selbstständige",
       "Arbeitnehmerinnen und Arbeitnehmer"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 136,
@@ -1499,7 +1499,7 @@ const QUESTIONS_DATA = [
       "Problemen mit den Nachbarinnen/Nachbarn.",
       "Schwierigkeiten nach einem Verkehrsunfall."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 137,
@@ -1510,7 +1510,7 @@ const QUESTIONS_DATA = [
       "das Arbeitsgericht",
       "das Amtsgericht"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 138,
@@ -1521,7 +1521,7 @@ const QUESTIONS_DATA = [
       "Kündigungsschutzklage erheben",
       "die Arbeitgeberin/den Arbeitgeber bei der Polizei anzeigen"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 139,
@@ -1532,7 +1532,7 @@ const QUESTIONS_DATA = [
       "eine andere Meinung als die der Regierung vertritt.",
       "sein Auto falsch geparkt hat und es abgeschleppt wird."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 140,
@@ -1565,7 +1565,7 @@ const QUESTIONS_DATA = [
       "ändert Gesetze.",
       "betreut Jugendliche vor Gericht."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 143,
@@ -1587,7 +1587,7 @@ const QUESTIONS_DATA = [
       "planenden Gewalt.",
       "gesetzgebenden Gewalt."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 145,
@@ -1609,7 +1609,7 @@ const QUESTIONS_DATA = [
       "Protokoll",
       "Prozess"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 147,
@@ -1620,7 +1620,7 @@ const QUESTIONS_DATA = [
       "Pläne erstellen",
       "Gesetze erlassen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 148,
@@ -1631,7 +1631,7 @@ const QUESTIONS_DATA = [
       "die Gesetze zu beschließen",
       "die Einhaltung von Gesetzen zu überwachen"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 149,
@@ -1642,7 +1642,7 @@ const QUESTIONS_DATA = [
       "den Holocaust leugnen",
       "gegen Juden Fußball spielen."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 150,
@@ -1653,7 +1653,7 @@ const QUESTIONS_DATA = [
       "ein Mitglied eines Gemeinderats.",
       "eine Person, die Jura studiert hat."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 151,
@@ -1664,7 +1664,7 @@ const QUESTIONS_DATA = [
       "die Bundesrepublik Deutschland",
       "die USA"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 152,
@@ -1675,7 +1675,7 @@ const QUESTIONS_DATA = [
       "1933 bis 1945",
       "1945 bis 1989"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 153,
@@ -1686,7 +1686,7 @@ const QUESTIONS_DATA = [
       "Wahl von Konrad Adenauer zum Bundeskanzler",
       "Ende des Zweiten Weltkriegs in Europa"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 154,
@@ -1697,7 +1697,7 @@ const QUESTIONS_DATA = [
       "1949",
       "1961"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 155,
@@ -1708,7 +1708,7 @@ const QUESTIONS_DATA = [
       "1933 bis 1945",
       "1949 bis 1963"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 156,
@@ -1719,7 +1719,7 @@ const QUESTIONS_DATA = [
       "1933",
       "1936"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 157,
@@ -1763,7 +1763,7 @@ const QUESTIONS_DATA = [
       "der Vietnamkrieg",
       "der Golfkrieg"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 161,
@@ -1785,7 +1785,7 @@ const QUESTIONS_DATA = [
       "den Aufbau der Wehrmacht.",
       "das Attentat auf Hitler am 20. Juli 1944."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 163,
@@ -1796,18 +1796,18 @@ const QUESTIONS_DATA = [
       "1938",
       "1945"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 164,
-    "question": "Was passierte am 9. November 1938 in Deutschland?  Mit dem Angriff auf Polen beginnt der Zweite Weltkrieg.",
+    "question": "Was passierte am 9. November 1938 in Deutschland?",
     "options": [
+      "Mit dem Angriff auf Polen beginnt der Zweite Weltkrieg.",
       "Die Nationalsozialisten verlieren eine Wahl und lösen den Reichstag auf.",
-      "Jüdische Geschäfte und Synagogen werden durch Nationalsozialisten und ihre",
-      "Anhänger zerstört.",
+      "Jüdische Geschäfte und Synagogen werden durch Nationalsozialisten und ihre Anhänger zerstört.",
       "Hitler wird Reichspräsident und lässt alle Parteien verbieten."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 165,
@@ -1822,14 +1822,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 166,
-    "question": "Bei welchen Demonstrationen in Deutschland riefen die Menschen \"Wir sind das Volk\"?  beim Arbeiteraufstand 1953 in der DDR",
+    "question": "Bei welchen Demonstrationen in Deutschland riefen die Menschen \"Wir sind das Volk\"?",
     "options": [
+      "beim Arbeiteraufstand 1953 in der DDR",
       "bei den Demonstrationen 1968 in der Bundesrepublik Deutschland",
-      "bei den Anti-Atomkraft-Demonstrationen 1985 in der Bundesrepublik",
-      "Deutschland",
+      "bei den Anti-Atomkraft-Demonstrationen 1985 in der Bundesrepublik Deutschland",
       "bei den Montagsdemonstrationen 1989 in der DDR"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 167,
@@ -1840,7 +1840,7 @@ const QUESTIONS_DATA = [
       "USA, Sowjetunion, Spanien, Portugal",
       "USA, Sowjetunion, Großbritannien, Frankreich"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 168,
@@ -1851,7 +1851,7 @@ const QUESTIONS_DATA = [
       "Frankreich",
       "Japan"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 169,
@@ -1862,7 +1862,7 @@ const QUESTIONS_DATA = [
       "1949",
       "1951"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 170,
@@ -1877,14 +1877,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 171,
-    "question": "Soziale Marktwirtschaft bedeutet, die Wirtschaft …  steuert sich allein nach Angebot und Nachfrage.  wird vom Staat geplant und gesteuert, Angebot und Nachfrage werden nicht",
+    "question": "Soziale Marktwirtschaft bedeutet, die Wirtschaft …",
     "options": [
-      "berücksichtigt.",
+      "steuert sich allein nach Angebot und Nachfrage.",
+      "wird vom Staat geplant und gesteuert, Angebot und Nachfrage werden nicht berücksichtigt.",
       "richtet sich nach der Nachfrage im Ausland.",
-      "richtet sich nach Angebot und Nachfrage, aber der Staat sorgt für einen",
-      "sozialen Ausgleich."
+      "richtet sich nach Angebot und Nachfrage, aber der Staat sorgt für einen sozialen Ausgleich."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 172,
@@ -1895,7 +1895,7 @@ const QUESTIONS_DATA = [
       "britischen Besatzungszone",
       "sowjetischen Besatzungszone"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 173,
@@ -1906,7 +1906,7 @@ const QUESTIONS_DATA = [
       "der Europäischen Union (EU).",
       "des Warschauer Pakts."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 174,
@@ -1917,7 +1917,7 @@ const QUESTIONS_DATA = [
       "1953",
       "1956"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 175,
@@ -1928,7 +1928,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 176,
@@ -1939,7 +1939,7 @@ const QUESTIONS_DATA = [
       "1=Großbritannien, 2=Sowjetunion, 3=USA, 4=Frankreich",
       "1=Großbritannien, 2=USA, 3=Sowjetunion, 4=Frankreich"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 177,
@@ -1950,18 +1950,18 @@ const QUESTIONS_DATA = [
       "Dresden",
       "Frankfurt/Oder"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 178,
-    "question": "Vom Juni 1948 bis zum Mai 1949 wurden die Bürgerinnen und Bürger von West-Berlin durch eine Luftbrücke versorgt. Welcher Umstand war dafür verantwortlich?  Für Frankreich war eine Versorgung der West-Berliner Bevölkerung mit dem Flugzeug kostengünstiger.",
+    "question": "Vom Juni 1948 bis zum Mai 1949 wurden die Bürgerinnen und Bürger von West-Berlin durch eine Luftbrücke versorgt. Welcher Umstand war dafür verantwortlich?",
     "options": [
-      "Die amerikanischen Soldatinnen und Soldaten hatten beim Landtransport",
-      "Angst vor Überfällen.",
+      "Für Frankreich war eine Versorgung der West-Berliner Bevölkerung mit dem Flugzeug kostengünstiger.",
+      "Die amerikanischen Soldatinnen und Soldaten hatten beim Landtransport Angst vor Überfällen.",
       "Für Großbritannien war die Versorgung über die Luftbrücke schneller.",
       "Die Sowjetunion unterbrach den gesamten Verkehr auf dem Landwege."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 179,
@@ -1972,7 +1972,7 @@ const QUESTIONS_DATA = [
       "mit dem Rückzug der Deutschen aus den besetzten Gebieten",
       "durch eine Revolution in Deutschland"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 180,
@@ -1983,7 +1983,7 @@ const QUESTIONS_DATA = [
       "Konrad Adenauer.",
       "Gerhard Schröder."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 181,
@@ -1994,7 +1994,7 @@ const QUESTIONS_DATA = [
       "Er zeigte seine Demut vor dem Warschauer Pakt.",
       "Er sprach ein Gebet am Grab des Unbekannten Soldaten."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 182,
@@ -2005,7 +2005,7 @@ const QUESTIONS_DATA = [
       "Synagoge",
       "Kirche"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 183,
@@ -2016,7 +2016,7 @@ const QUESTIONS_DATA = [
       "70er Jahre",
       "80er Jahre"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 184,
@@ -2049,7 +2049,7 @@ const QUESTIONS_DATA = [
       "20. Juli",
       "9. November"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 187,
@@ -2060,7 +2060,7 @@ const QUESTIONS_DATA = [
       "\"Drittes Reich\"",
       "DDR"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_187.png"
   },
   {
@@ -2072,7 +2072,7 @@ const QUESTIONS_DATA = [
       "1959",
       "1961"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 189,
@@ -2083,7 +2083,7 @@ const QUESTIONS_DATA = [
       "1961",
       "1990"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 190,
@@ -2094,7 +2094,7 @@ const QUESTIONS_DATA = [
       "Dritte Deutsche Republik",
       "Deutsche Demokratische Republik"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 191,
@@ -2105,7 +2105,7 @@ const QUESTIONS_DATA = [
       "1992",
       "1995"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 192,
@@ -2127,7 +2127,7 @@ const QUESTIONS_DATA = [
       "durch eine Mauer geteilt.",
       "nur mit dem Flugzeug erreichbar."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 194,
@@ -2149,7 +2149,7 @@ const QUESTIONS_DATA = [
       "Nordrhein-Westfalen",
       "Saarland"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 196,
@@ -2182,7 +2182,7 @@ const QUESTIONS_DATA = [
       "Sachsen",
       "Baden-Württemberg"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 199,
@@ -2193,7 +2193,7 @@ const QUESTIONS_DATA = [
       "eine regierende Partei.",
       "das Ministerium für Volksbildung."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 200,
@@ -2204,18 +2204,18 @@ const QUESTIONS_DATA = [
       "Mecklenburg-Vorpommern",
       "Saarland"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 201,
-    "question": "Welche der folgenden Auflistungen enthält nur Bundesländer, die zum Gebiet der früheren DDR gehörten?  Niedersachsen, Nordrhein-Westfalen, Hessen, Schleswig-Holstein, Brandenburg",
+    "question": "Welche der folgenden Auflistungen enthält nur Bundesländer, die zum Gebiet der früheren DDR gehörten?",
     "options": [
-      "Mecklenburg-Vorpommern, Brandenburg, Sachsen, Sachsen-Anhalt,",
-      "Thüringen",
+      "Niedersachsen, Nordrhein-Westfalen, Hessen, Schleswig-Holstein, Brandenburg",
+      "Mecklenburg-Vorpommern, Brandenburg, Sachsen, Sachsen-Anhalt, Thüringen",
       "Bayern, Baden-Württemberg, Rheinland-Pfalz, Thüringen, Sachsen",
       "Sachsen, Thüringen, Hessen, Niedersachen, Brandenburg"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 202,
@@ -2226,7 +2226,7 @@ const QUESTIONS_DATA = [
       "zur NATO",
       "zu den blockfreien Staaten"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 203,
@@ -2237,18 +2237,18 @@ const QUESTIONS_DATA = [
       "Angebot und Nachfrage",
       "Kapitalismus"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 204,
-    "question": "Wie wurden die Bundesrepublik Deutschland und die DDR zu einem Staat?  Die Bundesrepublik hat die DDR besetzt.",
+    "question": "Wie wurden die Bundesrepublik Deutschland und die DDR zu einem Staat?",
     "options": [
-      "Die heutigen fünf östlichen Bundesländer sind der Bundesrepublik",
-      "Deutschland beigetreten.",
+      "Die Bundesrepublik hat die DDR besetzt.",
+      "Die heutigen fünf östlichen Bundesländer sind der Bundesrepublik Deutschland beigetreten.",
       "Die westlichen Bundesländer sind der DDR beigetreten.",
       "Die DDR hat die Bundesrepublik Deutschland besetzt."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 205,
@@ -2263,14 +2263,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 206,
-    "question": "206. Woran erinnern die sogenannten „Stolpersteine“ in Deutschland?",
+    "question": "206. Woran erinnern die sogenannten 'Stolpersteine' in Deutschland?",
     "options": [
       "an berühmte deutsche Politikerinnen und Politiker",
       "an die Opfer des Nationalsozialismus",
       "an Verkehrstote",
       "an bekannte jüdische Musiker"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 207,
@@ -2281,7 +2281,7 @@ const QUESTIONS_DATA = [
       "im Warschauer Pakt",
       "im Europabündnis"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 208,
@@ -2292,7 +2292,7 @@ const QUESTIONS_DATA = [
       "der Geheimdienst der DDR",
       "ein deutscher Sportverein während des Zweiten Weltkrieges"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 209,
@@ -2315,7 +2315,7 @@ const QUESTIONS_DATA = [
       "der 1. SED-Parteitag",
       "der erste Besuch Fidel Castros"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 211,
@@ -2326,7 +2326,7 @@ const QUESTIONS_DATA = [
       "Michail Gorbatschow",
       "Ludwig Erhard"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 212,
@@ -2337,7 +2337,7 @@ const QUESTIONS_DATA = [
       "Bundesrepublik Deutschland",
       "Bundesbezirk Deutschland"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 213,
@@ -2348,7 +2348,7 @@ const QUESTIONS_DATA = [
       "84 Millionen",
       "90 Millionen"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 214,
@@ -2370,7 +2370,7 @@ const QUESTIONS_DATA = [
       "Konrad Adenauer",
       "Helmut Schmidt"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 216,
@@ -2393,7 +2393,7 @@ const QUESTIONS_DATA = [
       "1945 bis 1961",
       "1949 bis 1990"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 218,
@@ -2404,7 +2404,7 @@ const QUESTIONS_DATA = [
       "6",
       "7"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 219,
@@ -2415,18 +2415,18 @@ const QUESTIONS_DATA = [
       "1971",
       "1990"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 220,
-    "question": "Der 27. Januar ist in Deutschland ein offizieller Gedenktag. Woran erinnert dieser Tag?  an das Ende des Zweiten Weltkrieges",
+    "question": "Der 27. Januar ist in Deutschland ein offizieller Gedenktag. Woran erinnert dieser Tag?",
     "options": [
+      "an das Ende des Zweiten Weltkrieges",
       "an die Verabschiedung des Grundgesetzes",
       "an die Wiedervereinigung Deutschlands",
-      "an die Opfer des Nationalsozialismus (Tag der Befreiung des",
-      "Vernichtungslagers Auschwitz)"
+      "an die Opfer des Nationalsozialismus (Tag der Befreiung des Vernichtungslagers Auschwitz)"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 221,
@@ -2448,7 +2448,7 @@ const QUESTIONS_DATA = [
       "Spanien",
       "Schweiz"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 223,
@@ -2459,7 +2459,7 @@ const QUESTIONS_DATA = [
       "Polen",
       "Griechenland"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 224,
@@ -2470,7 +2470,7 @@ const QUESTIONS_DATA = [
       "Einheitliche Union",
       "Euro Union"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 225,
@@ -2481,7 +2481,7 @@ const QUESTIONS_DATA = [
       "Spanien",
       "Österreich"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 226,
@@ -2492,7 +2492,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 1,
     "image": "images/q_226.png"
   },
   {
@@ -2504,7 +2504,7 @@ const QUESTIONS_DATA = [
       "Norwegen",
       "Schweden"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 228,
@@ -2515,7 +2515,7 @@ const QUESTIONS_DATA = [
       "Deutsche Wiedervereinigung",
       "Europäische Gemeinschaft"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 229,
@@ -2526,7 +2526,7 @@ const QUESTIONS_DATA = [
       "Norwegen",
       "Luxemburg"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 230,
@@ -2541,14 +2541,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 231,
-    "question": "Was bedeutet der Begriff \"europäische Integration\"?  Damit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint.",
+    "question": "Was bedeutet der Begriff \"europäische Integration\"?",
     "options": [
+      "Damit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint.",
       "Der Begriff meint den Einwanderungsstopp nach Europa.",
-      "Damit sind europäische Auswanderinnen und Auswanderer in den USA",
-      "gemeint.",
+      "Damit sind europäische Auswanderinnen und Auswanderer in den USA gemeint.",
       "Der Begriff meint den Zusammenschluss europäischer Staaten zur EU."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 232,
@@ -2559,7 +2559,7 @@ const QUESTIONS_DATA = [
       "die Abgeordneten des Europäischen Parlaments",
       "die europäische Verfassung"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 233,
@@ -2581,7 +2581,7 @@ const QUESTIONS_DATA = [
       "Berlin",
       "Straßburg"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 235,
@@ -2592,7 +2592,7 @@ const QUESTIONS_DATA = [
       "Frieden und Sicherheit in den Ländern der EU",
       "einheitliche Feiertage in den Ländern der EU"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 236,
@@ -2603,7 +2603,7 @@ const QUESTIONS_DATA = [
       "25",
       "27"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 237,
@@ -2614,7 +2614,7 @@ const QUESTIONS_DATA = [
       "Verpflichtung Deutschlands zu Reparationsleistungen",
       "Festlegung der Oder-Neiße-Linie als Ostgrenze"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 238,
@@ -2625,7 +2625,7 @@ const QUESTIONS_DATA = [
       "Rom, Bern und Wien",
       "Bonn, Zürich und Mailand"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 239,
@@ -2636,7 +2636,7 @@ const QUESTIONS_DATA = [
       "durch die \"Pariser Verträge\"",
       "durch die \"Londoner Verträge\""
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 240,
@@ -2647,7 +2647,7 @@ const QUESTIONS_DATA = [
       "2002",
       "2005"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 241,
@@ -2658,7 +2658,7 @@ const QUESTIONS_DATA = [
       "Sie muss nichts tun, denn sie bekommt automatisch Elterngeld.",
       "Sie muss das Arbeitsamt um Erlaubnis bitten."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 242,
@@ -2669,16 +2669,16 @@ const QUESTIONS_DATA = [
       "die Eltern/die Erziehungsberechtigten",
       "die Schulen"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 243,
-    "question": "Maik und Sybille wollen mit Freunden an ihrem deutschen Wohnort eine Demonstration auf der Straße abhalten. Was müssen sie vorher tun?  Sie müssen die Demonstration anmelden.  Sie müssen nichts tun. Man darf in Deutschland jederzeit überall demonstrieren.",
+    "question": "Maik und Sybille wollen mit Freunden an ihrem deutschen Wohnort eine Demonstration auf der Straße abhalten. Was müssen sie vorher tun?",
     "options": [
-      "Sie können gar nichts tun, denn Demonstrationen sind in Deutschland",
-      "grundsätzlich verboten.",
-      "Maik und Sybille müssen einen neuen Verein gründen, weil nur Vereine",
-      "demonstrieren dürfen."
+      "Sie müssen die Demonstration anmelden.",
+      "Sie müssen nichts tun. Man darf in Deutschland jederzeit überall demonstrieren.",
+      "Sie können gar nichts tun, denn Demonstrationen sind in Deutschland grundsätzlich verboten.",
+      "Maik und Sybille müssen einen neuen Verein gründen, weil nur Vereine demonstrieren dürfen."
     ],
     "correct": 0
   },
@@ -2702,7 +2702,7 @@ const QUESTIONS_DATA = [
       "Sofie (35 Jahre) und Lisa (40 Jahre)",
       "Anne (13 Jahre) und Tim (25 Jahre)"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 246,
@@ -2713,7 +2713,7 @@ const QUESTIONS_DATA = [
       "19",
       "21"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 247,
@@ -2724,7 +2724,7 @@ const QUESTIONS_DATA = [
       "Geburtsvorbereitung",
       "Wochenbett"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 248,
@@ -2735,7 +2735,7 @@ const QUESTIONS_DATA = [
       "der Großeltern.",
       "der Schulen."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 249,
@@ -2746,7 +2746,7 @@ const QUESTIONS_DATA = [
       "die Verwandten",
       "die Schulen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 250,
@@ -2757,7 +2757,7 @@ const QUESTIONS_DATA = [
       "eine Frau ist.",
       "Mitglied einer Partei ist."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 251,
@@ -2768,13 +2768,13 @@ const QUESTIONS_DATA = [
       "kann man dafür nicht bestraft werden.",
       "kann man dafür bestraft werden."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 252,
-    "question": "In Deutschland …  darf man zur gleichen Zeit nur mit einer Partnerin/einem Partner verheiratet",
+    "question": "In Deutschland …",
     "options": [
-      "sein.",
+      "darf man zur gleichen Zeit nur mit einer Partnerin/einem Partner verheiratet sein.",
       "kann man mehrere Ehepartnerinnen/Ehepartner gleichzeitig haben.",
       "darf man nicht wieder heiraten, wenn man einmal verheiratet war.",
       "darf eine Frau nicht wieder heiraten, wenn ihr Mann gestorben ist."
@@ -2794,14 +2794,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 254,
-    "question": "In Deutschland dürfen Ehepaare sich scheiden lassen. Meistens müssen sie dazu das \"Trennungsjahr\" einhalten. Was bedeutet das?  Der Scheidungsprozess dauert ein Jahr.",
+    "question": "In Deutschland dürfen Ehepaare sich scheiden lassen. Meistens müssen sie dazu das \"Trennungsjahr\" einhalten. Was bedeutet das?",
     "options": [
+      "Der Scheidungsprozess dauert ein Jahr.",
       "Die Ehegatten sind ein Jahr verheiratet, dann ist die Scheidung möglich.",
       "Das Besuchsrecht für die Kinder gilt ein Jahr.",
-      "Die Ehegatten führen mindestens ein Jahr getrennt ihr eigenes Leben. Danach",
-      "ist die Scheidung möglich."
+      "Die Ehegatten führen mindestens ein Jahr getrennt ihr eigenes Leben. Danach ist die Scheidung möglich."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 255,
@@ -2812,7 +2812,7 @@ const QUESTIONS_DATA = [
       "Jugendamt.",
       "Gesundheitsamt."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 256,
@@ -2823,7 +2823,7 @@ const QUESTIONS_DATA = [
       "eine Genehmigung des Einwohnermeldeamts",
       "eine Gaststättenerlaubnis von der zuständigen Behörde"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 257,
@@ -2834,18 +2834,18 @@ const QUESTIONS_DATA = [
       "einer Hauptschule.",
       "einer Privatuniversität."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 258,
-    "question": "Was darf das Jugendamt in Deutschland?  Es entscheidet, welche Schule das Kind besucht.",
+    "question": "Was darf das Jugendamt in Deutschland?",
     "options": [
-      "Es kann ein Kind, das geschlagen wird oder hungern muss, aus der Familie",
-      "nehmen.",
+      "Es entscheidet, welche Schule das Kind besucht.",
+      "Es kann ein Kind, das geschlagen wird oder hungern muss, aus der Familie nehmen.",
       "Es bezahlt das Kindergeld an die Eltern.",
       "Es kontrolliert, ob das Kind einen Kindergarten besucht."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 259,
@@ -2856,7 +2856,7 @@ const QUESTIONS_DATA = [
       "Steuererklärung.",
       "Krankenversicherung."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 260,
@@ -2867,7 +2867,7 @@ const QUESTIONS_DATA = [
       "Anspruch auf Schulgeld.",
       "Anwesenheitspflicht."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 261,
@@ -2878,14 +2878,14 @@ const QUESTIONS_DATA = [
       "einer Hauptschule.",
       "einer Privatuniversität."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 262,
-    "question": "Was bedeutet in Deutschland der Grundsatz der Gleichbehandlung?  Niemand darf z.B. wegen einer Behinderung benachteiligt werden.",
+    "question": "Was bedeutet in Deutschland der Grundsatz der Gleichbehandlung?",
     "options": [
-      "Man darf andere Personen benachteiligen, wenn ausreichende persönliche",
-      "Gründe hierfür vorliegen.",
+      "Niemand darf z.B. wegen einer Behinderung benachteiligt werden.",
+      "Man darf andere Personen benachteiligen, wenn ausreichende persönliche Gründe hierfür vorliegen.",
       "Niemand darf gegen Personen klagen, wenn sie benachteiligt wurden.",
       "Es ist für alle Gesetz, benachteiligten Gruppen jährlich Geld zu spenden."
     ],
@@ -2922,7 +2922,7 @@ const QUESTIONS_DATA = [
       "zur Agentur für Arbeit",
       "zum Standesamt"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 266,
@@ -2933,7 +2933,7 @@ const QUESTIONS_DATA = [
       "um 0 Uhr, Mitternacht",
       "um 22 Uhr"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 267,
@@ -2948,14 +2948,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 268,
-    "question": "Eine junge Frau will den Führerschein machen. Sie hat Angst vor der Prüfung, weil ihre Muttersprache nicht Deutsch ist. Was ist richtig?  Sie muss mindestens zehn Jahre in Deutschland leben, bevor sie den Führerschein machen kann.  Wenn sie kein Deutsch kann, darf sie keinen Führerschein haben.",
+    "question": "Eine junge Frau will den Führerschein machen. Sie hat Angst vor der Prüfung, weil ihre Muttersprache nicht Deutsch ist. Was ist richtig?",
     "options": [
-      "Sie muss den Führerschein in dem Land machen, in dem man ihre Sprache",
-      "spricht.",
-      "Sie kann die Theorie-Prüfung vielleicht in ihrer Muttersprache machen. Es",
-      "gibt mehr als zehn Sprachen zur Auswahl."
+      "Sie muss mindestens zehn Jahre in Deutschland leben, bevor sie den Führerschein machen kann.",
+      "Wenn sie kein Deutsch kann, darf sie keinen Führerschein haben.",
+      "Sie muss den Führerschein in dem Land machen, in dem man ihre Sprache spricht.",
+      "Sie kann die Theorie-Prüfung vielleicht in ihrer Muttersprache machen. Es gibt mehr als zehn Sprachen zur Auswahl."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 269,
@@ -2966,7 +2966,7 @@ const QUESTIONS_DATA = [
       "einen Kindergartenplatz.",
       "einen Ferienpass."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 270,
@@ -2977,7 +2977,7 @@ const QUESTIONS_DATA = [
       "zur Weiterbildung.",
       "nur für Rentnerinnen und Rentner."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 271,
@@ -2988,7 +2988,7 @@ const QUESTIONS_DATA = [
       "sich mit Masken und Kostümen verkleiden",
       "Kürbisse vor die Tür stellen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 272,
@@ -2999,7 +2999,7 @@ const QUESTIONS_DATA = [
       "Ein alleinerziehender Vater lebt mit seinen zwei Kindern zusammen.",
       "Ein Mann ist mit zwei Frauen zur selben Zeit verheiratet."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 273,
@@ -3010,7 +3010,7 @@ const QUESTIONS_DATA = [
       "zum Einwohnermeldeamt.",
       "zum Jugendamt."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 274,
@@ -3021,7 +3021,7 @@ const QUESTIONS_DATA = [
       "die Schweigepflicht",
       "die Meinungsfreiheit"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 275,
@@ -3032,7 +3032,7 @@ const QUESTIONS_DATA = [
       "die Einwilligung der Kinder",
       "die Unterstützung einer Anwältin/eines Anwalts"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 276,
@@ -3043,7 +3043,7 @@ const QUESTIONS_DATA = [
       "Ich drohe der Person.",
       "Ich kann mich bei der Behördenleiterin/beim Behördenleiter beschweren."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 277,
@@ -3054,7 +3054,7 @@ const QUESTIONS_DATA = [
       "keine Erfahrungen in diesem Beruf hat.",
       "Mutter ist."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 278,
@@ -3076,7 +3076,7 @@ const QUESTIONS_DATA = [
       "Regeln, an die sich alle Bewohnerinnen und Bewohner halten müssen.",
       "die Adresse des nächsten Ordnungsamtes."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 280,
@@ -3087,7 +3087,7 @@ const QUESTIONS_DATA = [
       "Einspruch einlegen.",
       "warten, bis ein anderer Bescheid kommt."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 281,
@@ -3098,7 +3098,7 @@ const QUESTIONS_DATA = [
       "Versammlungsfreiheit",
       "Freizügigkeit"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 282,
@@ -3109,7 +3109,7 @@ const QUESTIONS_DATA = [
       "Bibliotheksaufsicht",
       "Lehrerin/Lehrer"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 283,
@@ -3120,18 +3120,18 @@ const QUESTIONS_DATA = [
       "Ich schicke die Rechnung an die Behörde zurück.",
       "Ich gehe mit der Rechnung zum Finanzamt."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 284,
-    "question": "Was man für die Arbeit können muss, ändert sich in Zukunft sehr schnell. Was kann man tun?  Es ist egal, was man lernt.",
+    "question": "Was man für die Arbeit können muss, ändert sich in Zukunft sehr schnell. Was kann man tun?",
     "options": [
+      "Es ist egal, was man lernt.",
       "Erwachsene müssen auch nach der Ausbildung immer weiter lernen.",
-      "Kinder lernen in der Schule alles, was im Beruf wichtig ist. Nach der Schule",
-      "muss man nicht weiter lernen.",
+      "Kinder lernen in der Schule alles, was im Beruf wichtig ist. Nach der Schule muss man nicht weiter lernen.",
       "Alle müssen früher aufhören zu arbeiten, weil sich alles ändert."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 285,
@@ -3142,7 +3142,7 @@ const QUESTIONS_DATA = [
       "Beiträge zur Renten- und Krankenversicherung",
       "Umsatzsteuer"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 286,
@@ -3164,7 +3164,7 @@ const QUESTIONS_DATA = [
       "die Kündigungsfrist",
       "die Versicherungspflicht"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 288,
@@ -3175,7 +3175,7 @@ const QUESTIONS_DATA = [
       "aus dem Grundgesetz der Bundesrepublik Deutschland",
       "aus der christlichen Tradition"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 289,
@@ -3186,7 +3186,7 @@ const QUESTIONS_DATA = [
       "er eine dunkle Haut hat.",
       "er keine Erfahrungen im Beruf hat."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 290,
@@ -3197,13 +3197,13 @@ const QUESTIONS_DATA = [
       "das Gerät ungefragt austauschen",
       "die Garantie verlängern"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 291,
-    "question": "Warum muss man in Deutschland bei der Steuererklärung aufschreiben, ob man zu einer Kirche gehört oder nicht? Weil …  es eine Kirchensteuer gibt, die an die Einkommen- und Lohnsteuer geknüpft",
+    "question": "Warum muss man in Deutschland bei der Steuererklärung aufschreiben, ob man zu einer Kirche gehört oder nicht? Weil …",
     "options": [
-      "ist.",
+      "es eine Kirchensteuer gibt, die an die Einkommen- und Lohnsteuer geknüpft ist.",
       "das für die Statistik in Deutschland wichtig ist.",
       "man mehr Steuern zahlen muss, wenn man nicht zu einer Kirche gehört.",
       "die Kirche für die Steuererklärung verantwortlich ist."
@@ -3219,7 +3219,7 @@ const QUESTIONS_DATA = [
       "Jeder kann glauben, was er möchte.",
       "Der Staat entscheidet, an welchen Gott die Menschen glauben."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 293,
@@ -3230,7 +3230,7 @@ const QUESTIONS_DATA = [
       "Eier bemalen",
       "Raketen in die Luft schießen"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 294,
@@ -3252,7 +3252,7 @@ const QUESTIONS_DATA = [
       "der Buddhismus",
       "der Islam"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 296,
@@ -3263,7 +3263,7 @@ const QUESTIONS_DATA = [
       "die Adventszeit.",
       "Allerheiligen."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 297,
@@ -3274,7 +3274,7 @@ const QUESTIONS_DATA = [
       "Marokko",
       "Türkei"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 298,
@@ -3296,7 +3296,7 @@ const QUESTIONS_DATA = [
       "Zeitarbeiterinnen/Zeitarbeiter.",
       "Schichtarbeiterinnen/Schichtarbeiter."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 300,
@@ -3343,7 +3343,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0,
+    "correct": 2,
     "bundesland": "Sachsen"
   },
   {
@@ -3355,7 +3355,7 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0,
+    "correct": 1,
     "bundesland": "Sachsen"
   },
   {
@@ -3367,7 +3367,7 @@ const QUESTIONS_DATA = [
       "grün-weiß-rot",
       "schwarz-gelb"
     ],
-    "correct": 0,
+    "correct": 1,
     "bundesland": "Sachsen"
   },
   {
@@ -3420,14 +3420,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 310,
-    "question": "Welche Ministerin/welchen Minister hat Sachsen nicht?  Justizministerin/Justizminister",
+    "question": "Welche Ministerin/welchen Minister hat Sachsen nicht?",
     "options": [
+      "Justizministerin/Justizminister",
       "Außenministerin/Außenminister",
       "Finanzministerin/Finanzminister",
-      "Innenministerin/Innenminister",
-      "Teil II"
+      "Innenministerin/Innenminister"
     ],
-    "correct": 0,
+    "correct": 1,
     "bundesland": "Sachsen"
   }
 ];
