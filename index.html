@@ -306,6 +306,14 @@
                 this.mode = null; // 'full' or 'simulation'
                 this.showResult = false;
                 this.selectedAnswer = null;
+                this.selectedBundesland = 'Sachsen'; // Default Bundesland
+
+                this.bundeslaender = [
+                    'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg',
+                    'Bremen', 'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern',
+                    'Niedersachsen', 'Nordrhein-Westfalen', 'Rheinland-Pfalz',
+                    'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen'
+                ];
 
                 this.loadData();
                 this.render();
@@ -371,6 +379,12 @@
                 if (storedAnswers) {
                     this.answers = JSON.parse(storedAnswers);
                 }
+
+                // Load selected Bundesland
+                const storedBundesland = localStorage.getItem('quiz-bundesland');
+                if (storedBundesland) {
+                    this.selectedBundesland = storedBundesland;
+                }
             }
 
             saveAllQuestions() {
@@ -385,6 +399,28 @@
                 localStorage.setItem('quiz-mode', this.mode);
             }
 
+            saveBundesland() {
+                localStorage.setItem('quiz-bundesland', this.selectedBundesland);
+            }
+
+            selectBundesland(bundesland) {
+                this.selectedBundesland = bundesland;
+                this.saveBundesland();
+                this.render();
+            }
+
+            getAvailableBundeslaender() {
+                // Return list of Bundesländer that have at least 3 questions
+                const bundeslaenderCount = {};
+                this.allQuestions
+                    .filter(q => q.id > 300 && q.bundesland)
+                    .forEach(q => {
+                        bundeslaenderCount[q.bundesland] = (bundeslaenderCount[q.bundesland] || 0) + 1;
+                    });
+
+                return Object.keys(bundeslaenderCount).filter(bl => bundeslaenderCount[bl] >= 3);
+            }
+
             startQuiz(mode) {
                 this.mode = mode;
                 this.saveMode();
@@ -397,12 +433,24 @@
                     const generalQuestions = this.allQuestions.filter(q => q.id <= 300);
                     const selectedGeneral = this.getRandomQuestions(generalQuestions, 30);
 
-                    // Select 3 random questions from regional questions (301-310)
-                    const regionalQuestions = this.allQuestions.filter(q => q.id > 300);
-                    const selectedRegional = this.getRandomQuestions(regionalQuestions, 3);
+                    // Select 3 random questions from selected Bundesland
+                    const regionalQuestions = this.allQuestions.filter(q =>
+                        q.id > 300 && q.bundesland === this.selectedBundesland
+                    );
 
-                    // Combine questions (30 federal + 3 regional = 33 total)
-                    this.questions = [...selectedGeneral, ...selectedRegional];
+                    if (regionalQuestions.length >= 3) {
+                        const selectedRegional = this.getRandomQuestions(regionalQuestions, 3);
+                        // Combine questions (30 federal + 3 regional = 33 total)
+                        this.questions = [...selectedGeneral, ...selectedRegional];
+                    } else {
+                        // If not enough regional questions available, show alert
+                        alert(`Sorry, regional questions for ${this.selectedBundesland} are not yet available. Using Sachsen questions instead.`);
+                        const fallbackRegional = this.allQuestions.filter(q =>
+                            q.id > 300 && q.bundesland === 'Sachsen'
+                        );
+                        const selectedRegional = this.getRandomQuestions(fallbackRegional, 3);
+                        this.questions = [...selectedGeneral, ...selectedRegional];
+                    }
                 }
 
                 this.saveActiveQuestions();
@@ -563,12 +611,36 @@
             }
 
             renderHome() {
+                // Check available Bundesländer
+                const availableBundeslaender = this.getAvailableBundeslaender();
+
                 return `
                     <div class="card">
                         <h1>🇩🇪 Einbürgerungstest</h1>
-                        <p style="text-align: center; color: #6b7280; margin-bottom: 32px;">
+                        <p style="text-align: center; color: #6b7280; margin-bottom: 24px;">
                             Choose your practice mode
                         </p>
+
+                        <div style="margin-bottom: 24px; padding: 16px; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
+                            <label style="display: block; font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 8px;">
+                                🗺️ Your Bundesland:
+                            </label>
+                            <select
+                                id="bundeslandSelect"
+                                onchange="app.selectBundesland(this.value)"
+                                style="width: 100%; padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px; background: white; cursor: pointer;"
+                            >
+                                ${this.bundeslaender.map(bl => {
+                                    const available = availableBundeslaender.includes(bl);
+                                    const selected = bl === this.selectedBundesland ? 'selected' : '';
+                                    const label = available ? bl : `${bl} (not yet available)`;
+                                    return `<option value="${bl}" ${selected}>${label}</option>`;
+                                }).join('')}
+                            </select>
+                            <p style="font-size: 12px; color: #6b7280; margin-top: 8px; margin-bottom: 0;">
+                                The test includes 3 random questions specific to your Bundesland
+                            </p>
+                        </div>
 
                         <div style="display: flex; flex-direction: column; gap: 16px;">
                             <button class="btn btn-primary" onclick="app.startQuiz('full')" style="padding: 24px;">
@@ -766,10 +838,15 @@
                         </div>
 
                         <h1>📊 Statistics</h1>
-                        <div style="text-align: center; margin-bottom: 16px;">
+                        <div style="text-align: center; margin-bottom: 16px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
                             <span style="font-size: 12px; font-weight: 600; color: #667eea; padding: 4px 12px; background: #f3f4ff; border-radius: 8px;">
                                 ${modeLabel}
                             </span>
+                            ${this.mode === 'simulation' ? `
+                            <span style="font-size: 12px; font-weight: 600; color: #059669; padding: 4px 12px; background: #d1fae5; border-radius: 8px;">
+                                🗺️ ${this.selectedBundesland}
+                            </span>
+                            ` : ''}
                         </div>
 
                         ${this.mode === 'simulation' && stats.answered === stats.total ? `

@@ -32,13 +32,23 @@ Or drag `index.html` into a browser (Chrome, Firefox, Safari)
 **✅ Test Simulation Mode**
 - Realistic test experience with 33 random questions:
   - 30 questions from the federal catalog (questions 1-300)
-  - 3 questions from your Bundesland (questions 301-310 for Sachsen)
+  - 3 questions specific to your selected Bundesland
+- **Select your Bundesland** from the dropdown on the home page
 - Pass/fail result (need ≥17 correct answers to pass)
 - Different questions each time you start a new simulation
+
+### 🗺️ Bundesland Selection
+
+Choose your Bundesland before starting a test simulation:
+- Currently available: **Sachsen** (10 questions)
+- Coming soon: 15 other Bundesländer
+- Your selection is saved automatically
+- If questions for your Bundesland aren't available yet, the app will use Sachsen questions as fallback
 
 ### 📊 Features
 
 - ✅ **Two practice modes**: Full practice or realistic test simulation
+- ✅ **Bundesland selection**: Choose your Bundesland for region-specific questions
 - ✅ **Auto-loading**: Questions load on startup
 - ✅ **Saved progress**: Your answers are automatically saved in the browser
 - ✅ **Detailed statistics**: View correct answers, percentage, pass/fail status
@@ -164,11 +174,12 @@ python download_images.py
 
 ## 📊 Current Statistics
 
-- **Questions extracted**: 310 / 310 ✅
+- **Questions extracted**: 310 ✅
   - 300 general federal questions (ID 1-300)
   - 10 Sachsen-specific questions (ID 301-310)
+- **Bundesländer available**: 1 / 16 (Sachsen)
 - **Format**: JSON with id, question, options (array of 4), correct (0-3), bundesland (optional)
-- **Completeness**: 100% ✅
+- **Correct answers**: 100% verified ✅
 
 ## 📝 TODO
 
@@ -176,9 +187,11 @@ python download_images.py
 - [x] ~~Download images for questions that require them~~ ✅ 7 images downloaded
 - [x] ~~Add test simulation mode~~ ✅ 33 questions (30 federal + 3 regional)
 - [x] ~~Add jump to question feature~~ ✅ Available in full practice mode
+- [x] ~~Add Bundesland selection~~ ✅ Dropdown selector on home page
+- [ ] Extract questions for remaining 15 Bundesländer from BAMF PDF
 - [ ] Optional Italian translation (if desired)
 - [ ] Search for missing images for questions 29, 31, 85, 214, 305 (if they exist)
-- [ ] Add Bundesland selection for regional questions
+- [ ] Add timer for test simulation mode (60 minutes)
 
 ## 🔗 Sources
 
