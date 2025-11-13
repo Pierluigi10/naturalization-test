@@ -292,47 +292,79 @@
 <body>
     <div class="container" id="app"></div>
 
-    <!-- Carica le domande -->
+    <!-- Load questions -->
     <script src="questions.js"></script>
 
     <script>
         class QuizApp {
             constructor() {
+                this.allQuestions = [];
                 this.questions = [];
                 this.currentIndex = 0;
                 this.answers = {};
-                this.view = 'quiz';
+                this.view = 'home';
+                this.mode = null; // 'full' or 'simulation'
                 this.showResult = false;
                 this.selectedAnswer = null;
-                
+
                 this.loadData();
                 this.render();
             }
 
             loadData() {
-                // Prima prova a caricare dal localStorage
+                // First try to load from localStorage
                 const stored = localStorage.getItem('quiz-questions');
 
                 if (typeof QUESTIONS_DATA !== 'undefined') {
-                    // Se abbiamo QUESTIONS_DATA, confronta con localStorage
+                    // If we have QUESTIONS_DATA, check if it's different from localStorage
+                    let needsUpdate = false;
+
                     if (stored) {
                         const storedQuestions = JSON.parse(stored);
-                        // Se il numero di domande è diverso, aggiorna dal file
+                        // Check if number of questions is different
                         if (storedQuestions.length !== QUESTIONS_DATA.length) {
-                            console.log(`Aggiornamento: ${storedQuestions.length} → ${QUESTIONS_DATA.length} domande`);
-                            this.questions = QUESTIONS_DATA;
-                            this.saveQuestions();
+                            needsUpdate = true;
+                            console.log(`Update: ${storedQuestions.length} → ${QUESTIONS_DATA.length} questions`);
                         } else {
-                            this.questions = storedQuestions;
+                            // Check if content has changed by comparing a sample of questions
+                            // Compare first, middle, and last question's correct answer
+                            const indices = [0, Math.floor(QUESTIONS_DATA.length / 2), QUESTIONS_DATA.length - 1];
+                            for (const idx of indices) {
+                                if (storedQuestions[idx].correct !== QUESTIONS_DATA[idx].correct ||
+                                    storedQuestions[idx].question !== QUESTIONS_DATA[idx].question) {
+                                    needsUpdate = true;
+                                    console.log('Update: Questions content has changed');
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (needsUpdate) {
+                            this.allQuestions = QUESTIONS_DATA;
+                            this.saveAllQuestions();
+                        } else {
+                            this.allQuestions = storedQuestions;
                         }
                     } else {
-                        // Se non c'è niente in localStorage, carica da questions.js
-                        this.questions = QUESTIONS_DATA;
-                        this.saveQuestions();
+                        // If nothing in localStorage, load from questions.js
+                        this.allQuestions = QUESTIONS_DATA;
+                        this.saveAllQuestions();
+                        console.log('Loaded questions from file');
                     }
                 } else if (stored) {
-                    // Fallback: usa solo localStorage se non c'è QUESTIONS_DATA
-                    this.questions = JSON.parse(stored);
+                    // Fallback: use only localStorage if QUESTIONS_DATA is not available
+                    this.allQuestions = JSON.parse(stored);
+                }
+
+                // Load mode and active questions
+                const storedMode = localStorage.getItem('quiz-mode');
+                if (storedMode) {
+                    this.mode = storedMode;
+                    const storedActiveQuestions = localStorage.getItem('quiz-active-questions');
+                    if (storedActiveQuestions) {
+                        this.questions = JSON.parse(storedActiveQuestions);
+                        this.view = 'quiz';
+                    }
                 }
 
                 const storedAnswers = localStorage.getItem('quiz-answers');
@@ -341,8 +373,63 @@
                 }
             }
 
-            saveQuestions() {
-                localStorage.setItem('quiz-questions', JSON.stringify(this.questions));
+            saveAllQuestions() {
+                localStorage.setItem('quiz-questions', JSON.stringify(this.allQuestions));
+            }
+
+            saveActiveQuestions() {
+                localStorage.setItem('quiz-active-questions', JSON.stringify(this.questions));
+            }
+
+            saveMode() {
+                localStorage.setItem('quiz-mode', this.mode);
+            }
+
+            startQuiz(mode) {
+                this.mode = mode;
+                this.saveMode();
+
+                if (mode === 'full') {
+                    // Use all 310 questions
+                    this.questions = [...this.allQuestions];
+                } else if (mode === 'simulation') {
+                    // Select 30 random questions from the first 300 (federal questions)
+                    const generalQuestions = this.allQuestions.filter(q => q.id <= 300);
+                    const selectedGeneral = this.getRandomQuestions(generalQuestions, 30);
+
+                    // Select 3 random questions from regional questions (301-310)
+                    const regionalQuestions = this.allQuestions.filter(q => q.id > 300);
+                    const selectedRegional = this.getRandomQuestions(regionalQuestions, 3);
+
+                    // Combine questions (30 federal + 3 regional = 33 total)
+                    this.questions = [...selectedGeneral, ...selectedRegional];
+                }
+
+                this.saveActiveQuestions();
+                this.currentIndex = 0;
+                this.answers = {};
+                this.saveAnswers();
+                this.view = 'quiz';
+                this.render();
+            }
+
+            getRandomQuestions(questions, count) {
+                const shuffled = [...questions].sort(() => Math.random() - 0.5);
+                return shuffled.slice(0, count);
+            }
+
+            returnToHome() {
+                if (confirm('Do you want to return to home? Current progress will be lost.')) {
+                    this.mode = null;
+                    this.questions = [];
+                    this.answers = {};
+                    this.currentIndex = 0;
+                    localStorage.removeItem('quiz-mode');
+                    localStorage.removeItem('quiz-active-questions');
+                    localStorage.removeItem('quiz-answers');
+                    this.view = 'home';
+                    this.render();
+                }
             }
 
             saveAnswers() {
@@ -384,9 +471,36 @@
                 }
             }
 
+            goToQuestion(questionId) {
+                const id = parseInt(questionId);
+
+                // Input validation
+                if (!questionId || isNaN(id)) {
+                    alert('Please enter a valid question number.');
+                    return;
+                }
+
+                if (id < 1 || id > 310) {
+                    alert('Question number must be between 1 and 310.');
+                    return;
+                }
+
+                // Find the index of the question with the specified ID
+                const index = this.questions.findIndex(q => q.id === id);
+                if (index !== -1) {
+                    this.currentIndex = index;
+                    this.selectedAnswer = null;
+                    this.showResult = false;
+                    this.render();
+                } else {
+                    alert(`Question ${id} not found in this mode.`);
+                }
+            }
+
             resetProgress() {
-                if (confirm('Vuoi davvero resettare tutti i progressi?')) {
+                if (confirm('Do you really want to reset all progress for this session?')) {
                     this.answers = {};
+                    this.currentIndex = 0;
                     this.saveAnswers();
                     this.selectedAnswer = null;
                     this.showResult = false;
@@ -395,11 +509,11 @@
             }
 
             reloadQuestions() {
-                if (confirm('Vuoi ricaricare le domande originali? Questo manterrà i tuoi progressi.')) {
+                if (confirm('Do you want to reload the original questions? This will keep your progress.')) {
                     if (typeof QUESTIONS_DATA !== 'undefined') {
-                        this.questions = QUESTIONS_DATA;
-                        this.saveQuestions();
-                        alert('Domande ricaricate con successo!');
+                        this.allQuestions = QUESTIONS_DATA;
+                        this.saveAllQuestions();
+                        alert('Questions reloaded successfully!');
                         this.render();
                     }
                 }
@@ -413,13 +527,13 @@
                 reader.onload = (e) => {
                     try {
                         const imported = JSON.parse(e.target.result);
-                        this.questions = imported;
-                        this.saveQuestions();
-                        alert(`${imported.length} domande importate con successo!`);
-                        this.view = 'quiz';
+                        this.allQuestions = imported;
+                        this.saveAllQuestions();
+                        alert(`${imported.length} questions imported successfully!`);
+                        this.view = 'home';
                         this.render();
                     } catch (error) {
-                        alert('Errore nel file JSON. Verifica il formato.');
+                        alert('Error in JSON file. Please check the format.');
                     }
                 };
                 reader.readAsText(file);
@@ -434,9 +548,11 @@
 
             render() {
                 const app = document.getElementById('app');
-                
-                if (this.questions.length === 0) {
+
+                if (this.allQuestions.length === 0) {
                     app.innerHTML = this.renderImport();
+                } else if (this.view === 'home') {
+                    app.innerHTML = this.renderHome();
                 } else if (this.view === 'stats') {
                     app.innerHTML = this.renderStats();
                 } else {
@@ -446,21 +562,66 @@
                 this.attachEventListeners();
             }
 
+            renderHome() {
+                return `
+                    <div class="card">
+                        <h1>🇩🇪 Einbürgerungstest</h1>
+                        <p style="text-align: center; color: #6b7280; margin-bottom: 32px;">
+                            Choose your practice mode
+                        </p>
+
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <button class="btn btn-primary" onclick="app.startQuiz('full')" style="padding: 24px;">
+                                <div style="text-align: left; width: 100%;">
+                                    <div style="font-size: 20px; font-weight: bold; margin-bottom: 8px;">
+                                        📚 All Questions
+                                    </div>
+                                    <div style="font-size: 14px; opacity: 0.9;">
+                                        Practice with all 310 questions
+                                    </div>
+                                </div>
+                            </button>
+
+                            <button class="btn" onclick="app.startQuiz('simulation')" style="padding: 24px; background: linear-gradient(135deg, #10b981, #059669); color: white;">
+                                <div style="text-align: left; width: 100%;">
+                                    <div style="font-size: 20px; font-weight: bold; margin-bottom: 8px;">
+                                        ✅ Test Simulation
+                                    </div>
+                                    <div style="font-size: 14px; opacity: 0.9;">
+                                        33 random questions (30 federal + 3 regional)
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div style="margin-top: 32px; padding: 16px; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
+                            <div style="font-size: 14px; color: #6b7280; line-height: 1.6;">
+                                <strong style="color: #374151;">ℹ️ About the test:</strong><br>
+                                The real naturalization test consists of 33 questions:<br>
+                                • 30 random questions from the federal catalog (questions 1-300)<br>
+                                • 3 random questions from your Bundesland (questions 301-310 for Sachsen)<br><br>
+                                To pass, you need to answer at least 17 questions correctly (≥51.5%).
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             renderImport() {
-                // Se QUESTIONS_DATA è disponibile, mostra un messaggio diverso
+                // If QUESTIONS_DATA is available, show a different message
                 if (typeof QUESTIONS_DATA !== 'undefined') {
                     return `
                         <div class="card">
                             <div class="import-section">
                                 <div class="import-icon">⚠️</div>
-                                <h1>Errore Caricamento</h1>
+                                <h1>Loading Error</h1>
                                 <p style="color: #6b7280; margin-bottom: 24px;">
-                                    Le domande dovrebbero caricarsi automaticamente.<br>
-                                    Se vedi questo messaggio, prova a ricaricare la pagina.
+                                    Questions should load automatically.<br>
+                                    If you see this message, try reloading the page.
                                 </p>
 
                                 <button class="btn btn-primary" onclick="location.reload()">
-                                    🔄 Ricarica Pagina
+                                    🔄 Reload Page
                                 </button>
                             </div>
                         </div>
@@ -471,21 +632,21 @@
                     <div class="card">
                         <div class="import-section">
                             <div class="import-icon">📚</div>
-                            <h1>Quiz Orientamento</h1>
+                            <h1>Einbürgerungstest Quiz</h1>
                             <p style="color: #6b7280; margin-bottom: 24px;">
-                                Importa le domande del test per iniziare a esercitarti
+                                Import test questions to start practicing
                             </p>
 
                             <div class="code-example">
 [
   {
     "id": 1,
-    "question": "Testo domanda?",
+    "question": "Question text?",
     "options": [
-      "Risposta A",
-      "Risposta B",
-      "Risposta C",
-      "Risposta D"
+      "Answer A",
+      "Answer B",
+      "Answer C",
+      "Answer D"
     ],
     "correct": 0
   }
@@ -493,7 +654,7 @@
                             </div>
 
                             <label class="btn btn-primary" style="display: inline-flex; cursor: pointer;">
-                                📤 Importa Domande (JSON)
+                                📤 Import Questions (JSON)
                                 <input type="file" accept=".json" class="file-input" id="fileInput">
                             </label>
                         </div>
@@ -504,16 +665,25 @@
             renderQuiz() {
                 const question = this.questions[this.currentIndex];
                 const progress = ((this.currentIndex + 1) / this.questions.length) * 100;
+                const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' : '📚 Full Practice';
 
                 return `
                     <div class="card">
-                        <div class="header">
-                            <div style="font-size: 14px; font-weight: 600; color: #6b7280;">
-                                Domanda ${question.id} di ${this.questions.length}
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                            <button class="btn-stats" onclick="app.returnToHome();" style="border-color: #6b7280; color: #6b7280;">
+                                ← Home
+                            </button>
+                            <div style="font-size: 12px; font-weight: 600; color: #667eea; padding: 4px 12px; background: #f3f4ff; border-radius: 8px;">
+                                ${modeLabel}
                             </div>
                             <button class="btn-stats" onclick="app.view = 'stats'; app.render();">
-                                📊 Statistiche
+                                📊 Stats
                             </button>
+                        </div>
+                        <div class="header">
+                            <div style="font-size: 14px; font-weight: 600; color: #6b7280;">
+                                Question ${this.currentIndex + 1} of ${this.questions.length}
+                            </div>
                         </div>
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: ${progress}%"></div>
@@ -551,47 +721,89 @@
                     <div class="card">
                         <div class="navigation">
                             <button class="btn btn-secondary" onclick="app.prevQuestion()" ${this.currentIndex === 0 ? 'disabled' : ''}>
-                                ← Precedente
+                                ← Previous
                             </button>
                             <button class="btn btn-primary" onclick="app.nextQuestion()" ${this.currentIndex === this.questions.length - 1 ? 'disabled' : ''}>
-                                Successiva →
+                                Next →
                             </button>
                         </div>
+                        ${this.mode === 'full' ? `
+                        <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px;">
+                            <label style="font-size: 14px; font-weight: 600; color: #6b7280;">Go to question:</label>
+                            <input
+                                type="number"
+                                id="questionNumberInput"
+                                min="1"
+                                max="310"
+                                placeholder="e.g. 258"
+                                style="flex: 1; padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;"
+                                onkeypress="if(event.key === 'Enter') app.goToQuestion(this.value)"
+                            >
+                            <button class="btn btn-secondary" onclick="app.goToQuestion(document.getElementById('questionNumberInput').value)" style="white-space: nowrap;">
+                                Jump
+                            </button>
+                        </div>
+                        ` : ''}
                     </div>
                 `;
             }
 
             renderStats() {
                 const stats = this.getStats();
-                
+                const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' : '📚 Full Practice';
+                const passThreshold = this.mode === 'simulation' ? 17 : Math.ceil(this.questions.length * 0.515);
+                const hasPassed = stats.correct >= passThreshold;
+
                 return `
                     <div class="card">
-                        <button class="btn-stats" onclick="app.view = 'quiz'; app.render();" style="margin-bottom: 16px;">
-                            ← Torna al Quiz
-                        </button>
-                        
-                        <h1>📊 Statistiche</h1>
+                        <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+                            <button class="btn-stats" onclick="app.view = 'quiz'; app.render();">
+                                ← Back to Quiz
+                            </button>
+                            <button class="btn-stats" onclick="app.returnToHome();" style="border-color: #6b7280; color: #6b7280;">
+                                🏠 Home
+                            </button>
+                        </div>
+
+                        <h1>📊 Statistics</h1>
+                        <div style="text-align: center; margin-bottom: 16px;">
+                            <span style="font-size: 12px; font-weight: 600; color: #667eea; padding: 4px 12px; background: #f3f4ff; border-radius: 8px;">
+                                ${modeLabel}
+                            </span>
+                        </div>
+
+                        ${this.mode === 'simulation' && stats.answered === stats.total ? `
+                        <div style="text-align: center; padding: 20px; margin-bottom: 16px; border-radius: 12px; background: ${hasPassed ? 'linear-gradient(135deg, #10b981, #059669)' : 'linear-gradient(135deg, #ef4444, #dc2626)'}; color: white;">
+                            <div style="font-size: 48px; margin-bottom: 8px;">${hasPassed ? '✅' : '❌'}</div>
+                            <div style="font-size: 24px; font-weight: bold; margin-bottom: 4px;">
+                                ${hasPassed ? 'PASSED!' : 'NOT PASSED'}
+                            </div>
+                            <div style="font-size: 14px; opacity: 0.9;">
+                                You need ${passThreshold} correct answers to pass (${stats.correct}/${stats.total})
+                            </div>
+                        </div>
+                        ` : ''}
 
                         <div class="stats-grid">
                             <div class="stat-card" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
                                 <div class="stat-value">${stats.answered}</div>
-                                <div class="stat-label">Risposte date</div>
+                                <div class="stat-label">Answered</div>
                             </div>
                             <div class="stat-card" style="background: linear-gradient(135deg, #10b981, #059669);">
                                 <div class="stat-value">${stats.correct}</div>
-                                <div class="stat-label">Corrette</div>
+                                <div class="stat-label">Correct</div>
                             </div>
                             <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
                                 <div class="stat-value">${stats.percentage}%</div>
-                                <div class="stat-label">Percentuale</div>
+                                <div class="stat-label">Percentage</div>
                             </div>
                             <div class="stat-card" style="background: linear-gradient(135deg, #6b7280, #4b5563);">
                                 <div class="stat-value">${stats.total}</div>
-                                <div class="stat-label">Totale domande</div>
+                                <div class="stat-label">Total Questions</div>
                             </div>
                         </div>
 
-                        <h3 style="margin-bottom: 12px; color: #374151;">Dettaglio Risposte</h3>
+                        <h3 style="margin-bottom: 12px; color: #374151;">Answer Details</h3>
                         <div class="answer-list">
                             ${this.questions.map((q, idx) => {
                                 const answer = this.answers[idx];
@@ -600,31 +812,38 @@
                                 
                                 if (!answer) {
                                     className += 'unanswered';
-                                    badge = '<span class="badge" style="background: #e5e7eb; color: #374151;">Non risposta</span>';
+                                    badge = '<span class="badge" style="background: #e5e7eb; color: #374151;">Not answered</span>';
                                 } else if (answer.correct) {
                                     className += 'correct';
-                                    badge = '<span class="badge" style="background: #10b981; color: white;">✓ Corretta</span>';
+                                    badge = '<span class="badge" style="background: #10b981; color: white;">✓ Correct</span>';
                                 } else {
                                     className += 'incorrect';
-                                    badge = '<span class="badge" style="background: #ef4444; color: white;">✗ Errata</span>';
+                                    badge = '<span class="badge" style="background: #ef4444; color: white;">✗ Wrong</span>';
                                 }
 
                                 return `
                                     <div class="${className}">
-                                        <span style="font-weight: 600;">Domanda ${q.id}</span>
+                                        <span style="font-weight: 600;">Question ${q.id}</span>
                                         ${badge}
                                     </div>
                                 `;
                             }).join('')}
                         </div>
 
-                        <button class="btn" onclick="app.resetProgress()" style="width: 100%; background: #ef4444; color: white; margin-top: 24px;">
-                            🔄 Reset Progressi
-                        </button>
+                        <div style="display: flex; gap: 12px; margin-top: 24px;">
+                            <button class="btn" onclick="app.resetProgress()" style="flex: 1; background: #f59e0b; color: white;">
+                                🔄 Reset Progress
+                            </button>
+                            ${this.mode === 'simulation' ? `
+                            <button class="btn" onclick="app.startQuiz('simulation')" style="flex: 1; background: #10b981; color: white;">
+                                🎲 New Test
+                            </button>
+                            ` : ''}
+                        </div>
 
                         ${typeof QUESTIONS_DATA !== 'undefined' ? `
                         <button class="btn" onclick="app.reloadQuestions()" style="width: 100%; background: #667eea; color: white; margin-top: 12px;">
-                            🔄 Ricarica Domande Originali
+                            🔄 Reload Original Questions
                         </button>
                         ` : ''}
                     </div>
