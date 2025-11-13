@@ -241,6 +241,12 @@ class QuizApp {
                 this.reviewQuestions = storedReviewQuestions;
             }
         }
+
+        // If resuming a session, check if current question was already answered
+        if (this.view === 'quiz' && this.answers[this.currentIndex]) {
+            this.selectedAnswer = this.answers[this.currentIndex].selected;
+            this.showResult = true;
+        }
     }
 
     // ==================== TIMER ====================
@@ -424,6 +430,58 @@ class QuizApp {
         return shuffled.slice(0, count);
     }
 
+    startTopicQuiz(start, end) {
+        // Filter questions by range
+        this.questions = this.allQuestions.filter(q => q.id >= start && q.id <= end);
+
+        if (this.questions.length === 0) {
+            alert('No questions found in this range!');
+            return;
+        }
+
+        // Set mode to 'topic' for practice mode (no timer)
+        this.mode = 'topic';
+        this.currentIndex = 0;
+        this.answers = {};
+        this.startTime = null;
+        this.stopTimer();
+
+        Storage.saveMode(this.mode);
+        Storage.saveActiveQuestions(this.questions);
+        Storage.saveAnswers(this.answers);
+        Storage.clearSession();
+
+        this.view = 'quiz';
+        this.render();
+    }
+
+    startTopicQuizByBundesland(bundesland) {
+        // Filter questions by Bundesland
+        this.questions = this.allQuestions.filter(q =>
+            q.id > 300 && q.bundesland === bundesland
+        );
+
+        if (this.questions.length === 0) {
+            alert(`No questions found for ${bundesland}!`);
+            return;
+        }
+
+        // Set mode to 'topic' for practice mode (no timer)
+        this.mode = 'topic';
+        this.currentIndex = 0;
+        this.answers = {};
+        this.startTime = null;
+        this.stopTimer();
+
+        Storage.saveMode(this.mode);
+        Storage.saveActiveQuestions(this.questions);
+        Storage.saveAnswers(this.answers);
+        Storage.clearSession();
+
+        this.view = 'quiz';
+        this.render();
+    }
+
     startReview() {
         // Get wrong answers from current session
         const wrongQuestions = [];
@@ -527,12 +585,10 @@ class QuizApp {
         Storage.saveAnswers(this.answers);
         this.render();
 
-        // Auto-advance to next question in simulation mode
-        if (this.mode === 'simulation') {
-            setTimeout(() => {
-                this.nextQuestion();
-            }, 1000);
-        }
+        // Auto-advance to next question after answering
+        setTimeout(() => {
+            this.nextQuestion();
+        }, 1000);
     }
 
     nextQuestion() {
@@ -541,8 +597,8 @@ class QuizApp {
             this.selectedAnswer = null;
             this.showResult = false;
             this.render();
-        } else if (this.mode === 'simulation') {
-            // Auto-transition to stats view when all questions answered in simulation mode
+        } else {
+            // Auto-transition to stats view when all questions answered
             this.view = 'stats';
             this.render();
         }
@@ -551,8 +607,14 @@ class QuizApp {
     prevQuestion() {
         if (this.currentIndex > 0) {
             this.currentIndex--;
-            this.selectedAnswer = null;
-            this.showResult = false;
+            // Check if this question was already answered
+            if (this.answers[this.currentIndex]) {
+                this.selectedAnswer = this.answers[this.currentIndex].selected;
+                this.showResult = true;
+            } else {
+                this.selectedAnswer = null;
+                this.showResult = false;
+            }
             this.render();
         }
     }
@@ -573,8 +635,14 @@ class QuizApp {
         const index = this.questions.findIndex(q => q.id === id);
         if (index !== -1) {
             this.currentIndex = index;
-            this.selectedAnswer = null;
-            this.showResult = false;
+            // Check if this question was already answered
+            if (this.answers[this.currentIndex]) {
+                this.selectedAnswer = this.answers[this.currentIndex].selected;
+                this.showResult = true;
+            } else {
+                this.selectedAnswer = null;
+                this.showResult = false;
+            }
             this.render();
         } else {
             alert(`Question ${id} not found in this mode.`);
@@ -651,6 +719,8 @@ class QuizApp {
             app.innerHTML = this.renderImport();
         } else if (this.view === 'home') {
             app.innerHTML = this.renderHome();
+        } else if (this.view === 'topicSelection') {
+            app.innerHTML = this.renderTopicSelection();
         } else if (this.view === 'stats') {
             app.innerHTML = this.renderStats();
         } else {
@@ -819,6 +889,22 @@ class QuizApp {
                             </div>
                         </div>
                     </button>
+
+                    <button
+                        class="btn"
+                        onclick="app.view = 'topicSelection'; app.render();"
+                        style="padding: 24px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white;"
+                        aria-label="Practice by topic or question range"
+                    >
+                        <div style="text-align: left; width: 100%;">
+                            <div style="font-size: 20px; font-weight: bold; margin-bottom: 8px;">
+                                🎯 Practice by Topic
+                            </div>
+                            <div style="font-size: 14px; opacity: 0.9;">
+                                Select specific question ranges or Bundesland
+                            </div>
+                        </div>
+                    </button>
                 </div>
 
                 <div style="margin-top: 32px; padding: 16px; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
@@ -830,6 +916,87 @@ class QuizApp {
                         To pass, you need to answer at least 17 out of 33 questions correctly (≥51.5%).
                     </div>
                 </div>
+            </div>
+        `;
+    }
+
+    renderTopicSelection() {
+        // Group federal questions (1-300) into ranges of 30
+        const federalRanges = [];
+        for (let i = 1; i <= 300; i += 30) {
+            const end = Math.min(i + 29, 300);
+            const rangeQuestions = this.allQuestions.filter(q => q.id >= i && q.id <= end);
+            if (rangeQuestions.length > 0) {
+                federalRanges.push({
+                    start: i,
+                    end: end,
+                    count: rangeQuestions.length,
+                    label: `Questions ${i}-${end}`
+                });
+            }
+        }
+
+        // Group regional questions by Bundesland
+        const regionalGroups = {};
+        this.allQuestions.filter(q => q.id > 300 && q.bundesland).forEach(q => {
+            if (!regionalGroups[q.bundesland]) {
+                regionalGroups[q.bundesland] = [];
+            }
+            regionalGroups[q.bundesland].push(q);
+        });
+
+        return `
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    <h1>🎯 Practice by Topic</h1>
+                    <button class="btn" onclick="app.returnToHome()" style="padding: 8px 16px;">
+                        ← Back
+                    </button>
+                </div>
+
+                <p style="text-align: center; color: #6b7280; margin-bottom: 32px;">
+                    Select a specific range of questions to practice
+                </p>
+
+                <!-- Federal Questions Section -->
+                <div style="margin-bottom: 32px;">
+                    <h2 style="font-size: 18px; font-weight: 600; color: #374151; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        🇩🇪 Federal Questions (1-300)
+                    </h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px;">
+                        ${federalRanges.map(range => `
+                            <button
+                                class="btn"
+                                onclick="app.startTopicQuiz(${range.start}, ${range.end})"
+                                style="padding: 16px; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; font-size: 14px; text-align: center;"
+                            >
+                                <div style="font-weight: bold; margin-bottom: 4px;">${range.start}-${range.end}</div>
+                                <div style="font-size: 12px; opacity: 0.9;">${range.count} questions</div>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <!-- Regional Questions Section -->
+                ${Object.keys(regionalGroups).length > 0 ? `
+                <div>
+                    <h2 style="font-size: 18px; font-weight: 600; color: #374151; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        🗺️ Bundesland Questions (301-310)
+                    </h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px;">
+                        ${Object.entries(regionalGroups).map(([bundesland, questions]) => `
+                            <button
+                                class="btn"
+                                onclick="app.startTopicQuizByBundesland('${bundesland}')"
+                                style="padding: 16px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 14px; text-align: center;"
+                            >
+                                <div style="font-weight: bold; margin-bottom: 4px;">${bundesland}</div>
+                                <div style="font-size: 12px; opacity: 0.9;">${questions.length} questions</div>
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
             </div>
         `;
     }
@@ -884,7 +1051,8 @@ class QuizApp {
         const question = this.questions[this.currentIndex];
         const progress = ((this.currentIndex + 1) / this.questions.length) * 100;
         const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' :
-                         this.mode === 'review' ? '🔄 Review Wrong Answers' : '📚 Full Practice';
+                         this.mode === 'review' ? '🔄 Review Wrong Answers' :
+                         this.mode === 'topic' ? '🎯 Topic Practice' : '📚 Full Practice';
 
         return `
             <div class="card">
@@ -1045,7 +1213,8 @@ class QuizApp {
     renderStats() {
         const stats = this.getStats();
         const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' :
-                         this.mode === 'review' ? '🔄 Review Mode' : '📚 Full Practice';
+                         this.mode === 'review' ? '🔄 Review Mode' :
+                         this.mode === 'topic' ? '🎯 Topic Practice' : '📚 Full Practice';
 
         // For simulation mode, need 17 correct answers out of all 33 questions (federal + regional)
         let passThreshold, hasPassed;
