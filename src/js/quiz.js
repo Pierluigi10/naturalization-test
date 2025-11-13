@@ -366,8 +366,14 @@ class QuizApp {
         Storage.saveMode(mode);
 
         if (mode === 'full') {
-            // Use all questions
-            this.questions = [...this.allQuestions];
+            // Use federal questions (1-300) + selected Bundesland questions
+            const federalQuestions = this.allQuestions.filter(q => q.id <= 300);
+            const regionalQuestions = this.allQuestions.filter(q =>
+                q.id > 300 && q.bundesland === this.selectedBundesland
+            );
+
+            this.questions = [...federalQuestions, ...regionalQuestions];
+
             // No timer for full mode
             this.startTime = null;
             this.stopTimer();
@@ -726,6 +732,11 @@ class QuizApp {
         const availableBundeslaender = this.getAvailableBundeslaender();
         const hasOngoingSimulation = this.mode === 'simulation' && this.startTime && this.questions.length > 0;
 
+        // Count regional questions for selected Bundesland
+        const regionalQuestionsCount = this.allQuestions.filter(q =>
+            q.id > 300 && q.bundesland === this.selectedBundesland
+        ).length;
+
         return `
             ${this.renderAccessibilityPanel()}
             <div class="card">
@@ -784,7 +795,7 @@ class QuizApp {
                                 📚 All Questions
                             </div>
                             <div style="font-size: 14px; opacity: 0.9;">
-                                Practice with all ${this.allQuestions.length} questions
+                                300 federal + ${regionalQuestionsCount} ${this.selectedBundesland} questions (${300 + regionalQuestionsCount} total)
                             </div>
                         </div>
                     </button>
