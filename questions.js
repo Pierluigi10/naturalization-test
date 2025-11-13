@@ -1939,7 +1939,8 @@ const QUESTIONS_DATA = [
       "1=Großbritannien, 2=Sowjetunion, 3=USA, 4=Frankreich",
       "1=Großbritannien, 2=USA, 3=Sowjetunion, 4=Frankreich"
     ],
-    "correct": 1
+    "correct": 2,
+    "image": "images/q_176.png"
   },
   {
     "id": 177,
