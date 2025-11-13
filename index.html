@@ -307,6 +307,10 @@
                 this.showResult = false;
                 this.selectedAnswer = null;
                 this.selectedBundesland = 'Sachsen'; // Default Bundesland
+                this.startTime = null; // Timer for simulation mode
+                this.timerInterval = null;
+                this.elapsedTime = 0;
+                this.timeoutWarningShown = false;
 
                 this.bundeslaender = [
                     'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg',
@@ -316,6 +320,7 @@
                 ];
 
                 this.loadData();
+                this.startTimer();
                 this.render();
             }
 
@@ -385,6 +390,12 @@
                 if (storedBundesland) {
                     this.selectedBundesland = storedBundesland;
                 }
+
+                // Load start time for simulation
+                const storedStartTime = localStorage.getItem('quiz-start-time');
+                if (storedStartTime && this.mode === 'simulation') {
+                    this.startTime = parseInt(storedStartTime);
+                }
             }
 
             saveAllQuestions() {
@@ -401,6 +412,66 @@
 
             saveBundesland() {
                 localStorage.setItem('quiz-bundesland', this.selectedBundesland);
+            }
+
+            startTimer() {
+                // Clear any existing timer
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                }
+
+                // Only start timer for simulation mode
+                if (this.mode !== 'simulation' || !this.startTime) {
+                    return;
+                }
+
+                this.timerInterval = setInterval(() => {
+                    this.elapsedTime = Date.now() - this.startTime;
+
+                    // Check if 60 minutes have passed
+                    if (this.elapsedTime >= 60 * 60 * 1000 && !this.timeoutWarningShown) {
+                        this.timeoutWarningShown = true;
+                        alert('⏰ 60 minutes have passed!\n\nYou can continue answering, but your total time will be recorded.');
+                    }
+
+                    // Update timer display
+                    this.updateTimerDisplay();
+                }, 1000);
+            }
+
+            stopTimer() {
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                    this.timerInterval = null;
+                }
+            }
+
+            formatTime(milliseconds) {
+                const totalSeconds = Math.floor(milliseconds / 1000);
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+
+                if (hours > 0) {
+                    return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                }
+                return `${minutes}:${String(seconds).padStart(2, '0')}`;
+            }
+
+            updateTimerDisplay() {
+                const timerElement = document.getElementById('timer-display');
+                if (timerElement && this.startTime) {
+                    const elapsed = this.elapsedTime;
+                    const remaining = 60 * 60 * 1000 - elapsed;
+
+                    if (remaining > 0) {
+                        timerElement.textContent = `⏱️ Time: ${this.formatTime(elapsed)} / 60:00`;
+                        timerElement.style.color = '#374151';
+                    } else {
+                        timerElement.textContent = `⏱️ Time: ${this.formatTime(elapsed)}`;
+                        timerElement.style.color = '#ef4444';
+                    }
+                }
             }
 
             selectBundesland(bundesland) {
@@ -428,6 +499,10 @@
                 if (mode === 'full') {
                     // Use all 310 questions
                     this.questions = [...this.allQuestions];
+                    // No timer for full mode
+                    this.startTime = null;
+                    this.stopTimer();
+                    localStorage.removeItem('quiz-start-time');
                 } else if (mode === 'simulation') {
                     // Select 30 random questions from the first 300 (federal questions)
                     const generalQuestions = this.allQuestions.filter(q => q.id <= 300);
@@ -451,6 +526,13 @@
                         const selectedRegional = this.getRandomQuestions(fallbackRegional, 3);
                         this.questions = [...selectedGeneral, ...selectedRegional];
                     }
+
+                    // Start timer for simulation mode
+                    this.startTime = Date.now();
+                    this.elapsedTime = 0;
+                    this.timeoutWarningShown = false;
+                    localStorage.setItem('quiz-start-time', this.startTime.toString());
+                    this.startTimer();
                 }
 
                 this.saveActiveQuestions();
@@ -472,9 +554,12 @@
                     this.questions = [];
                     this.answers = {};
                     this.currentIndex = 0;
+                    this.startTime = null;
+                    this.stopTimer();
                     localStorage.removeItem('quiz-mode');
                     localStorage.removeItem('quiz-active-questions');
                     localStorage.removeItem('quiz-answers');
+                    localStorage.removeItem('quiz-start-time');
                     this.view = 'home';
                     this.render();
                 }
@@ -552,6 +637,17 @@
                     this.saveAnswers();
                     this.selectedAnswer = null;
                     this.showResult = false;
+
+                    // Reset timer for simulation mode
+                    if (this.mode === 'simulation') {
+                        this.startTime = Date.now();
+                        this.elapsedTime = 0;
+                        this.timeoutWarningShown = false;
+                        localStorage.setItem('quiz-start-time', this.startTime.toString());
+                        this.stopTimer();
+                        this.startTimer();
+                    }
+
                     this.render();
                 }
             }
@@ -752,6 +848,13 @@
                                 📊 Stats
                             </button>
                         </div>
+                        ${this.mode === 'simulation' && this.startTime ? `
+                        <div style="text-align: center; margin-bottom: 12px;">
+                            <div id="timer-display" style="font-size: 16px; font-weight: 600; color: #374151;">
+                                ⏱️ Time: 0:00 / 60:00
+                            </div>
+                        </div>
+                        ` : ''}
                         <div class="header">
                             <div style="font-size: 14px; font-weight: 600; color: #6b7280;">
                                 Question ${this.currentIndex + 1} of ${this.questions.length}
@@ -825,6 +928,7 @@
                 const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' : '📚 Full Practice';
                 const passThreshold = this.mode === 'simulation' ? 17 : Math.ceil(this.questions.length * 0.515);
                 const hasPassed = stats.correct >= passThreshold;
+                const totalTime = this.startTime ? Date.now() - this.startTime : 0;
 
                 return `
                     <div class="card">
@@ -848,6 +952,20 @@
                             </span>
                             ` : ''}
                         </div>
+
+                        ${this.mode === 'simulation' && this.startTime && stats.answered === stats.total ? `
+                        <div style="text-align: center; padding: 16px; margin-bottom: 16px; border-radius: 12px; background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+                            <div style="font-size: 20px; font-weight: bold; margin-bottom: 4px;">
+                                ⏱️ Total Time
+                            </div>
+                            <div style="font-size: 32px; font-weight: bold;">
+                                ${this.formatTime(totalTime)}
+                            </div>
+                            <div style="font-size: 14px; opacity: 0.9; margin-top: 4px;">
+                                ${totalTime > 60 * 60 * 1000 ? '(Exceeded 60 minutes)' : '(Within time limit)'}
+                            </div>
+                        </div>
+                        ` : ''}
 
                         ${this.mode === 'simulation' && stats.answered === stats.total ? `
                         <div style="text-align: center; padding: 20px; margin-bottom: 16px; border-radius: 12px; background: ${hasPassed ? 'linear-gradient(135deg, #10b981, #059669)' : 'linear-gradient(135deg, #ef4444, #dc2626)'}; color: white;">
