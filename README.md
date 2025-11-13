@@ -63,13 +63,8 @@ The following questions have available images:
 To download/update images:
 
 ```bash
-source venv/bin/activate
+pip install requests pillow
 python download_images.py
-```
-
-To test that images are displayed correctly:
-```bash
-open test_images.html
 ```
 
 Images are saved in `images/` and the app displays them automatically.
@@ -163,8 +158,6 @@ For basic usage (editing questions), you only need:
 
 For downloading images (optional):
 ```bash
-python3 -m venv venv
-source venv/bin/activate
 pip install -r requirements.txt
 python download_images.py
 ```
