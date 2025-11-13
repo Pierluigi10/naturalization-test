@@ -311,6 +311,8 @@
                 this.timerInterval = null;
                 this.elapsedTime = 0;
                 this.timeoutWarningShown = false;
+                this.tenMinWarningShown = false;
+                this.timerVisible = true; // Toggle for showing/hiding timer
 
                 this.bundeslaender = [
                     'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg',
@@ -452,24 +454,61 @@
                 const minutes = Math.floor((totalSeconds % 3600) / 60);
                 const seconds = totalSeconds % 60;
 
-                if (hours > 0) {
-                    return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-                }
-                return `${minutes}:${String(seconds).padStart(2, '0')}`;
+                // Always show h:mm:ss format for consistency
+                return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             }
 
             updateTimerDisplay() {
                 const timerElement = document.getElementById('timer-display');
+                const progressBar = document.getElementById('time-progress-bar');
+
                 if (timerElement && this.startTime) {
                     const elapsed = this.elapsedTime;
                     const remaining = 60 * 60 * 1000 - elapsed;
+                    const remainingMinutes = remaining / (60 * 1000);
 
+                    // Update progress bar
+                    if (progressBar) {
+                        const progressPercent = Math.min((elapsed / (60 * 60 * 1000)) * 100, 100);
+                        progressBar.style.width = `${progressPercent}%`;
+
+                        // Change progress bar color based on time
+                        if (remaining <= 0) {
+                            progressBar.style.background = '#ef4444'; // Red
+                        } else if (remainingMinutes <= 5) {
+                            progressBar.style.background = '#f97316'; // Orange
+                        } else if (remainingMinutes <= 10) {
+                            progressBar.style.background = '#f59e0b'; // Yellow-orange
+                        } else {
+                            progressBar.style.background = 'linear-gradient(90deg, #667eea, #764ba2)';
+                        }
+                    }
+
+                    // Show warning at 10 minutes remaining
+                    if (remainingMinutes <= 10 && remainingMinutes > 0 && !this.tenMinWarningShown) {
+                        this.tenMinWarningShown = true;
+                        alert('⚠️ 10 minutes remaining!\n\nYou still have time to complete the test.');
+                    }
+
+                    // Update timer text and color
                     if (remaining > 0) {
-                        timerElement.textContent = `⏱️ Time: ${this.formatTime(elapsed)} / 60:00`;
-                        timerElement.style.color = '#374151';
+                        timerElement.textContent = `⏱️ ${this.formatTime(elapsed)} / 1:00:00`;
+
+                        // Progressive color warning
+                        if (remainingMinutes <= 5) {
+                            timerElement.style.color = '#f97316'; // Orange
+                            timerElement.style.fontWeight = 'bold';
+                        } else if (remainingMinutes <= 10) {
+                            timerElement.style.color = '#f59e0b'; // Yellow-orange
+                            timerElement.style.fontWeight = 'bold';
+                        } else {
+                            timerElement.style.color = '#374151';
+                            timerElement.style.fontWeight = '600';
+                        }
                     } else {
-                        timerElement.textContent = `⏱️ Time: ${this.formatTime(elapsed)}`;
+                        timerElement.textContent = `⏱️ ${this.formatTime(elapsed)} (overtime)`;
                         timerElement.style.color = '#ef4444';
+                        timerElement.style.fontWeight = 'bold';
                     }
                 }
             }
@@ -531,6 +570,7 @@
                     this.startTime = Date.now();
                     this.elapsedTime = 0;
                     this.timeoutWarningShown = false;
+                    this.tenMinWarningShown = false;
                     localStorage.setItem('quiz-start-time', this.startTime.toString());
                     this.startTimer();
                 }
@@ -643,6 +683,7 @@
                         this.startTime = Date.now();
                         this.elapsedTime = 0;
                         this.timeoutWarningShown = false;
+                        this.tenMinWarningShown = false;
                         localStorage.setItem('quiz-start-time', this.startTime.toString());
                         this.stopTimer();
                         this.startTimer();
@@ -710,12 +751,32 @@
                 // Check available Bundesländer
                 const availableBundeslaender = this.getAvailableBundeslaender();
 
+                // Check if there's an ongoing simulation
+                const hasOngoingSimulation = this.mode === 'simulation' && this.startTime && this.questions.length > 0;
+
                 return `
                     <div class="card">
                         <h1>🇩🇪 Einbürgerungstest</h1>
                         <p style="text-align: center; color: #6b7280; margin-bottom: 24px;">
                             Choose your practice mode
                         </p>
+
+                        ${hasOngoingSimulation ? `
+                        <div style="padding: 16px; margin-bottom: 24px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; color: white; text-align: center;">
+                            <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">
+                                ⚠️ Ongoing Simulation
+                            </div>
+                            <div style="font-size: 24px; font-weight: bold; margin-bottom: 8px;">
+                                ⏱️ ${this.formatTime(Date.now() - this.startTime)}
+                            </div>
+                            <div style="font-size: 14px; opacity: 0.9; margin-bottom: 12px;">
+                                ${Object.keys(this.answers).length} / ${this.questions.length} questions answered
+                            </div>
+                            <button class="btn" onclick="app.view = 'quiz'; app.render();" style="background: white; color: #667eea; font-weight: 600;">
+                                Continue Test →
+                            </button>
+                        </div>
+                        ` : ''}
 
                         <div style="margin-bottom: 24px; padding: 16px; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
                             <label style="display: block; font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 8px;">
@@ -849,9 +910,21 @@
                             </button>
                         </div>
                         ${this.mode === 'simulation' && this.startTime ? `
-                        <div style="text-align: center; margin-bottom: 12px;">
-                            <div id="timer-display" style="font-size: 16px; font-weight: 600; color: #374151;">
-                                ⏱️ Time: 0:00 / 60:00
+                        <div style="margin-bottom: 12px; ${this.timerVisible ? '' : 'opacity: 0.3;'}">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <div id="timer-display" style="font-size: 16px; font-weight: 600; color: #374151;">
+                                    ⏱️ 0:00:00 / 1:00:00
+                                </div>
+                                <button
+                                    onclick="app.timerVisible = !app.timerVisible; app.render();"
+                                    style="background: transparent; border: none; cursor: pointer; font-size: 14px; color: #6b7280; padding: 4px 8px;"
+                                    title="${this.timerVisible ? 'Hide timer' : 'Show timer'}"
+                                >
+                                    ${this.timerVisible ? '👁️' : '👁️‍🗨️'}
+                                </button>
+                            </div>
+                            <div style="width: 100%; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden;">
+                                <div id="time-progress-bar" style="height: 100%; width: 0%; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s, background 0.3s;"></div>
                             </div>
                         </div>
                         ` : ''}
@@ -998,7 +1071,39 @@
                             </div>
                         </div>
 
-                        <h3 style="margin-bottom: 12px; color: #374151;">Answer Details</h3>
+                        ${this.mode === 'simulation' && this.startTime && stats.answered > 0 ? `
+                        <div style="margin-top: 16px; padding: 16px; background: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
+                            <h3 style="margin-bottom: 12px; color: #374151;">⏱️ Time Statistics</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 14px;">
+                                <div style="padding: 12px; background: white; border-radius: 8px;">
+                                    <div style="color: #6b7280; margin-bottom: 4px;">Average per question</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #374151;">
+                                        ${this.formatTime(Math.floor(totalTime / stats.answered))}
+                                    </div>
+                                </div>
+                                <div style="padding: 12px; background: white; border-radius: 8px;">
+                                    <div style="color: #6b7280; margin-bottom: 4px;">Elapsed time</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #374151;">
+                                        ${this.formatTime(totalTime)}
+                                    </div>
+                                </div>
+                                <div style="padding: 12px; background: white; border-radius: 8px;">
+                                    <div style="color: #6b7280; margin-bottom: 4px;">Federal questions</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #374151;">
+                                        ${this.questions.filter((q, idx) => q.id <= 300 && this.answers[idx]).length} / 30
+                                    </div>
+                                </div>
+                                <div style="padding: 12px; background: white; border-radius: 8px;">
+                                    <div style="color: #6b7280; margin-bottom: 4px;">Regional questions</div>
+                                    <div style="font-size: 18px; font-weight: 600; color: #374151;">
+                                        ${this.questions.filter((q, idx) => q.id > 300 && this.answers[idx]).length} / 3
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        ` : ''}
+
+                        <h3 style="margin-bottom: 12px; margin-top: 16px; color: #374151;">Answer Details</h3>
                         <div class="answer-list">
                             ${this.questions.map((q, idx) => {
                                 const answer = this.answers[idx];
