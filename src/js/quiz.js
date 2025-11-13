@@ -541,6 +541,10 @@ class QuizApp {
             this.selectedAnswer = null;
             this.showResult = false;
             this.render();
+        } else if (this.mode === 'simulation') {
+            // Auto-transition to stats view when all questions answered in simulation mode
+            this.view = 'stats';
+            this.render();
         }
     }
 
@@ -823,7 +827,7 @@ class QuizApp {
                         The real naturalization test consists of 33 questions:<br>
                         • 30 random questions from the federal catalog (questions 1-300)<br>
                         • 3 random questions from your Bundesland<br><br>
-                        To pass, you need to answer at least 17 questions correctly (≥51.5%).
+                        To pass, you need to answer at least 17 out of 33 questions correctly (≥51.5%).
                     </div>
                 </div>
             </div>
@@ -1042,8 +1046,16 @@ class QuizApp {
         const stats = this.getStats();
         const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' :
                          this.mode === 'review' ? '🔄 Review Mode' : '📚 Full Practice';
-        const passThreshold = this.mode === 'simulation' ? 17 : Math.ceil(this.questions.length * 0.515);
-        const hasPassed = stats.correct >= passThreshold;
+
+        // For simulation mode, need 17 correct answers out of all 33 questions (federal + regional)
+        let passThreshold, hasPassed;
+        if (this.mode === 'simulation') {
+            passThreshold = 17; // Need 17 out of 33 total questions (30 federal + 3 regional)
+            hasPassed = stats.correct >= passThreshold;
+        } else {
+            passThreshold = Math.ceil(this.questions.length * 0.515);
+            hasPassed = stats.correct >= passThreshold;
+        }
         const totalTime = this.startTime ? Date.now() - this.startTime : 0;
 
         // Count wrong answers
