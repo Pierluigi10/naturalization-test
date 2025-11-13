@@ -6,11 +6,10 @@ Quiz app to practice German naturalization test questions (Einbürgerungstest).
 
 - **`index.html`** - Quiz app (open in a browser)
 - **`questions.js`** - 310 questions in JavaScript format (auto-loading)
-- `questions.json` - 310 questions extracted from official BAMF PDF (backup/editing)
+- **`questions.json`** - 310 questions extracted from official BAMF PDF (source file for editing)
+- **`generate_js.py`** - Script to generate questions.js from questions.json
 - `images/` - Folder with 7 question images
-- `extract_final.py` - Script to extract questions from PDF
-- `clean_questions.py` - Script to clean and filter questions
-- `generate_js.py` - Script to generate questions.js from questions.json
+- `download_images.py` - Script to download/update question images
 
 ## 🚀 How to Use
 
@@ -159,23 +158,15 @@ If you see outdated questions or answers, the browser cache needs to be cleared:
 
 ### Dependencies
 
+For basic usage (editing questions), you only need:
+- Python 3 (for running `generate_js.py`)
+
+For downloading images (optional):
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-```
-
-### Re-extract questions from PDF
-
-```bash
-source venv/bin/activate
-
-# Download the PDF if you don't have it already
-python extract_final.py  # Extracts raw questions
-
-# Clean and filter
-python clean_questions.py  # Generates questions_clean.json
-mv questions_clean.json questions.json
+python download_images.py
 ```
 
 ## 📊 Current Statistics
