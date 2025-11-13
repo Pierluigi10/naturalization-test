@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Practice German citizenship test (Einbürgerungstest) with accessibility features including high contrast mode, keyboard navigation, and screen reader support.">
     <title>Einbürgerungstest - Quiz</title>
     <style>
         * {
@@ -268,6 +269,71 @@
             font-weight: 600;
         }
 
+        /* High contrast mode */
+        body.high-contrast {
+            background: #000;
+        }
+
+        body.high-contrast .card {
+            background: #fff;
+            border: 3px solid #000;
+        }
+
+        body.high-contrast .option {
+            border: 3px solid #000;
+            background: #fff;
+        }
+
+        body.high-contrast .option:hover:not(.disabled) {
+            background: #ffff00;
+            border-color: #000;
+        }
+
+        body.high-contrast .option.selected {
+            background: #ffff00;
+            border-color: #000;
+        }
+
+        body.high-contrast .option.correct {
+            background: #00ff00;
+            border-color: #000;
+        }
+
+        body.high-contrast .option.wrong {
+            background: #ff0000;
+            border-color: #000;
+            color: #fff;
+        }
+
+        body.high-contrast .btn-primary {
+            background: #000;
+            color: #fff;
+            border: 3px solid #000;
+        }
+
+        body.high-contrast .btn-secondary {
+            background: #fff;
+            color: #000;
+            border: 3px solid #000;
+        }
+
+        body.high-contrast .progress-fill {
+            background: #000;
+        }
+
+        /* Keyboard focus indicators */
+        button:focus,
+        .option:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        body.high-contrast button:focus,
+        body.high-contrast .option:focus {
+            outline: 3px solid #000;
+            outline-offset: 2px;
+        }
+
         @media (max-width: 640px) {
             body {
                 padding: 12px;
@@ -289,8 +355,8 @@
         }
     </style>
 </head>
-<body>
-    <div class="container" id="app"></div>
+<body role="application">
+    <div class="container" id="app" role="main" aria-label="Quiz application"></div>
 
     <!-- Load questions -->
     <script src="questions.js"></script>
@@ -314,6 +380,14 @@
                 this.tenMinWarningShown = false;
                 this.timerVisible = true; // Toggle for showing/hiding timer
 
+                // Accessibility settings
+                this.highContrast = localStorage.getItem('high-contrast') === 'true';
+                this.fontSize = parseInt(localStorage.getItem('font-size')) || 100; // percentage
+
+                // Touch swipe support
+                this.touchStartX = 0;
+                this.touchEndX = 0;
+
                 this.bundeslaender = [
                     'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg',
                     'Bremen', 'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern',
@@ -323,7 +397,127 @@
 
                 this.loadData();
                 this.startTimer();
+                this.applyAccessibilitySettings();
+                this.setupKeyboardNavigation();
                 this.render();
+            }
+
+            applyAccessibilitySettings() {
+                const root = document.documentElement;
+                root.style.fontSize = `${this.fontSize}%`;
+
+                if (this.highContrast) {
+                    document.body.classList.add('high-contrast');
+                } else {
+                    document.body.classList.remove('high-contrast');
+                }
+            }
+
+            toggleHighContrast() {
+                this.highContrast = !this.highContrast;
+                localStorage.setItem('high-contrast', this.highContrast.toString());
+                this.applyAccessibilitySettings();
+                this.render();
+            }
+
+            adjustFontSize(delta) {
+                this.fontSize = Math.max(80, Math.min(150, this.fontSize + delta));
+                localStorage.setItem('font-size', this.fontSize.toString());
+                this.applyAccessibilitySettings();
+                this.render();
+            }
+
+            setupKeyboardNavigation() {
+                document.addEventListener('keydown', (e) => {
+                    // Only handle keyboard in quiz view
+                    if (this.view !== 'quiz') return;
+
+                    switch(e.key) {
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            this.prevQuestion();
+                            break;
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            this.nextQuestion();
+                            break;
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                            if (!this.showResult) {
+                                e.preventDefault();
+                                const index = parseInt(e.key) - 1;
+                                this.handleAnswer(index);
+                            }
+                            break;
+                        case 'a':
+                        case 'A':
+                            if (!this.showResult) {
+                                e.preventDefault();
+                                this.handleAnswer(0);
+                            }
+                            break;
+                        case 'b':
+                        case 'B':
+                            if (!this.showResult) {
+                                e.preventDefault();
+                                this.handleAnswer(1);
+                            }
+                            break;
+                        case 'c':
+                        case 'C':
+                            if (!this.showResult) {
+                                e.preventDefault();
+                                this.handleAnswer(2);
+                            }
+                            break;
+                        case 'd':
+                        case 'D':
+                            if (!this.showResult) {
+                                e.preventDefault();
+                                this.handleAnswer(3);
+                            }
+                            break;
+                        case 's':
+                        case 'S':
+                            e.preventDefault();
+                            this.view = 'stats';
+                            this.render();
+                            break;
+                        case 'h':
+                        case 'H':
+                            if (e.ctrlKey || e.metaKey) {
+                                e.preventDefault();
+                                this.returnToHome();
+                            }
+                            break;
+                    }
+                });
+            }
+
+            handleTouchStart(e) {
+                this.touchStartX = e.changedTouches[0].screenX;
+            }
+
+            handleTouchEnd(e) {
+                this.touchEndX = e.changedTouches[0].screenX;
+                this.handleSwipe();
+            }
+
+            handleSwipe() {
+                const swipeThreshold = 50; // minimum distance for swipe
+                const diff = this.touchStartX - this.touchEndX;
+
+                if (Math.abs(diff) < swipeThreshold) return;
+
+                if (diff > 0) {
+                    // Swipe left - next question
+                    this.nextQuestion();
+                } else {
+                    // Swipe right - previous question
+                    this.prevQuestion();
+                }
             }
 
             loadData() {
@@ -611,19 +805,26 @@
 
             handleAnswer(index) {
                 if (this.showResult) return;
-                
+
                 this.selectedAnswer = index;
                 this.showResult = true;
-                
+
                 const correct = index === this.questions[this.currentIndex].correct;
                 this.answers[this.currentIndex] = {
                     selected: index,
                     correct: correct,
                     timestamp: Date.now()
                 };
-                
+
                 this.saveAnswers();
                 this.render();
+
+                // Auto-advance to next question in simulation mode
+                if (this.mode === 'simulation') {
+                    setTimeout(() => {
+                        this.nextQuestion();
+                    }, 1000); // Wait 1 second to show the result
+                }
             }
 
             nextQuestion() {
@@ -747,6 +948,78 @@
                 this.attachEventListeners();
             }
 
+            renderAccessibilityPanel() {
+                return `
+                    <div class="card" style="margin-bottom: 16px;">
+                        <details>
+                            <summary style="cursor: pointer; font-weight: 600; color: #374151; padding: 8px; user-select: none;">
+                                ♿ Accessibility Settings
+                            </summary>
+                            <div style="margin-top: 16px; padding: 16px; background: #f9fafb; border-radius: 8px;">
+                                <div style="display: flex; flex-direction: column; gap: 16px;">
+                                    <!-- Font Size -->
+                                    <div>
+                                        <label style="display: block; font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 8px;">
+                                            Font Size: ${this.fontSize}%
+                                        </label>
+                                        <div style="display: flex; gap: 8px; align-items: center;">
+                                            <button
+                                                class="btn btn-secondary"
+                                                onclick="app.adjustFontSize(-10)"
+                                                aria-label="Decrease font size"
+                                                style="flex: 1;"
+                                            >
+                                                A-
+                                            </button>
+                                            <button
+                                                class="btn btn-secondary"
+                                                onclick="app.adjustFontSize(10)"
+                                                aria-label="Increase font size"
+                                                style="flex: 1;"
+                                            >
+                                                A+
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- High Contrast -->
+                                    <div>
+                                        <label style="display: block; font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 8px;">
+                                            High Contrast Mode
+                                        </label>
+                                        <button
+                                            class="btn btn-secondary"
+                                            onclick="app.toggleHighContrast()"
+                                            aria-label="Toggle high contrast mode"
+                                            aria-pressed="${this.highContrast}"
+                                            style="width: 100%;"
+                                        >
+                                            ${this.highContrast ? '✓ Enabled' : 'Disabled'}
+                                        </button>
+                                    </div>
+
+                                    <!-- Keyboard Shortcuts -->
+                                    <div style="font-size: 12px; color: #6b7280; line-height: 1.6;">
+                                        <strong style="color: #374151;">⌨️ Keyboard Shortcuts:</strong><br>
+                                        • Arrow Left/Right: Previous/Next question<br>
+                                        • 1, 2, 3, 4 or A, B, C, D: Select answer<br>
+                                        • S: View statistics<br>
+                                        • Ctrl/Cmd + H: Return to home
+                                    </div>
+
+                                    <!-- Mobile Gestures -->
+                                    <div style="font-size: 12px; color: #6b7280; line-height: 1.6;">
+                                        <strong style="color: #374151;">📱 Mobile Gestures:</strong><br>
+                                        • Swipe left: Next question<br>
+                                        • Swipe right: Previous question
+                                    </div>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                `;
+            }
+
             renderHome() {
                 // Check available Bundesländer
                 const availableBundeslaender = this.getAvailableBundeslaender();
@@ -755,6 +1028,7 @@
                 const hasOngoingSimulation = this.mode === 'simulation' && this.startTime && this.questions.length > 0;
 
                 return `
+                    ${this.renderAccessibilityPanel()}
                     <div class="card">
                         <h1>🇩🇪 Einbürgerungstest</h1>
                         <p style="text-align: center; color: #6b7280; margin-bottom: 24px;">
@@ -799,8 +1073,13 @@
                             </p>
                         </div>
 
-                        <div style="display: flex; flex-direction: column; gap: 16px;">
-                            <button class="btn btn-primary" onclick="app.startQuiz('full')" style="padding: 24px;">
+                        <div style="display: flex; flex-direction: column; gap: 16px;" role="navigation" aria-label="Quiz mode selection">
+                            <button
+                                class="btn btn-primary"
+                                onclick="app.startQuiz('full')"
+                                style="padding: 24px;"
+                                aria-label="Start practice with all 310 questions"
+                            >
                                 <div style="text-align: left; width: 100%;">
                                     <div style="font-size: 20px; font-weight: bold; margin-bottom: 8px;">
                                         📚 All Questions
@@ -811,7 +1090,12 @@
                                 </div>
                             </button>
 
-                            <button class="btn" onclick="app.startQuiz('simulation')" style="padding: 24px; background: linear-gradient(135deg, #10b981, #059669); color: white;">
+                            <button
+                                class="btn"
+                                onclick="app.startQuiz('simulation')"
+                                style="padding: 24px; background: linear-gradient(135deg, #10b981, #059669); color: white;"
+                                aria-label="Start test simulation with 33 random questions: 30 federal and 3 regional"
+                            >
                                 <div style="text-align: left; width: 100%;">
                                     <div style="font-size: 20px; font-weight: bold; margin-bottom: 8px;">
                                         ✅ Test Simulation
@@ -899,13 +1183,26 @@
                 return `
                     <div class="card">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-                            <button class="btn-stats" onclick="app.returnToHome();" style="border-color: #6b7280; color: #6b7280;">
+                            <button
+                                class="btn-stats"
+                                onclick="app.returnToHome();"
+                                style="border-color: #6b7280; color: #6b7280;"
+                                aria-label="Return to home page"
+                            >
                                 ← Home
                             </button>
-                            <div style="font-size: 12px; font-weight: 600; color: #667eea; padding: 4px 12px; background: #f3f4ff; border-radius: 8px;">
+                            <div
+                                style="font-size: 12px; font-weight: 600; color: #667eea; padding: 4px 12px; background: #f3f4ff; border-radius: 8px;"
+                                role="status"
+                                aria-label="${modeLabel}"
+                            >
                                 ${modeLabel}
                             </div>
-                            <button class="btn-stats" onclick="app.view = 'stats'; app.render();">
+                            <button
+                                class="btn-stats"
+                                onclick="app.view = 'stats'; app.render();"
+                                aria-label="View statistics"
+                            >
                                 📊 Stats
                             </button>
                         </div>
@@ -929,37 +1226,70 @@
                         </div>
                         ` : ''}
                         <div class="header">
-                            <div style="font-size: 14px; font-weight: 600; color: #6b7280;">
+                            <div
+                                style="font-size: 14px; font-weight: 600; color: #6b7280;"
+                                role="status"
+                                aria-live="polite"
+                            >
                                 Question ${this.currentIndex + 1} of ${this.questions.length}
                             </div>
                         </div>
-                        <div class="progress-bar">
+                        <div
+                            class="progress-bar"
+                            role="progressbar"
+                            aria-valuenow="${this.currentIndex + 1}"
+                            aria-valuemin="1"
+                            aria-valuemax="${this.questions.length}"
+                            aria-label="Quiz progress"
+                        >
                             <div class="progress-fill" style="width: ${progress}%"></div>
                         </div>
                     </div>
 
-                    <div class="card">
-                        ${question.image ? `<div style="text-align: center; margin-bottom: 20px;"><img src="${question.image}" alt="Domanda ${question.id}" style="max-width: 100%; height: auto; border-radius: 8px;"></div>` : ''}
-                        <div class="question">${question.question}</div>
-                        <div>
+                    <div
+                        class="card"
+                        id="question-card"
+                        role="main"
+                        aria-labelledby="current-question"
+                    >
+                        ${question.image ? `<div style="text-align: center; margin-bottom: 20px;"><img src="${question.image}" alt="Question ${question.id} illustration" style="max-width: 100%; height: auto; border-radius: 8px;"></div>` : ''}
+                        <div
+                            class="question"
+                            id="current-question"
+                            role="heading"
+                            aria-level="2"
+                        >
+                            ${question.question}
+                        </div>
+                        <div role="radiogroup" aria-labelledby="current-question">
                             ${question.options.map((option, idx) => {
                                 const isSelected = this.selectedAnswer === idx;
                                 const isCorrect = idx === question.correct;
                                 const showCorrect = this.showResult && isCorrect;
                                 const showWrong = this.showResult && isSelected && !isCorrect;
-                                
+
                                 let className = 'option';
                                 if (showCorrect) className += ' correct';
                                 else if (showWrong) className += ' wrong';
                                 else if (isSelected) className += ' selected';
                                 if (this.showResult) className += ' disabled';
 
+                                const ariaLabel = `Option ${String.fromCharCode(65 + idx)}: ${option}${showCorrect ? ' - Correct answer' : ''}${showWrong ? ' - Incorrect' : ''}`;
+
                                 return `
-                                    <div class="${className}" onclick="${this.showResult ? '' : `app.handleAnswer(${idx})`}">
-                                        <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                    <div
+                                        class="${className}"
+                                        onclick="${this.showResult ? '' : `app.handleAnswer(${idx})`}"
+                                        role="radio"
+                                        aria-checked="${isSelected ? 'true' : 'false'}"
+                                        aria-label="${ariaLabel}"
+                                        tabindex="${this.showResult ? '-1' : '0'}"
+                                        onkeypress="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); ${this.showResult ? '' : `app.handleAnswer(${idx})`} }"
+                                    >
+                                        <div class="option-letter" aria-hidden="true">${String.fromCharCode(65 + idx)}</div>
                                         <div class="option-text">${option}</div>
-                                        ${showCorrect ? '<span style="color: #10b981; font-weight: bold;">✓</span>' : ''}
-                                        ${showWrong ? '<span style="color: #ef4444; font-weight: bold;">✗</span>' : ''}
+                                        ${showCorrect ? '<span style="color: #10b981; font-weight: bold;" aria-hidden="true">✓</span>' : ''}
+                                        ${showWrong ? '<span style="color: #ef4444; font-weight: bold;" aria-hidden="true">✗</span>' : ''}
                                     </div>
                                 `;
                             }).join('')}
@@ -967,11 +1297,21 @@
                     </div>
 
                     <div class="card">
-                        <div class="navigation">
-                            <button class="btn btn-secondary" onclick="app.prevQuestion()" ${this.currentIndex === 0 ? 'disabled' : ''}>
+                        <div class="navigation" role="navigation" aria-label="Question navigation">
+                            <button
+                                class="btn btn-secondary"
+                                onclick="app.prevQuestion()"
+                                ${this.currentIndex === 0 ? 'disabled' : ''}
+                                aria-label="Previous question"
+                            >
                                 ← Previous
                             </button>
-                            <button class="btn btn-primary" onclick="app.nextQuestion()" ${this.currentIndex === this.questions.length - 1 ? 'disabled' : ''}>
+                            <button
+                                class="btn btn-primary"
+                                onclick="app.nextQuestion()"
+                                ${this.currentIndex === this.questions.length - 1 ? 'disabled' : ''}
+                                aria-label="Next question"
+                            >
                                 Next →
                             </button>
                         </div>
@@ -1154,6 +1494,13 @@
                 const fileInput = document.getElementById('fileInput');
                 if (fileInput) {
                     fileInput.addEventListener('change', (e) => this.importFile(e));
+                }
+
+                // Attach touch event listeners for swipe support
+                const questionCard = document.getElementById('question-card');
+                if (questionCard && this.view === 'quiz') {
+                    questionCard.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+                    questionCard.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
                 }
             }
         }
