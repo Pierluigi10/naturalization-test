@@ -1,52 +1,52 @@
 # Einbürgerungstest Quiz App
 
-App quiz per esercitarsi con le domande del test di naturalizzazione tedesco (Einbürgerungstest).
+Quiz app to practice German naturalization test questions (Einbürgerungstest).
 
-## 📁 File Principali
+## 📁 Main Files
 
-- **`index.html`** - App quiz (apri in un browser)
-- **`questions.js`** - 310 domande in formato JavaScript (auto-caricamento)
-- `questions.json` - 310 domande estratte dal PDF ufficiale BAMF (backup/editing)
-- `images/` - Cartella con le 7 immagini delle domande
-- `extract_final.py` - Script per estrarre domande dal PDF
-- `clean_questions.py` - Script per pulire e filtrare le domande
-- `generate_js.py` - Script per generare questions.js da questions.json
+- **`index.html`** - Quiz app (open in a browser)
+- **`questions.js`** - 310 questions in JavaScript format (auto-loading)
+- `questions.json` - 310 questions extracted from official BAMF PDF (backup/editing)
+- `images/` - Folder with 7 question images
+- `extract_final.py` - Script to extract questions from PDF
+- `clean_questions.py` - Script to clean and filter questions
+- `generate_js.py` - Script to generate questions.js from questions.json
 
-## 🚀 Come Usare
+## 🚀 How to Use
 
-**È semplicissimo! Le domande si caricano automaticamente:**
+**It's super simple! Questions load automatically:**
 
 ```bash
 open index.html
 ```
 
-Oppure trascina `index.html` in un browser (Chrome, Firefox, Safari)
+Or drag `index.html` into a browser (Chrome, Firefox, Safari)
 
-**Fatto!** Le 310 domande si caricano automaticamente e puoi iniziare subito a esercitarti.
+**Done!** All 310 questions load automatically and you can start practicing right away.
 
-### 📊 Funzionalità
+### 📊 Features
 
-- ✅ **Auto-caricamento**: Le domande si caricano all'avvio
-- ✅ **Progressi salvati**: Le tue risposte vengono salvate automaticamente nel browser
-- ✅ **Statistiche dettagliate**: Visualizza risposte corrette, percentuale, ecc.
-- ✅ **Supporto immagini**: Le domande con immagini mostrano automaticamente le foto
-- ✅ **Mobile-friendly**: Funziona perfettamente su smartphone
+- ✅ **Auto-loading**: Questions load on startup
+- ✅ **Saved progress**: Your answers are automatically saved in the browser
+- ✅ **Detailed statistics**: View correct answers, percentage, etc.
+- ✅ **Image support**: Questions with images automatically display photos
+- ✅ **Mobile-friendly**: Works perfectly on smartphones
 
-## ⚠️ Nota Importante: Risposte Corrette
+## ⚠️ Important Note: Correct Answers
 
-**Le risposte corrette sono attualmente impostate a 0 (opzione A) come placeholder.**
+**Correct answers are currently set to 0 (option A) as a placeholder.**
 
-Il PDF ufficiale BAMF non contiene le risposte corrette nel formato estrabile. Per ottenere le risposte corrette hai 2 opzioni:
+The official BAMF PDF doesn't contain correct answers in extractable format. To get the correct answers you have 2 options:
 
-1. **Manuale**: Modifica `questions.json` e aggiorna il campo `correct` (0=A, 1=B, 2=C, 3=D) consultando fonti ufficiali
+1. **Manual**: Edit `questions.json` and update the `correct` field (0=A, 1=B, 2=C, 3=D) by consulting official sources
 
-2. **Automatico** (TODO): Implementare web scraping da https://www.einbuergerungstest-online.eu/
+2. **Automatic** (TODO): Implement web scraping from https://www.einbuergerungstest-online.eu/
 
-## 🖼️ Immagini
+## 🖼️ Images
 
-**✅ Immagini scaricate: 7/12 identificate**
+**✅ Images downloaded: 7/12 identified**
 
-Le seguenti domande hanno immagini disponibili:
+The following questions have available images:
 - **21** - Wappen der Bundesrepublik Deutschland
 - **55** - Bundestagssitz in Berlin
 - **187** - Flagge der DDR
@@ -55,39 +55,39 @@ Le seguenti domande hanno immagini disponibili:
 - **226** - Flagge der Europäischen Union
 - **301** - Wappen von Sachsen
 
-Per scaricare/aggiornare le immagini:
+To download/update images:
 
 ```bash
 source venv/bin/activate
 python download_images.py
 ```
 
-Per testare che le immagini siano visualizzate correttamente:
+To test that images are displayed correctly:
 ```bash
 open test_images.html
 ```
 
-Le immagini sono salvate in `images/` e l'app le mostra automaticamente.
+Images are saved in `images/` and the app displays them automatically.
 
-## ✏️ Modificare le Domande
+## ✏️ Editing Questions
 
-Se vuoi modificare le domande o le risposte corrette:
+If you want to edit questions or correct answers:
 
 ```bash
-# 1. Modifica questions.json con un editor di testo
+# 1. Edit questions.json with a text editor
 
-# 2. Rigenera questions.js
+# 2. Regenerate questions.js
 source venv/bin/activate
 python generate_js.py
 
-# 3. Ricarica l'app nel browser (Cmd+R / Ctrl+R)
+# 3. Reload the app in browser (Cmd+R / Ctrl+R)
 ```
 
-**Nota**: Puoi anche usare il pulsante "Ricarica Domande Originali" nelle statistiche dell'app per ricaricare i dati senza rigenerare il file.
+**Note**: You can also use the "Reload Original Questions" button in the app statistics to reload data without regenerating the file.
 
-## 🛠️ Sviluppo
+## 🛠️ Development
 
-### Dipendenze
+### Dependencies
 
 ```bash
 python3 -m venv venv
@@ -95,39 +95,39 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Re-estrarre le domande dal PDF
+### Re-extract questions from PDF
 
 ```bash
 source venv/bin/activate
 
-# Scarica il PDF se non l'hai già
-python extract_final.py  # Estrae domande grezze
+# Download the PDF if you don't have it already
+python extract_final.py  # Extracts raw questions
 
-# Pulisci e filtra
-python clean_questions.py  # Genera questions_clean.json
+# Clean and filter
+python clean_questions.py  # Generates questions_clean.json
 mv questions_clean.json questions.json
 ```
 
-## 📊 Statistiche Attuali
+## 📊 Current Statistics
 
-- **Domande estratte**: 310 / 310 ✅
-  - 300 domande generali federali (ID 1-300)
-  - 10 domande specifiche per Sachsen (ID 301-310)
-- **Formato**: JSON con id, question, options (array di 4), correct (0-3), bundesland (opzionale)
-- **Completezza**: 100% ✅
+- **Questions extracted**: 310 / 310 ✅
+  - 300 general federal questions (ID 1-300)
+  - 10 Sachsen-specific questions (ID 301-310)
+- **Format**: JSON with id, question, options (array of 4), correct (0-3), bundesland (optional)
+- **Completeness**: 100% ✅
 
 ## 📝 TODO
 
-- [ ] Integrare risposte corrette da fonte affidabile (attualmente tutte impostate a opzione A)
-- [x] ~~Scaricare immagini per domande che le richiedono~~ ✅ 7 immagini scaricate
-- [ ] Traduzione italiana opzionale (se desiderata)
-- [ ] Cercare immagini mancanti per domande 29, 31, 85, 214, 305 (se esistono)
+- [ ] Integrate correct answers from reliable source (currently all set to option A)
+- [x] ~~Download images for questions that require them~~ ✅ 7 images downloaded
+- [ ] Optional Italian translation (if desired)
+- [ ] Search for missing images for questions 29, 31, 85, 214, 305 (if they exist)
 
-## 🔗 Fonti
+## 🔗 Sources
 
-- **PDF Ufficiale**: [BAMF - Gesamtfragenkatalog](https://www.bamf.de/SharedDocs/Anlagen/DE/Integration/Einbuergerung/gesamtfragenkatalog-lebenindeutschland.pdf)
-- **Riferimento Domande**: https://www.einbuergerungstest-online.eu/
+- **Official PDF**: [BAMF - Gesamtfragenkatalog](https://www.bamf.de/SharedDocs/Anlagen/DE/Integration/Einbuergerung/gesamtfragenkatalog-lebenindeutschland.pdf)
+- **Question Reference**: https://www.einbuergerungstest-online.eu/
 
-## 📄 Licenza
+## 📄 License
 
-Solo per uso personale ed educativo. Le domande sono proprietà del BAMF (Bundesamt für Migration und Flüchtlinge).
+For personal and educational use only. Questions are property of BAMF (Bundesamt für Migration und Flüchtlinge).
