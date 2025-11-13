@@ -1433,7 +1433,8 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 1
+    "correct": 0,
+    "image": "images/q_130.png"
   },
   {
     "id": 131,
