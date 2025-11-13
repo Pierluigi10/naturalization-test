@@ -10,7 +10,8 @@ const Storage = {
         BUNDESLAND: 'quiz-bundesland',
         START_TIME: 'quiz-start-time',
         HIGH_CONTRAST: 'high-contrast',
-        FONT_SIZE: 'font-size'
+        FONT_SIZE: 'font-size',
+        REVIEW_QUESTIONS: 'quiz-review-questions'
     },
 
     // Save all questions to localStorage
@@ -95,11 +96,23 @@ const Storage = {
         return stored ? parseInt(stored) : 100;
     },
 
+    // Save review questions (original questions before review mode)
+    saveReviewQuestions(questions) {
+        localStorage.setItem(this.KEYS.REVIEW_QUESTIONS, JSON.stringify(questions));
+    },
+
+    // Load review questions
+    loadReviewQuestions() {
+        const stored = localStorage.getItem(this.KEYS.REVIEW_QUESTIONS);
+        return stored ? JSON.parse(stored) : [];
+    },
+
     // Clear quiz session data
     clearSession() {
         localStorage.removeItem(this.KEYS.MODE);
         localStorage.removeItem(this.KEYS.ACTIVE_QUESTIONS);
         localStorage.removeItem(this.KEYS.ANSWERS);
         localStorage.removeItem(this.KEYS.START_TIME);
+        localStorage.removeItem(this.KEYS.REVIEW_QUESTIONS);
     }
 };

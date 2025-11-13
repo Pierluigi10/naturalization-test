@@ -7,8 +7,9 @@ class QuizApp {
         this.currentIndex = 0;
         this.answers = {};
         this.view = 'home';
-        this.mode = null; // 'full' or 'simulation'
+        this.mode = null; // 'full', 'simulation', or 'review'
         this.showResult = false;
+        this.reviewQuestions = []; // Store original questions for review mode
         this.selectedAnswer = null;
         this.selectedBundesland = 'Sachsen'; // Default Bundesland
         this.startTime = null; // Timer for simulation mode
@@ -232,6 +233,14 @@ class QuizApp {
         if (storedStartTime && this.mode === 'simulation') {
             this.startTime = storedStartTime;
         }
+
+        // Load review questions if in review mode
+        if (this.mode === 'review') {
+            const storedReviewQuestions = Storage.loadReviewQuestions();
+            if (storedReviewQuestions && storedReviewQuestions.length > 0) {
+                this.reviewQuestions = storedReviewQuestions;
+            }
+        }
     }
 
     // ==================== TIMER ====================
@@ -407,6 +416,79 @@ class QuizApp {
     getRandomQuestions(questions, count) {
         const shuffled = [...questions].sort(() => Math.random() - 0.5);
         return shuffled.slice(0, count);
+    }
+
+    startReview() {
+        // Get wrong answers from current session
+        const wrongQuestions = [];
+        this.questions.forEach((q, idx) => {
+            const answer = this.answers[idx];
+            if (answer && !answer.correct) {
+                wrongQuestions.push(q);
+            }
+        });
+
+        if (wrongQuestions.length === 0) {
+            alert('No wrong answers to review!');
+            return;
+        }
+
+        // Save current state for reference
+        this.reviewQuestions = [...this.questions];
+
+        // Start review mode with wrong questions only
+        this.mode = 'review';
+        this.questions = wrongQuestions;
+        this.currentIndex = 0;
+        this.answers = {};
+
+        // No timer for review mode
+        this.startTime = null;
+        this.stopTimer();
+
+        Storage.saveMode(this.mode);
+        Storage.saveActiveQuestions(this.questions);
+        Storage.saveReviewQuestions(this.reviewQuestions);
+        Storage.saveAnswers(this.answers);
+
+        this.view = 'quiz';
+        this.render();
+    }
+
+    triggerConfetti() {
+        // Check if confetti library is loaded
+        if (typeof confetti === 'undefined') return;
+
+        // Launch confetti animation
+        const duration = 3000;
+        const animationEnd = Date.now() + duration;
+        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function() {
+            const timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
+
+            const particleCount = 50 * (timeLeft / duration);
+
+            // Launch confetti from two different origins
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+            });
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+            });
+        }, 250);
     }
 
     returnToHome() {
@@ -786,7 +868,8 @@ class QuizApp {
     renderQuiz() {
         const question = this.questions[this.currentIndex];
         const progress = ((this.currentIndex + 1) / this.questions.length) * 100;
-        const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' : '📚 Full Practice';
+        const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' :
+                         this.mode === 'review' ? '🔄 Review Wrong Answers' : '📚 Full Practice';
 
         return `
             <div class="card">
@@ -946,10 +1029,20 @@ class QuizApp {
 
     renderStats() {
         const stats = this.getStats();
-        const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' : '📚 Full Practice';
+        const modeLabel = this.mode === 'simulation' ? '🎯 Simulation Mode' :
+                         this.mode === 'review' ? '🔄 Review Mode' : '📚 Full Practice';
         const passThreshold = this.mode === 'simulation' ? 17 : Math.ceil(this.questions.length * 0.515);
         const hasPassed = stats.correct >= passThreshold;
         const totalTime = this.startTime ? Date.now() - this.startTime : 0;
+
+        // Count wrong answers
+        const wrongAnswersCount = Object.values(this.answers).filter(a => !a.correct).length;
+
+        // Trigger confetti if test is passed (simulation mode only, all questions answered)
+        if (this.mode === 'simulation' && stats.answered === stats.total && hasPassed) {
+            // Use setTimeout to ensure DOM is rendered before confetti
+            setTimeout(() => this.triggerConfetti(), 100);
+        }
 
         return `
             <div class="card">
@@ -1078,7 +1171,18 @@ class QuizApp {
                     }).join('')}
                 </div>
 
-                <div style="display: flex; gap: 12px; margin-top: 24px;">
+                ${wrongAnswersCount > 0 && this.mode !== 'review' ? `
+                <div style="margin-top: 24px; padding: 16px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 12px; text-align: center;">
+                    <div style="color: white; font-size: 16px; font-weight: 600; margin-bottom: 8px;">
+                        🔄 ${wrongAnswersCount} question${wrongAnswersCount > 1 ? 's' : ''} answered incorrectly
+                    </div>
+                    <button class="btn" onclick="app.startReview()" style="width: 100%; background: white; color: #d97706; font-weight: 600;">
+                        📝 Review Wrong Answers
+                    </button>
+                </div>
+                ` : ''}
+
+                <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
                     <button class="btn" onclick="app.resetProgress()" style="flex: 1; background: #f59e0b; color: white;">
                         🔄 Reset Progress
                     </button>
