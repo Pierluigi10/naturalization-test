@@ -1,0 +1,64 @@
+/* High contrast mode */
+body.high-contrast {
+    background: #000;
+}
+
+body.high-contrast .card {
+    background: #fff;
+    border: 3px solid #000;
+}
+
+body.high-contrast .option {
+    border: 3px solid #000;
+    background: #fff;
+}
+
+body.high-contrast .option:hover:not(.disabled) {
+    background: #ffff00;
+    border-color: #000;
+}
+
+body.high-contrast .option.selected {
+    background: #ffff00;
+    border-color: #000;
+}
+
+body.high-contrast .option.correct {
+    background: #00ff00;
+    border-color: #000;
+}
+
+body.high-contrast .option.wrong {
+    background: #ff0000;
+    border-color: #000;
+    color: #fff;
+}
+
+body.high-contrast .btn-primary {
+    background: #000;
+    color: #fff;
+    border: 3px solid #000;
+}
+
+body.high-contrast .btn-secondary {
+    background: #fff;
+    color: #000;
+    border: 3px solid #000;
+}
+
+body.high-contrast .progress-fill {
+    background: #000;
+}
+
+/* Keyboard focus indicators */
+button:focus,
+.option:focus {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
+
+body.high-contrast button:focus,
+body.high-contrast .option:focus {
+    outline: 3px solid #000;
+    outline-offset: 2px;
+}
