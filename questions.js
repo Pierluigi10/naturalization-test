@@ -3311,7 +3311,7 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 301,
-    "question": "Welches Wappen gehört zum Freistaat Sachsen? Bild 1 Bild 2 Bild 3 Bild 4",
+    "question": "Welches Wappen gehört zum Freistaat Sachsen?",
     "options": [
       "Bild 1",
       "Bild 2",
