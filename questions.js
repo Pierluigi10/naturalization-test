@@ -321,7 +321,7 @@ const QUESTIONS_DATA = [
       "Bär",
       "Pferd"
     ],
-    "correct": 2
+    "correct": 1
   },
   {
     "id": 30,
