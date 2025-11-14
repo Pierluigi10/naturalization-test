@@ -3,27 +3,171 @@
 class UIRenderer {
     constructor(app) {
         this.app = app;
+        this.lastView = null;
+        this.lastQuestionIndex = null;
     }
 
     /**
      * Main render method - determines which view to render
+     * Uses smart diffing to update only what changed
      */
     render() {
         const appElement = document.getElementById('app');
+        const currentView = this.getCurrentViewKey();
 
-        if (this.app.allQuestions.length === 0) {
-            appElement.innerHTML = this.renderImport();
-        } else if (this.app.view === 'home') {
-            appElement.innerHTML = this.renderHome();
-        } else if (this.app.view === 'topicSelection') {
-            appElement.innerHTML = this.renderTopicSelection();
-        } else if (this.app.view === 'stats') {
-            appElement.innerHTML = this.renderStats();
+        // Only do full render if view changed
+        if (this.lastView !== currentView) {
+            if (this.app.allQuestions.length === 0) {
+                appElement.innerHTML = this.renderImport();
+            } else if (this.app.view === 'home') {
+                appElement.innerHTML = this.renderHome();
+            } else if (this.app.view === 'topicSelection') {
+                appElement.innerHTML = this.renderTopicSelection();
+            } else if (this.app.view === 'stats') {
+                appElement.innerHTML = this.renderStats();
+            } else {
+                appElement.innerHTML = this.renderQuiz();
+            }
+            this.lastView = currentView;
+            this.lastQuestionIndex = this.app.currentIndex;
+            this.attachEventListeners();
+        } else if (this.app.view === 'quiz') {
+            // Partial update for quiz view
+            this.updateQuizPartial();
+        }
+    }
+
+    /**
+     * Get unique key for current view state
+     */
+    getCurrentViewKey() {
+        if (this.app.allQuestions.length === 0) return 'import';
+        if (this.app.view === 'home') return 'home';
+        if (this.app.view === 'topicSelection') return 'topicSelection';
+        if (this.app.view === 'stats') return 'stats';
+        return 'quiz';
+    }
+
+    /**
+     * Partial update for quiz view (much faster than full render)
+     */
+    updateQuizPartial() {
+        // Only update if question changed
+        if (this.lastQuestionIndex !== this.app.currentIndex) {
+            this.updateQuestion();
+            this.updateProgress();
+            this.lastQuestionIndex = this.app.currentIndex;
         } else {
-            appElement.innerHTML = this.renderQuiz();
+            // Just update answer options (happens on answer selection)
+            this.updateAnswerOptions();
+        }
+    }
+
+    /**
+     * Update only the question content (optimized)
+     */
+    updateQuestion() {
+        const questionElement = document.querySelector('.question-content');
+        if (!questionElement) return;
+
+        const question = this.app.questions[this.app.currentIndex];
+        if (!question) return;
+
+        // Update question text
+        const questionTextElement = questionElement.querySelector('.question-text');
+        if (questionTextElement) {
+            DOMDiffer.updateHTML(questionTextElement, `
+                <span class="question-number">Question ${this.app.currentIndex + 1}/${this.app.questions.length}</span>
+                ${question.question}
+            `);
         }
 
-        this.attachEventListeners();
+        // Update image if exists
+        const imageContainer = questionElement.querySelector('.question-image');
+        if (question.image && imageContainer) {
+            DOMDiffer.updateHTML(imageContainer,
+                `<img src="${question.image}" alt="Question illustration" loading="lazy">`
+            );
+        } else if (imageContainer) {
+            imageContainer.innerHTML = '';
+        }
+
+        // Update answer options
+        this.updateAnswerOptions();
+    }
+
+    /**
+     * Update only answer options (most frequently updated part)
+     */
+    updateAnswerOptions() {
+        const answersContainer = document.querySelector('.answers');
+        if (!answersContainer) return;
+
+        const question = this.app.questions[this.app.currentIndex];
+        if (!question) return;
+
+        const questionId = question.id;
+        const userAnswer = this.app.answers[questionId];
+        const correctAnswer = question.correctAnswer;
+        const showResult = this.app.showResult || userAnswer !== undefined;
+
+        // Update each answer button individually (faster than full innerHTML)
+        ['A', 'B', 'C', 'D'].forEach((option, index) => {
+            const button = answersContainer.querySelector(`[data-answer="${option}"]`);
+            if (!button) return;
+
+            const isUserAnswer = userAnswer === option;
+            const isCorrect = correctAnswer === option;
+
+            // Update classes without re-rendering
+            button.className = 'answer-option';
+            if (showResult) {
+                if (isCorrect) {
+                    button.classList.add('correct');
+                } else if (isUserAnswer) {
+                    button.classList.add('incorrect');
+                }
+            } else if (isUserAnswer) {
+                button.classList.add('selected');
+            }
+
+            // Update text if needed
+            const expectedText = `${option}. ${question[`answer${option}`]}`;
+            if (button.textContent.trim() !== expectedText.trim()) {
+                button.textContent = expectedText;
+            }
+        });
+    }
+
+    /**
+     * Update progress indicators
+     */
+    updateProgress() {
+        // Update progress bar
+        const progressFill = document.querySelector('.progress-fill');
+        if (progressFill) {
+            const percent = ((this.app.currentIndex + 1) / this.app.questions.length) * 100;
+            progressFill.style.width = `${percent}%`;
+        }
+
+        // Update progress text
+        const progressText = document.querySelector('.progress-text');
+        if (progressText) {
+            DOMDiffer.updateTextContent(progressText,
+                `${this.app.currentIndex + 1} / ${this.app.questions.length}`
+            );
+        }
+
+        // Update navigation buttons state
+        const prevBtn = document.querySelector('[onclick*="previousQuestion"]');
+        const nextBtn = document.querySelector('[onclick*="nextQuestion"]');
+
+        if (prevBtn) {
+            prevBtn.disabled = this.app.currentIndex === 0;
+        }
+        if (nextBtn) {
+            nextBtn.disabled = this.app.currentIndex >= this.app.questions.length - 1;
+        }
     }
 
     /**

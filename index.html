@@ -39,6 +39,7 @@
     <script src="src/js/navigation.js"></script>
     <script src="src/js/statistics.js"></script>
     <script src="src/js/share.js"></script>
+    <script src="src/js/dom-differ.js"></script>
     <script src="src/js/ui-renderer.js"></script>
     <script src="src/js/quiz.js"></script>
     <script src="src/js/app.js"></script>
@@ -60,10 +61,17 @@
                     .then((registration) => {
                         console.log('✅ Service Worker registered successfully:', registration.scope);
 
-                        // Check for updates periodically
+                        // Check for updates when page becomes visible (more efficient than polling)
+                        document.addEventListener('visibilitychange', () => {
+                            if (!document.hidden) {
+                                registration.update();
+                            }
+                        });
+
+                        // Also check every 30 minutes as backup (instead of 1 minute)
                         setInterval(() => {
                             registration.update();
-                        }, 60000); // Check every minute
+                        }, 30 * 60 * 1000); // Check every 30 minutes
                     })
                     .catch((error) => {
                         console.log('❌ Service Worker registration failed:', error);
