@@ -6,6 +6,19 @@
     <meta name="description" content="Practice German citizenship test (Einbürgerungstest) with accessibility features including high contrast mode, keyboard navigation, and screen reader support.">
     <title>Einbürgerungstest - Quiz</title>
 
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Einbürgerungstest">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="stylesheet" href="src/css/accessibility.css">
@@ -32,5 +45,31 @@
     <!-- GoatCounter Analytics - Privacy-friendly visitor tracking -->
     <script data-goatcounter="https://einbuergerungstest.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('✅ Service Worker registered successfully:', registration.scope);
+
+                        // Check for updates periodically
+                        setInterval(() => {
+                            registration.update();
+                        }, 60000); // Check every minute
+                    })
+                    .catch((error) => {
+                        console.log('❌ Service Worker registration failed:', error);
+                    });
+            });
+
+            // Handle service worker updates
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                console.log('🔄 Service Worker updated, reloading page...');
+                window.location.reload();
+            });
+        }
+    </script>
 </body>
 </html>

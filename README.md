@@ -7,6 +7,10 @@ Quiz app to practice German naturalization test questions (Einbürgerungstest).
 ```
 einbuergerungstest/
 ├── index.html                    # Main entry point
+├── manifest.json                 # PWA manifest
+├── service-worker.js             # Service worker for offline mode
+├── icon-192.png                  # PWA icon (192x192)
+├── icon-512.png                  # PWA icon (512x512)
 ├── questions.js                  # 310 questions in JS format (auto-generated)
 ├── questions.json                # 310 questions from BAMF PDF (source file)
 ├── src/
@@ -19,11 +23,14 @@ einbuergerungstest/
 │       └── accessibility.css    # Accessibility features (high contrast, etc.)
 ├── images/                       # Question images (7 images)
 ├── generate_js.py               # Generate questions.js from questions.json
+├── generate_icons.py            # Generate PWA icons
 ├── download_images.py           # Download/update question images
 └── requirements.txt             # Python dependencies (for images)
 ```
 
 ## 🚀 How to Use
+
+### Local Usage
 
 **It's super simple! Questions load automatically:**
 
@@ -32,6 +39,27 @@ open index.html
 ```
 
 Or drag `index.html` into a browser (Chrome, Firefox, Safari)
+
+### 📱 Install as PWA (Progressive Web App)
+
+You can install this app on your device for a native app experience:
+
+**On Mobile (iOS/Android):**
+1. Open the site in your browser
+2. iOS: Tap the Share button → "Add to Home Screen"
+3. Android: Tap the menu → "Install app" or "Add to Home Screen"
+
+**On Desktop (Chrome/Edge):**
+1. Look for the install icon (⊕) in the address bar
+2. Click "Install"
+3. The app will open in its own window
+
+**Benefits of PWA:**
+- 📱 Works like a native app with its own icon
+- 🚀 Faster loading after first visit
+- 📴 Works offline (all questions cached)
+- 🔔 Optional: Enable notifications for study reminders (coming soon)
+- 💾 No app store needed, updates automatically
 
 ### 🎯 Three Practice Modes
 
@@ -81,6 +109,9 @@ Choose your Bundesland before starting a test simulation:
 - ✅ **Image support**: Questions with images automatically display photos
 - ✅ **Accessibility**: High contrast mode, keyboard navigation, screen reader support
 - ✅ **Mobile-friendly**: Works perfectly on smartphones with touch gestures
+- ✅ **PWA Support**: Install as an app on your phone/desktop
+- ✅ **Offline Mode**: Works without internet connection after first load
+- ✅ **Privacy-friendly analytics**: GoatCounter integration (no cookies, GDPR compliant)
 - ✅ **Correct answers included**: All 310 questions have verified correct answers
 
 ## 🖼️ Images
@@ -253,9 +284,13 @@ External libraries (loaded from CDN):
 - [x] ~~Add review mode~~ ✅ Review incorrect answers
 - [x] ~~Add confetti animation~~ ✅ Celebration when passing
 - [x] ~~Add accessibility features~~ ✅ High contrast, keyboard nav, screen reader support
+- [x] ~~PWA + Offline Mode~~ ✅ Installable as app, works offline
+- [x] ~~Privacy-friendly analytics~~ ✅ GoatCounter integration
 - [ ] Extract questions for remaining 15 Bundesländer from BAMF PDF
 - [ ] Optional Italian translation (if desired)
 - [ ] Search for missing images for questions 29, 31, 85, 214, 305 (if they exist)
+- [ ] Add explanations for correct answers (educational value)
+- [ ] Dark mode
 
 ## 🔗 Sources
 
