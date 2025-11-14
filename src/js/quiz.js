@@ -18,6 +18,7 @@ class QuizApp {
         this.timeoutWarningShown = false;
         this.tenMinWarningShown = false;
         this.timerVisible = true; // Toggle for showing/hiding timer
+        this.isNavigatingBack = false; // Track when user navigates back with Previous
 
         // Accessibility settings
         this.highContrast = Storage.loadHighContrast();
@@ -246,6 +247,10 @@ class QuizApp {
         if (this.view === 'quiz' && this.answers[this.currentIndex]) {
             this.selectedAnswer = this.answers[this.currentIndex].selected;
             this.showResult = true;
+            // In simulation mode, if resuming on an answered question, enable navigation
+            if (this.mode === 'simulation') {
+                this.isNavigatingBack = true;
+            }
         }
     }
 
@@ -574,6 +579,7 @@ class QuizApp {
 
         this.selectedAnswer = index;
         this.showResult = true;
+        this.isNavigatingBack = false; // Reset navigation flag when answering
 
         const correct = index === this.questions[this.currentIndex].correct;
         this.answers[this.currentIndex] = {
@@ -585,13 +591,16 @@ class QuizApp {
         Storage.saveAnswers(this.answers);
         this.render();
 
-        // Auto-advance to next question after answering
-        setTimeout(() => {
-            this.nextQuestion();
-        }, 1000);
+        // Auto-advance to next question after answering (only in simulation mode)
+        if (this.mode === 'simulation') {
+            setTimeout(() => {
+                this.nextQuestion();
+            }, 1000);
+        }
     }
 
     nextQuestion() {
+        this.isNavigatingBack = false; // Reset navigation flag when moving forward
         if (this.currentIndex < this.questions.length - 1) {
             this.currentIndex++;
             this.selectedAnswer = null;
@@ -607,6 +616,7 @@ class QuizApp {
     prevQuestion() {
         if (this.currentIndex > 0) {
             this.currentIndex--;
+            this.isNavigatingBack = true; // Set flag when navigating back
             // Check if this question was already answered
             if (this.answers[this.currentIndex]) {
                 this.selectedAnswer = this.answers[this.currentIndex].selected;
@@ -802,6 +812,23 @@ class QuizApp {
         `;
     }
 
+    viewStats() {
+        // Load saved quiz data before viewing stats
+        const savedMode = Storage.loadMode();
+        const savedAnswers = Storage.loadAnswers();
+        const savedActiveQuestions = Storage.loadActiveQuestions();
+        const savedStartTime = Storage.loadStartTime();
+
+        if (savedMode && savedAnswers && savedActiveQuestions) {
+            this.mode = savedMode;
+            this.answers = savedAnswers;
+            this.questions = savedActiveQuestions;
+            this.startTime = savedStartTime;
+            this.view = 'stats';
+            this.render();
+        }
+    }
+
     renderHome() {
         const availableBundeslaender = this.getAvailableBundeslaender();
         const hasOngoingSimulation = this.mode === 'simulation' && this.startTime && this.questions.length > 0;
@@ -811,10 +838,22 @@ class QuizApp {
             q.id > 300 && q.bundesland === this.selectedBundesland
         ).length;
 
+        // Check if there's any saved quiz data to show Stats button
+        const savedMode = Storage.loadMode();
+        const savedAnswers = Storage.loadAnswers();
+        const hasStatsToShow = savedMode && savedAnswers && Object.keys(savedAnswers).length > 0;
+
         return `
             ${this.renderAccessibilityPanel()}
             <div class="card">
-                <h1>🇩🇪 Einbürgerungstest</h1>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h1 style="margin: 0;">🇩🇪 Einbürgerungstest</h1>
+                    ${hasStatsToShow ? `
+                    <button class="btn-stats" onclick="app.viewStats();" aria-label="View statistics">
+                        📊 Stats
+                    </button>
+                    ` : ''}
+                </div>
                 <p style="text-align: center; color: #6b7280; margin-bottom: 24px;">
                     Choose your practice mode
                 </p>
@@ -1180,6 +1219,7 @@ class QuizApp {
                     >
                         ← Previous
                     </button>
+                    ${this.mode === 'simulation' && !this.isNavigatingBack ? '' : `
                     <button
                         class="btn btn-primary"
                         onclick="app.nextQuestion()"
@@ -1188,6 +1228,7 @@ class QuizApp {
                     >
                         Next →
                     </button>
+                    `}
                 </div>
                 ${this.mode === 'full' ? `
                 <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px;">
