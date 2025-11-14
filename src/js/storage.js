@@ -11,7 +11,10 @@ const Storage = {
         START_TIME: 'quiz-start-time',
         HIGH_CONTRAST: 'high-contrast',
         FONT_SIZE: 'font-size',
-        REVIEW_QUESTIONS: 'quiz-review-questions'
+        REVIEW_QUESTIONS: 'quiz-review-questions',
+        DARK_MODE: 'dark-mode',
+        ACHIEVEMENTS: 'achievements',
+        STATS_HISTORY: 'stats-history'
     },
 
     /**
@@ -311,5 +314,112 @@ const Storage = {
         localStorage.removeItem(this.KEYS.ANSWERS);
         localStorage.removeItem(this.KEYS.START_TIME);
         localStorage.removeItem(this.KEYS.REVIEW_QUESTIONS);
+    },
+
+    // ==================== DARK MODE ====================
+
+    /**
+     * Save dark mode preference
+     * @param {boolean} enabled - Whether dark mode is enabled
+     */
+    saveDarkMode(enabled) {
+        return this.safeSetItem(this.KEYS.DARK_MODE, enabled.toString());
+    },
+
+    /**
+     * Load dark mode preference
+     * @returns {boolean} Whether dark mode is enabled
+     */
+    loadDarkMode() {
+        return localStorage.getItem(this.KEYS.DARK_MODE) === 'true';
+    },
+
+    // ==================== ACHIEVEMENTS ====================
+
+    /**
+     * Save achievements data
+     * @param {Object} achievements - Achievements object
+     */
+    saveAchievements(achievements) {
+        return this.safeSetItem(this.KEYS.ACHIEVEMENTS, JSON.stringify(achievements));
+    },
+
+    /**
+     * Load achievements data
+     * @returns {Object} Achievements object
+     */
+    loadAchievements() {
+        try {
+            const stored = localStorage.getItem(this.KEYS.ACHIEVEMENTS);
+            return stored ? JSON.parse(stored) : this.getDefaultAchievements();
+        } catch (error) {
+            console.error('[Storage] Failed to load achievements:', error);
+            return this.getDefaultAchievements();
+        }
+    },
+
+    /**
+     * Get default achievements structure
+     * @returns {Object} Default achievements
+     */
+    getDefaultAchievements() {
+        return {
+            firstTestCompleted: false,
+            tenTestsCompleted: false,
+            perfectScore: false,
+            sevenDayStreak: false,
+            allQuestionsSeen: false,
+            speedDemon: false,
+            // Stats for tracking
+            testsCompleted: 0,
+            lastTestDate: null,
+            currentStreak: 0,
+            questionsSeen: [],
+            bestTime: null
+        };
+    },
+
+    // ==================== STATS HISTORY ====================
+
+    /**
+     * Save stats history
+     * @param {Array} history - Array of test results
+     */
+    saveStatsHistory(history) {
+        return this.safeSetItem(this.KEYS.STATS_HISTORY, JSON.stringify(history));
+    },
+
+    /**
+     * Load stats history
+     * @returns {Array} Array of test results
+     */
+    loadStatsHistory() {
+        try {
+            const stored = localStorage.getItem(this.KEYS.STATS_HISTORY);
+            return stored ? JSON.parse(stored) : [];
+        } catch (error) {
+            console.error('[Storage] Failed to load stats history:', error);
+            return [];
+        }
+    },
+
+    /**
+     * Add a test result to history
+     * @param {Object} result - Test result object
+     */
+    addTestResult(result) {
+        const history = this.loadStatsHistory();
+        history.push({
+            ...result,
+            timestamp: Date.now(),
+            date: new Date().toISOString()
+        });
+
+        // Keep only last 100 results to avoid storage bloat
+        if (history.length > 100) {
+            history.shift();
+        }
+
+        return this.saveStatsHistory(history);
     }
 };

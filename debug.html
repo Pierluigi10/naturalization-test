@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Debug & Clear</title>
+    <style>
+        body {
+            font-family: system-ui;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .success { color: #10b981; font-weight: bold; margin: 20px 0; }
+        pre {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Debug Tools</h1>
+
+    <h2>Step 1: Unregister Service Worker</h2>
+    <button onclick="unregisterSW()">Unregister Service Worker</button>
+
+    <h2>Step 2: Clear All Cache</h2>
+    <button onclick="clearCache()">Clear All Cache</button>
+
+    <h2>Step 3: Clear localStorage</h2>
+    <button onclick="clearStorage()">Clear localStorage</button>
+
+    <h2>Step 4: Do Everything</h2>
+    <button onclick="clearAll()">Clear Everything & Go to App</button>
+
+    <div id="message"></div>
+
+    <h2>Debug Info</h2>
+    <button onclick="showDebugInfo()">Show Debug Info</button>
+    <pre id="debug"></pre>
+
+    <script>
+        function msg(text, success = true) {
+            document.getElementById('message').innerHTML =
+                `<div class="${success ? 'success' : 'error'}">${text}</div>`;
+        }
+
+        async function unregisterSW() {
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (let registration of registrations) {
+                    await registration.unregister();
+                }
+                msg('✅ Service Worker unregistered');
+            } else {
+                msg('ℹ️ No Service Worker support');
+            }
+        }
+
+        async function clearCache() {
+            if ('caches' in window) {
+                const names = await caches.keys();
+                for (let name of names) {
+                    await caches.delete(name);
+                }
+                msg('✅ Cache cleared (' + names.length + ' caches)');
+            } else {
+                msg('ℹ️ No Cache API support');
+            }
+        }
+
+        function clearStorage() {
+            localStorage.clear();
+            sessionStorage.clear();
+            msg('✅ Storage cleared');
+        }
+
+        async function clearAll() {
+            await unregisterSW();
+            await clearCache();
+            clearStorage();
+            msg('✅ Everything cleared! Redirecting...');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+
+        async function showDebugInfo() {
+            const info = {
+                serviceWorker: 'serviceWorker' in navigator ? 'Supported' : 'Not supported',
+                registrations: 'serviceWorker' in navigator ?
+                    (await navigator.serviceWorker.getRegistrations()).length : 0,
+                caches: 'caches' in window ? (await caches.keys()).length : 0,
+                localStorage: Object.keys(localStorage).length + ' items',
+                userAgent: navigator.userAgent,
+                url: window.location.href
+            };
+
+            document.getElementById('debug').textContent = JSON.stringify(info, null, 2);
+        }
+    </script>
+</body>
+</html>

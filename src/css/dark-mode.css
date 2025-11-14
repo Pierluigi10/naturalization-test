@@ -1,0 +1,533 @@
+/* Dark Mode Styles with CSS Variables */
+
+:root {
+    /* Light mode colors (default) */
+    --bg-gradient-start: #667eea;
+    --bg-gradient-end: #764ba2;
+    --card-bg: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --border-hover: #667eea;
+
+    /* Option states */
+    --option-bg: #ffffff;
+    --option-hover-bg: #f3f4ff;
+    --option-hover-border: #667eea;
+    --option-selected-bg: #f3f4ff;
+    --option-selected-border: #667eea;
+    --option-correct-bg: #d1fae5;
+    --option-correct-border: #10b981;
+    --option-wrong-bg: #fee2e2;
+    --option-wrong-border: #ef4444;
+
+    /* Button colors */
+    --btn-secondary-bg: #f3f4f6;
+    --btn-secondary-text: #374151;
+    --btn-secondary-hover: #e5e7eb;
+
+    /* Progress bar */
+    --progress-bg: #e5e7eb;
+    --progress-fill: linear-gradient(90deg, #667eea, #764ba2);
+
+    /* Answer items */
+    --answer-unanswered-bg: #f3f4f6;
+    --answer-unanswered-border: #e5e7eb;
+
+    /* Code blocks */
+    --code-bg: #f9fafb;
+    --code-border: #e5e7eb;
+
+    /* Disclaimer */
+    --disclaimer-bg: rgba(255, 255, 255, 0.9);
+    --disclaimer-text: #6b7280;
+
+    /* Shadow */
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --btn-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Dark mode colors */
+body.dark-mode {
+    --bg-gradient-start: #1a1a2e;
+    --bg-gradient-end: #16213e;
+    --card-bg: #0f1419;
+    --text-primary: #e5e7eb;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    --border-hover: #667eea;
+
+    /* Option states */
+    --option-bg: #1f2937;
+    --option-hover-bg: #374151;
+    --option-hover-border: #667eea;
+    --option-selected-bg: #374151;
+    --option-selected-border: #667eea;
+    --option-correct-bg: #064e3b;
+    --option-correct-border: #10b981;
+    --option-wrong-bg: #7f1d1d;
+    --option-wrong-border: #ef4444;
+
+    /* Button colors */
+    --btn-secondary-bg: #374151;
+    --btn-secondary-text: #e5e7eb;
+    --btn-secondary-hover: #4b5563;
+
+    /* Progress bar */
+    --progress-bg: #374151;
+    --progress-fill: linear-gradient(90deg, #667eea, #764ba2);
+
+    /* Answer items */
+    --answer-unanswered-bg: #1f2937;
+    --answer-unanswered-border: #374151;
+
+    /* Code blocks */
+    --code-bg: #1f2937;
+    --code-border: #374151;
+
+    /* Disclaimer */
+    --disclaimer-bg: rgba(15, 20, 25, 0.9);
+    --disclaimer-text: #9ca3af;
+
+    /* Shadow */
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --btn-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
+}
+
+/* Apply variables to elements - ONLY in dark mode to avoid conflicts */
+body.dark-mode {
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+}
+
+body.dark-mode .card {
+    background: var(--card-bg);
+    box-shadow: var(--card-shadow);
+}
+
+body.dark-mode h1,
+body.dark-mode .question {
+    color: var(--text-primary);
+}
+
+/* Fix option letter colors in dark mode */
+body.dark-mode .option-letter {
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+body.dark-mode .option.correct .option-letter {
+    color: #10b981;
+    border-color: #10b981;
+}
+
+body.dark-mode .option.wrong .option-letter,
+body.dark-mode .option.incorrect .option-letter {
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+body.dark-mode .option.selected .option-letter {
+    color: #667eea;
+    border-color: #667eea;
+}
+
+/* Fix all text colors in dark mode - Override inline styles */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode p,
+body.dark-mode label,
+body.dark-mode summary,
+body.dark-mode strong {
+    color: var(--text-primary) !important;
+}
+
+/* Secondary text colors */
+body.dark-mode [style*="color: #6b7280"],
+body.dark-mode [style*="color:#6b7280"] {
+    color: var(--text-secondary) !important;
+}
+
+body.dark-mode [style*="color: #374151"],
+body.dark-mode [style*="color:#374151"] {
+    color: var(--text-primary) !important;
+}
+
+/* Fix button colors */
+body.dark-mode .btn-stats {
+    background: transparent;
+    border-color: #818cf8 !important;
+    color: #818cf8 !important;
+}
+
+body.dark-mode .btn-stats:hover {
+    background: rgba(129, 140, 248, 0.1);
+}
+
+body.dark-mode [style*="border-color: #6b7280"] {
+    border-color: var(--text-secondary) !important;
+}
+
+body.dark-mode [style*="color: #6b7280"] {
+    color: var(--text-secondary) !important;
+}
+
+/* Timer display colors - ensure readability */
+body.dark-mode #timer-display {
+    color: var(--text-primary) !important;
+}
+
+body.dark-mode #timer-display[style*="color: #ef4444"] {
+    color: #fca5a5 !important; /* Lighter red for dark mode */
+}
+
+body.dark-mode #timer-display[style*="color: #f59e0b"] {
+    color: #fbbf24 !important; /* Lighter orange for dark mode */
+}
+
+/* Fix backgrounds that might be too light */
+body.dark-mode [style*="background: #f9fafb"],
+body.dark-mode [style*="background:#f9fafb"] {
+    background: var(--code-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+body.dark-mode [style*="background: #f3f4f6"],
+body.dark-mode [style*="background:#f3f4f6"] {
+    background: var(--answer-unanswered-bg) !important;
+}
+
+/* Fix badges with hardcoded colors */
+body.dark-mode [style*="background: #f3f4ff"] {
+    background: rgba(102, 126, 234, 0.2) !important;
+}
+
+body.dark-mode [style*="background: #d1fae5"] {
+    background: rgba(16, 185, 129, 0.2) !important;
+}
+
+body.dark-mode [style*="background: #e5e7eb"] {
+    background: var(--answer-unanswered-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Fix white backgrounds in stats panels */
+body.dark-mode [style*="background: white"] {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Question number badge */
+body.dark-mode .question-number {
+    color: var(--text-secondary) !important;
+}
+
+/* Form elements in dark mode */
+body.dark-mode select,
+body.dark-mode input[type="text"],
+body.dark-mode input[type="number"],
+body.dark-mode textarea {
+    background: var(--option-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+body.dark-mode select:focus,
+body.dark-mode input:focus,
+body.dark-mode textarea:focus {
+    border-color: #818cf8 !important;
+    outline: none;
+}
+
+body.dark-mode select option {
+    background: var(--card-bg);
+    color: var(--text-primary);
+}
+
+/* Fix input placeholder text */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+body.dark-mode .progress-bar {
+    background: var(--progress-bg);
+}
+
+body.dark-mode .progress-fill {
+    background: var(--progress-fill);
+}
+
+/* These rules only apply when CSS variables are set - safe for both modes */
+body.dark-mode .option {
+    background: var(--option-bg);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .option:hover:not(.disabled) {
+    background: var(--option-hover-bg);
+    border-color: var(--option-hover-border);
+}
+
+body.dark-mode .option.selected {
+    background: var(--option-selected-bg);
+    border-color: var(--option-selected-border);
+}
+
+body.dark-mode .option.correct {
+    background: var(--option-correct-bg);
+    border-color: var(--option-correct-border);
+}
+
+body.dark-mode .option.wrong {
+    background: var(--option-wrong-bg);
+    border-color: var(--option-wrong-border);
+}
+
+body.dark-mode .option-text {
+    color: var(--text-primary);
+}
+
+/* Button styles - only for dark mode */
+body.dark-mode .btn-secondary {
+    background: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
+}
+
+body.dark-mode .btn-secondary:hover:not(:disabled) {
+    background: var(--btn-secondary-hover);
+}
+
+body.dark-mode .btn-primary:hover:not(:disabled) {
+    box-shadow: var(--btn-shadow);
+}
+
+body.dark-mode .answer-item.unanswered {
+    background: var(--answer-unanswered-bg);
+    border-color: var(--answer-unanswered-border);
+}
+
+body.dark-mode .code-example {
+    background: var(--code-bg);
+    border-color: var(--code-border);
+    color: var(--text-primary);
+}
+
+body.dark-mode .disclaimer {
+    background: var(--disclaimer-bg);
+    color: var(--disclaimer-text);
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.dark-mode-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Smooth transitions for dark mode */
+body,
+.card,
+.option,
+.btn-secondary,
+.disclaimer,
+.answer-item,
+.code-example,
+.dark-mode-toggle {
+    transition: background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* Dark mode specific adjustments */
+body.dark-mode .stat-card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode img {
+    opacity: 0.9;
+}
+
+body.dark-mode .disclaimer a {
+    color: #818cf8;
+}
+
+/* Ensure primary buttons remain vibrant */
+body.dark-mode .btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white !important;
+}
+
+body.dark-mode .btn-secondary {
+    background: var(--btn-secondary-bg) !important;
+    color: var(--btn-secondary-text) !important;
+}
+
+body.dark-mode .btn-secondary:hover:not(:disabled) {
+    background: var(--btn-secondary-hover) !important;
+}
+
+/* Fix answer badges in stats */
+body.dark-mode .badge {
+    color: white !important;
+}
+
+body.dark-mode .answer-item {
+    color: var(--text-primary);
+}
+
+body.dark-mode .answer-item.unanswered {
+    background: var(--answer-unanswered-bg);
+    border-color: var(--answer-unanswered-border);
+}
+
+body.dark-mode .answer-item.correct {
+    background: #064e3b;
+    border-color: #10b981;
+}
+
+body.dark-mode .answer-item.incorrect {
+    background: #7f1d1d;
+    border-color: #ef4444;
+}
+
+/* Accessibility panel in dark mode */
+body.dark-mode details {
+    background: var(--card-bg);
+}
+
+body.dark-mode details[open] {
+    background: var(--code-bg);
+}
+
+/* Links in dark mode */
+body.dark-mode a {
+    color: #818cf8;
+}
+
+body.dark-mode a:hover {
+    color: #a5b4fc;
+}
+
+/* Ensure gradient buttons keep their colors (they're already high contrast) */
+body.dark-mode [style*="background: linear-gradient"] {
+    /* Keep gradient backgrounds as they are - they're already accessible */
+}
+
+/* Fix disabled button visibility */
+body.dark-mode .btn:disabled,
+body.dark-mode .btn-primary:disabled,
+body.dark-mode .btn-secondary:disabled {
+    opacity: 0.4;
+    color: var(--text-secondary) !important;
+}
+
+/* Progress text in dark mode */
+body.dark-mode .progress-text {
+    color: var(--text-primary);
+}
+
+/* Stat cards - keep gradient backgrounds visible */
+body.dark-mode .stat-card {
+    /* Gradients remain as-is for high contrast */
+    color: white !important;
+}
+
+/* Answer icons (checkmarks, X marks) */
+body.dark-mode .answer-icon {
+    /* Keep their colors - already high contrast */
+}
+
+/* Code examples in dark mode */
+body.dark-mode .code-example {
+    background: var(--code-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Import section */
+body.dark-mode .import-section {
+    color: var(--text-primary);
+}
+
+body.dark-mode .import-icon {
+    filter: brightness(0.8); /* Slightly dim large emojis in dark mode */
+}
+
+/* Navigation buttons */
+body.dark-mode .navigation .btn {
+    color: var(--text-primary);
+}
+
+/* Override high contrast in dark mode */
+body.dark-mode.high-contrast {
+    --bg-gradient-start: #000000;
+    --bg-gradient-end: #000000;
+    --card-bg: #1a1a1a;
+    --text-primary: #ffffff;
+    --border-color: #ffffff;
+    --option-bg: #000000;
+    --option-hover-bg: #333333;
+}
+
+/* Achievement badge hover effects */
+.achievement-badge {
+    transition: all 0.3s ease;
+}
+
+.achievement-badge:hover:not(.locked) {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+}
+
+.achievement-badge.unlocked {
+    animation: badgeUnlock 0.6s ease;
+}
+
+@keyframes badgeUnlock {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 640px) {
+    .dark-mode-toggle {
+        bottom: 80px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+}

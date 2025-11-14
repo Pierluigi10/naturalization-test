@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Storage</title>
+    <style>
+        body {
+            font-family: system-ui;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .success {
+            color: #10b981;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .error {
+            color: #ef4444;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧹 Clear Storage & Fix Issues</h1>
+    <p>If the app is not working, click the button below to clear all storage and reset.</p>
+
+    <button onclick="clearStorage()">Clear All Storage</button>
+    <button onclick="goToApp()">Go to App</button>
+
+    <div id="message"></div>
+
+    <script>
+        function clearStorage() {
+            try {
+                // Clear localStorage
+                localStorage.clear();
+
+                // Clear sessionStorage
+                sessionStorage.clear();
+
+                // Clear service worker cache
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.getRegistrations().then(registrations => {
+                        registrations.forEach(registration => {
+                            registration.unregister();
+                        });
+                    });
+                }
+
+                // Clear cache storage
+                if ('caches' in window) {
+                    caches.keys().then(names => {
+                        names.forEach(name => {
+                            caches.delete(name);
+                        });
+                    });
+                }
+
+                document.getElementById('message').innerHTML = '<div class="success">✅ Storage cleared successfully!<br>Now click "Go to App" or close this tab and reload the app.</div>';
+            } catch (error) {
+                document.getElementById('message').innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+            }
+        }
+
+        function goToApp() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

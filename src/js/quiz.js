@@ -22,6 +22,17 @@ class QuizApp {
         // Accessibility
         this.highContrast = Storage.loadHighContrast();
         this.fontSize = Storage.loadFontSize();
+        this.darkMode = Storage.loadDarkMode();
+
+        // Achievements - with error handling
+        try {
+            this.achievements = Storage.loadAchievements();
+        } catch (error) {
+            console.error('[QuizApp] Failed to load achievements:', error);
+            // Clear corrupted achievements data
+            localStorage.removeItem(Storage.KEYS.ACHIEVEMENTS);
+            this.achievements = Storage.getDefaultAchievements();
+        }
 
         // Bundesländer list
         this.bundeslaender = [
@@ -65,6 +76,18 @@ class QuizApp {
         } else {
             document.body.classList.remove('high-contrast');
         }
+
+        if (this.darkMode) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+
+        // Update dark mode icon
+        const icon = document.getElementById('dark-mode-icon');
+        if (icon) {
+            icon.textContent = this.darkMode ? '☀️' : '🌙';
+        }
     }
 
     toggleHighContrast() {
@@ -72,6 +95,18 @@ class QuizApp {
         Storage.saveHighContrast(this.highContrast);
         this.applyAccessibilitySettings();
         this.render();
+    }
+
+    toggleDarkMode() {
+        this.darkMode = !this.darkMode;
+        Storage.saveDarkMode(this.darkMode);
+        this.applyAccessibilitySettings();
+
+        // Update icon
+        const icon = document.getElementById('dark-mode-icon');
+        if (icon) {
+            icon.textContent = this.darkMode ? '☀️' : '🌙';
+        }
     }
 
     adjustFontSize(delta) {
@@ -414,9 +449,36 @@ class QuizApp {
             this.answers = savedAnswers;
             this.questions = savedActiveQuestions;
             this.timer.startTime = savedStartTime;
+
+            // Save test result to history if test is completed
+            const stats = this.statistics.getStats();
+            if (stats.answered === stats.total) {
+                this.saveTestResultToHistory();
+            }
+
             this.view = 'stats';
             this.render();
         }
+    }
+
+    /**
+     * Save test result to history for achievements tracking
+     */
+    saveTestResultToHistory() {
+        const stats = this.statistics.getStats();
+        const totalTime = this.timer.getTotalTime();
+
+        const result = {
+            mode: this.mode,
+            answered: stats.answered,
+            correct: stats.correct,
+            percentage: stats.percentage,
+            total: stats.total,
+            time: totalTime,
+            passed: this.statistics.checkPassed().hasPassed
+        };
+
+        Storage.addTestResult(result);
     }
 
     /**

@@ -23,9 +23,18 @@
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="stylesheet" href="src/css/accessibility.css">
     <link rel="stylesheet" href="src/css/animations.css">
+    <link rel="stylesheet" href="src/css/dark-mode.css">
 </head>
 <body role="application">
     <div class="container" id="app" role="main" aria-label="Quiz application"></div>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle"
+            onclick="app.toggleDarkMode()"
+            aria-label="Toggle dark mode"
+            title="Toggle dark mode">
+        <span id="dark-mode-icon">🌙</span>
+    </button>
 
     <!-- Load questions data -->
     <script src="questions.js"></script>

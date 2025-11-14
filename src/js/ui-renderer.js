@@ -25,16 +25,20 @@ class UIRenderer {
                 appElement.innerHTML = this.renderTopicSelection();
             } else if (this.app.view === 'stats') {
                 appElement.innerHTML = this.renderStats();
+            } else if (this.app.view === 'achievements') {
+                appElement.innerHTML = this.renderAchievements();
             } else {
                 appElement.innerHTML = this.renderQuiz();
             }
             this.lastView = currentView;
             this.lastQuestionIndex = this.app.currentIndex;
-            this.attachEventListeners();
         } else if (this.app.view === 'quiz') {
             // Partial update for quiz view
             this.updateQuizPartial();
         }
+
+        // ALWAYS attach event listeners after any render
+        this.attachEventListeners();
     }
 
     /**
@@ -45,6 +49,7 @@ class UIRenderer {
         if (this.app.view === 'home') return 'home';
         if (this.app.view === 'topicSelection') return 'topicSelection';
         if (this.app.view === 'stats') return 'stats';
+        if (this.app.view === 'achievements') return 'achievements';
         return 'quiz';
     }
 
@@ -267,13 +272,18 @@ class UIRenderer {
         return `
             ${this.renderAccessibilityPanel()}
             <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
                     <h1 style="margin: 0;">🇩🇪 Einbürgerungstest</h1>
-                    ${hasStatsToShow ? `
-                    <button class="btn-stats" onclick="app.viewStats();" aria-label="View statistics">
-                        📊 Stats
-                    </button>
-                    ` : ''}
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-stats" onclick="app.view = 'achievements'; app.render();" aria-label="View achievements">
+                            🏆
+                        </button>
+                        ${hasStatsToShow ? `
+                        <button class="btn-stats" onclick="app.viewStats();" aria-label="View statistics">
+                            📊
+                        </button>
+                        ` : ''}
+                    </div>
                 </div>
                 <p style="text-align: center; color: #6b7280; margin-bottom: 24px;">
                     Choose your practice mode
@@ -995,6 +1005,36 @@ class UIRenderer {
             fileInput.addEventListener('change', (e) => this.app.importFile(e));
         }
 
+        // Attach navigation button listeners
+        const prevBtn = document.querySelector('.btn-secondary[aria-label="Previous question"]');
+        const nextBtn = document.querySelector('.btn-primary[aria-label="Next question"]');
+
+        if (prevBtn) {
+            prevBtn.onclick = (e) => {
+                e.preventDefault();
+                this.app.navigation.previous();
+            };
+        }
+
+        if (nextBtn) {
+            nextBtn.onclick = (e) => {
+                e.preventDefault();
+                this.app.navigation.next();
+            };
+        }
+
+        // Attach answer option listeners
+        const answerOptions = document.querySelectorAll('.option:not(.disabled)');
+        answerOptions.forEach((option) => {
+            const optionIndex = Array.from(option.parentElement.children).indexOf(option);
+            option.onclick = (e) => {
+                e.preventDefault();
+                if (!this.app.showResult) {
+                    this.app.navigation.handleAnswer(optionIndex);
+                }
+            };
+        });
+
         // Attach touch event listeners for swipe support
         const questionCard = document.getElementById('question-card');
         if (questionCard && this.app.view === 'quiz') {
@@ -1007,5 +1047,188 @@ class UIRenderer {
             this.app.timer.elapsedTime = Date.now() - this.app.timer.startTime;
             this.app.timer.start();
         }
+    }
+
+    // ==================== ACHIEVEMENTS VIEW ====================
+
+    /**
+     * Render Achievements view
+     * @returns {string} HTML for achievements view
+     */
+    renderAchievements() {
+        const history = Storage.loadStatsHistory();
+
+        // Calculate current stats
+        const testsCompleted = history.length;
+        const perfectScores = history.filter(h => h.percentage === 100).length;
+
+        // Calculate streak
+        const today = new Date().setHours(0, 0, 0, 0);
+        const uniqueDates = [...new Set(history.map(h => {
+            const date = new Date(h.date);
+            return date.setHours(0, 0, 0, 0);
+        }))].sort((a, b) => b - a);
+
+        let currentStreak = 0;
+        for (let i = 0; i < uniqueDates.length; i++) {
+            const expectedDate = today - (i * 24 * 60 * 60 * 1000);
+            if (uniqueDates[i] === expectedDate) {
+                currentStreak++;
+            } else {
+                break;
+            }
+        }
+
+        // Define badges
+        const badges = [
+            {
+                id: 'firstTest',
+                icon: '🥉',
+                title: 'First Steps',
+                description: 'Complete your first test',
+                unlocked: testsCompleted >= 1,
+                progress: `${Math.min(testsCompleted, 1)}/1`
+            },
+            {
+                id: 'tenTests',
+                icon: '🥈',
+                title: 'Dedicated Learner',
+                description: 'Complete 10 tests',
+                unlocked: testsCompleted >= 10,
+                progress: `${Math.min(testsCompleted, 10)}/10`
+            },
+            {
+                id: 'perfectScore',
+                icon: '🥇',
+                title: 'Perfect Score',
+                description: 'Get 100% correct answers',
+                unlocked: perfectScores >= 1,
+                progress: perfectScores >= 1 ? 'Achieved!' : 'Not yet'
+            },
+            {
+                id: 'sevenDayStreak',
+                icon: '🔥',
+                title: 'Week Warrior',
+                description: 'Study 7 days in a row',
+                unlocked: currentStreak >= 7,
+                progress: `${Math.min(currentStreak, 7)}/7 days`
+            },
+            {
+                id: 'allQuestions',
+                icon: '🧠',
+                title: 'Knowledge Master',
+                description: 'See all 310 questions at least once',
+                unlocked: this.app.allQuestions.length > 0 && testsCompleted >= 10,
+                progress: this.app.allQuestions.length > 0 ? `${Math.min(testsCompleted, 10)}/10 tests` : 'N/A'
+            },
+            {
+                id: 'speedDemon',
+                icon: '⚡',
+                title: 'Speed Demon',
+                description: 'Complete a simulation test in under 30 minutes',
+                unlocked: history.some(h => h.mode === 'simulation' && h.time && h.time < 30 * 60 * 1000),
+                progress: history.some(h => h.mode === 'simulation' && h.time && h.time < 30 * 60 * 1000) ? 'Achieved!' : 'Not yet'
+            }
+        ];
+
+        const unlockedCount = badges.filter(b => b.unlocked).length;
+
+        return `
+            <div class="card">
+                <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+                    <button class="btn-stats" onclick="app.view = 'home'; app.render();">
+                        ← Back to Home
+                    </button>
+                </div>
+
+                <h1>🏆 Achievements</h1>
+                <p style="text-align: center; color: #6b7280; margin-bottom: 24px;">
+                    ${unlockedCount} / ${badges.length} badges unlocked
+                </p>
+
+                <!-- Progress Bar -->
+                <div style="margin-bottom: 32px;">
+                    <div style="width: 100%; height: 24px; background: var(--progress-bg); border-radius: 12px; overflow: hidden;">
+                        <div style="height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); width: ${(unlockedCount / badges.length) * 100}%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 600;">
+                            ${unlockedCount > 0 ? `${Math.round((unlockedCount / badges.length) * 100)}%` : ''}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Summary -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 32px;">
+                    <div style="padding: 16px; background: var(--code-bg); border-radius: 12px; text-align: center; border: 1px solid var(--border-color);">
+                        <div style="font-size: 24px; font-weight: bold; color: var(--text-primary); margin-bottom: 4px;">${testsCompleted}</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Tests Completed</div>
+                    </div>
+                    <div style="padding: 16px; background: var(--code-bg); border-radius: 12px; text-align: center; border: 1px solid var(--border-color);">
+                        <div style="font-size: 24px; font-weight: bold; color: var(--text-primary); margin-bottom: 4px;">${currentStreak}</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Day Streak 🔥</div>
+                    </div>
+                    <div style="padding: 16px; background: var(--code-bg); border-radius: 12px; text-align: center; border: 1px solid var(--border-color);">
+                        <div style="font-size: 24px; font-weight: bold; color: var(--text-primary); margin-bottom: 4px;">${perfectScores}</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Perfect Scores</div>
+                    </div>
+                </div>
+
+                <!-- Badges Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;">
+                    ${badges.map(badge => {
+                        const isLocked = !badge.unlocked;
+                        return `
+                            <div style="
+                                padding: 20px;
+                                background: ${isLocked ? 'var(--answer-unanswered-bg)' : 'linear-gradient(135deg, #667eea15, #764ba215)'};
+                                border: 2px solid ${isLocked ? 'var(--border-color)' : '#667eea'};
+                                border-radius: 16px;
+                                text-align: center;
+                                transition: all 0.3s ease;
+                                ${isLocked ? 'opacity: 0.6; filter: grayscale(100%);' : ''}
+                                position: relative;
+                                overflow: hidden;
+                            ">
+                                ${!isLocked ? `
+                                <div style="position: absolute; top: 8px; right: 8px; background: #10b981; color: white; padding: 4px 8px; border-radius: 8px; font-size: 10px; font-weight: 600;">
+                                    ✓ UNLOCKED
+                                </div>
+                                ` : ''}
+
+                                <div style="font-size: 48px; margin-bottom: 12px; ${isLocked ? 'filter: grayscale(100%);' : ''}">${badge.icon}</div>
+                                <h3 style="margin-bottom: 8px; font-size: 18px; color: var(--text-primary);">${badge.title}</h3>
+                                <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.4;">
+                                    ${badge.description}
+                                </p>
+                                <div style="
+                                    padding: 8px 12px;
+                                    background: var(--card-bg);
+                                    border-radius: 8px;
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                    color: ${isLocked ? 'var(--text-secondary)' : '#667eea'};
+                                ">
+                                    ${badge.progress}
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                ${unlockedCount < badges.length ? `
+                <div style="margin-top: 32px; padding: 16px; background: var(--code-bg); border-radius: 12px; border: 1px solid var(--border-color); text-align: center;">
+                    <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">
+                        💡 Keep practicing to unlock more badges!
+                    </p>
+                </div>
+                ` : `
+                <div style="margin-top: 32px; padding: 20px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; text-align: center; color: white;">
+                    <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
+                    <h3 style="font-size: 20px; font-weight: bold; margin-bottom: 8px;">Congratulations!</h3>
+                    <p style="font-size: 14px; opacity: 0.9; margin: 0;">
+                        You've unlocked all achievements! You're a true Einbürgerungstest master!
+                    </p>
+                </div>
+                `}
+            </div>
+        `;
     }
 }

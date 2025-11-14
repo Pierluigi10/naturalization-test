@@ -134,8 +134,8 @@ class Navigation {
 
         Storage.saveAnswers(this.app.answers);
 
-        // Just update the answer options directly without full render
-        this.app.renderer.updateAnswerOptions();
+        // Render to update UI (event listeners will be reattached automatically)
+        this.app.render();
 
         // Auto-advance to next question after answering (only in simulation mode)
         if (this.app.mode === 'simulation') {
@@ -155,7 +155,9 @@ class Navigation {
             this.app.selectedAnswer = null;
             this.app.showResult = false;
 
-            // Just render normally - timer lives outside and won't be touched
+            // Force FULL HTML re-render by resetting view cache
+            this.app.renderer.lastView = null;
+            this.app.renderer.lastQuestionIndex = null;
             this.app.render();
         } else {
             // Auto-transition to stats view when all questions answered
@@ -180,7 +182,9 @@ class Navigation {
                 this.app.showResult = false;
             }
 
-            // Just render normally - timer lives outside and won't be touched
+            // Force FULL HTML re-render
+            this.app.renderer.lastView = null;
+            this.app.renderer.lastQuestionIndex = null;
             this.app.render();
         }
     }
