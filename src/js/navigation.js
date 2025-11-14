@@ -149,10 +149,23 @@ class Navigation {
     next() {
         this.app.isNavigatingBack = false; // Reset navigation flag when moving forward
         if (this.app.currentIndex < this.app.questions.length - 1) {
-            this.app.currentIndex++;
-            this.app.selectedAnswer = null;
-            this.app.showResult = false;
-            this.app.render();
+            // Add slide-out animation
+            const questionCard = document.getElementById('question-card');
+            if (questionCard) {
+                questionCard.classList.add('slide-out');
+                setTimeout(() => {
+                    this.app.currentIndex++;
+                    this.app.selectedAnswer = null;
+                    this.app.showResult = false;
+                    this.app.render();
+                }, 300); // Match animation duration
+            } else {
+                // Fallback if card not found
+                this.app.currentIndex++;
+                this.app.selectedAnswer = null;
+                this.app.showResult = false;
+                this.app.render();
+            }
         } else {
             // Auto-transition to stats view when all questions answered
             this.app.view = 'stats';
@@ -165,17 +178,36 @@ class Navigation {
      */
     previous() {
         if (this.app.currentIndex > 0) {
-            this.app.currentIndex--;
-            this.app.isNavigatingBack = true; // Set flag when navigating back
-            // Check if this question was already answered
-            if (this.app.answers[this.app.currentIndex]) {
-                this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
-                this.app.showResult = true;
+            // Add slide-out animation
+            const questionCard = document.getElementById('question-card');
+            if (questionCard) {
+                questionCard.classList.add('slide-out');
+                setTimeout(() => {
+                    this.app.currentIndex--;
+                    this.app.isNavigatingBack = true; // Set flag when navigating back
+                    // Check if this question was already answered
+                    if (this.app.answers[this.app.currentIndex]) {
+                        this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
+                        this.app.showResult = true;
+                    } else {
+                        this.app.selectedAnswer = null;
+                        this.app.showResult = false;
+                    }
+                    this.app.render();
+                }, 300); // Match animation duration
             } else {
-                this.app.selectedAnswer = null;
-                this.app.showResult = false;
+                // Fallback if card not found
+                this.app.currentIndex--;
+                this.app.isNavigatingBack = true;
+                if (this.app.answers[this.app.currentIndex]) {
+                    this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
+                    this.app.showResult = true;
+                } else {
+                    this.app.selectedAnswer = null;
+                    this.app.showResult = false;
+                }
+                this.app.render();
             }
-            this.app.render();
         }
     }
 
@@ -198,16 +230,34 @@ class Navigation {
 
         const index = this.app.questions.findIndex(q => q.id === id);
         if (index !== -1) {
-            this.app.currentIndex = index;
-            // Check if this question was already answered
-            if (this.app.answers[this.app.currentIndex]) {
-                this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
-                this.app.showResult = true;
+            // Add slide-out animation
+            const questionCard = document.getElementById('question-card');
+            if (questionCard) {
+                questionCard.classList.add('slide-out');
+                setTimeout(() => {
+                    this.app.currentIndex = index;
+                    // Check if this question was already answered
+                    if (this.app.answers[this.app.currentIndex]) {
+                        this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
+                        this.app.showResult = true;
+                    } else {
+                        this.app.selectedAnswer = null;
+                        this.app.showResult = false;
+                    }
+                    this.app.render();
+                }, 300); // Match animation duration
             } else {
-                this.app.selectedAnswer = null;
-                this.app.showResult = false;
+                // Fallback if card not found
+                this.app.currentIndex = index;
+                if (this.app.answers[this.app.currentIndex]) {
+                    this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
+                    this.app.showResult = true;
+                } else {
+                    this.app.selectedAnswer = null;
+                    this.app.showResult = false;
+                }
+                this.app.render();
             }
-            this.app.render();
         } else {
             alert(`Question ${id} not found in this mode.`);
         }

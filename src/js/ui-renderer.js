@@ -490,8 +490,8 @@ class UIRenderer {
                             >
                                 <div class="option-letter" aria-hidden="true">${String.fromCharCode(65 + idx)}</div>
                                 <div class="option-text">${option}</div>
-                                ${showCorrect ? '<span style="color: #10b981; font-weight: bold;" aria-hidden="true">✓</span>' : ''}
-                                ${showWrong ? '<span style="color: #ef4444; font-weight: bold;" aria-hidden="true">✗</span>' : ''}
+                                ${showCorrect ? '<span class="answer-icon" style="color: #10b981; font-weight: bold; font-size: 20px;" aria-hidden="true">✓</span>' : ''}
+                                ${showWrong ? '<span class="answer-icon" style="color: #ef4444; font-weight: bold; font-size: 20px;" aria-hidden="true">✗</span>' : ''}
                             </div>
                         `;
                     }).join('')}
@@ -696,6 +696,22 @@ class UIRenderer {
                     <button class="btn" onclick="app.startReview()" style="width: 100%; background: white; color: #d97706; font-weight: 600;">
                         📝 Review Wrong Answers
                     </button>
+                </div>
+                ` : ''}
+
+                ${stats.answered > 0 ? `
+                <div style="margin-top: 24px;">
+                    <h3 style="margin-bottom: 12px; color: #374151; text-align: center;">📤 Share Your Results</h3>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <button class="btn" onclick="app.shareResults()" style="flex: 1; background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; min-width: 140px;">
+                            📤 Share Image
+                        </button>
+                        <button class="btn" onclick="app.copyResultsText()" style="flex: 1; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; min-width: 140px;">
+                            📋 Copy Text
+                        </button>
+                    </div>
+                    <div id="share-feedback" style="margin-top: 8px; text-align: center; font-size: 14px; color: #10b981; font-weight: 600; min-height: 20px;">
+                    </div>
                 </div>
                 ` : ''}
 

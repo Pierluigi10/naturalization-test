@@ -35,6 +35,7 @@ class QuizApp {
         this.timer = new Timer(this);
         this.navigation = new Navigation(this);
         this.statistics = new Statistics(this);
+        this.share = new ShareResults(this);
         this.renderer = new UIRenderer(this);
 
         // Initialize app
@@ -415,6 +416,65 @@ class QuizApp {
             this.timer.startTime = savedStartTime;
             this.view = 'stats';
             this.render();
+        }
+    }
+
+    /**
+     * Share results as image
+     */
+    async shareResults() {
+        const feedbackEl = document.getElementById('share-feedback');
+        if (feedbackEl) {
+            feedbackEl.textContent = 'Generating image...';
+            feedbackEl.style.color = '#6b7280';
+        }
+
+        const result = await this.share.shareResults();
+
+        if (feedbackEl) {
+            if (result.success) {
+                if (result.method === 'share') {
+                    feedbackEl.textContent = '✅ Shared successfully!';
+                    feedbackEl.style.color = '#10b981';
+                } else if (result.method === 'download') {
+                    feedbackEl.textContent = result.clipboardText
+                        ? '✅ Image downloaded! Text copied to clipboard.'
+                        : '✅ Image downloaded!';
+                    feedbackEl.style.color = '#10b981';
+                }
+                setTimeout(() => {
+                    if (feedbackEl) feedbackEl.textContent = '';
+                }, 3000);
+            } else {
+                feedbackEl.textContent = '❌ Error: ' + result.error;
+                feedbackEl.style.color = '#ef4444';
+            }
+        }
+    }
+
+    /**
+     * Copy results as text to clipboard
+     */
+    async copyResultsText() {
+        const feedbackEl = document.getElementById('share-feedback');
+        if (feedbackEl) {
+            feedbackEl.textContent = 'Copying...';
+            feedbackEl.style.color = '#6b7280';
+        }
+
+        const result = await this.share.copyResultsText();
+
+        if (feedbackEl) {
+            if (result.success) {
+                feedbackEl.textContent = '✅ Text copied to clipboard!';
+                feedbackEl.style.color = '#10b981';
+                setTimeout(() => {
+                    if (feedbackEl) feedbackEl.textContent = '';
+                }, 3000);
+            } else {
+                feedbackEl.textContent = '❌ Error: ' + result.error;
+                feedbackEl.style.color = '#ef4444';
+            }
         }
     }
 }
