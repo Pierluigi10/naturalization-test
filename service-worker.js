@@ -1,7 +1,7 @@
 // Service Worker for Einbürgerungstest PWA
 // Provides offline functionality and fast loading
 
-const CACHE_NAME = 'einbuergerungstest-v1';
+const CACHE_NAME = 'einbuergerungstest-v2';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -9,9 +9,17 @@ const urlsToCache = [
   '/src/js/app.js',
   '/src/js/quiz.js',
   '/src/js/storage.js',
+  '/src/js/timer.js',
+  '/src/js/navigation.js',
+  '/src/js/statistics.js',
+  '/src/js/share.js',
+  '/src/js/ui-renderer.js',
   '/src/css/styles.css',
   '/src/css/accessibility.css',
+  '/src/css/animations.css',
   '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
   // External dependencies
   'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js',
   'https://gc.zgo.at/count.js'

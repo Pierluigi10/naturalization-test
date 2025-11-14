@@ -15,8 +15,10 @@ class Timer {
      * Start timer for simulation mode
      */
     start() {
-        // Clear any existing timer
-        this.stop();
+        // If timer is already running, don't restart it
+        if (this.timerInterval) {
+            return;
+        }
 
         // Only start timer for simulation mode
         if (this.app.mode !== 'simulation' || !this.startTime) {
@@ -135,6 +137,16 @@ class Timer {
      */
     toggleVisibility() {
         this.timerVisible = !this.timerVisible;
+        // Update the timer container opacity directly without full render
+        const timerContainer = document.getElementById('timer-display')?.parentElement?.parentElement;
+        if (timerContainer) {
+            timerContainer.style.opacity = this.timerVisible ? '1' : '0.3';
+        }
+        // Update the button icon
+        const toggleButton = document.querySelector('[title*="timer"]');
+        if (toggleButton) {
+            toggleButton.textContent = this.timerVisible ? '👁️' : '👁️‍🗨️';
+        }
     }
 
     /**

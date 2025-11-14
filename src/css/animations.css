@@ -1,5 +1,17 @@
 /* ==================== ANIMATIONS & TRANSITIONS ==================== */
 
+/* Timer optimization - GPU acceleration */
+#timer-display {
+    will-change: contents;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+}
+
+#time-progress-bar {
+    will-change: width, background;
+    transform: translate3d(0, 0, 0);
+}
+
 /* Question card transitions */
 .question-card-container {
     position: relative;

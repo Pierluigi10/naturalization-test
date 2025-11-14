@@ -382,6 +382,46 @@ class UIRenderer {
                          this.app.mode === 'review' ? '🔄 Review Wrong Answers' :
                          this.app.mode === 'topic' ? '🎯 Topic Practice' : '📚 Full Practice';
 
+        // Calculate current timer values for initial display
+        let currentTimeDisplay = '0:00:00 / 1:00:00';
+        let currentProgressPercent = 0;
+        let currentProgressColor = 'linear-gradient(90deg, #667eea, #764ba2)';
+        let currentTimerColor = '#374151';
+        let currentTimerWeight = '600';
+
+        if (this.app.mode === 'simulation' && this.app.timer.startTime) {
+            const elapsed = Date.now() - this.app.timer.startTime;
+            const remaining = 60 * 60 * 1000 - elapsed;
+            const remainingMinutes = remaining / (60 * 1000);
+
+            currentProgressPercent = Math.min((elapsed / (60 * 60 * 1000)) * 100, 100);
+
+            // Set progress bar color
+            if (remaining <= 0) {
+                currentProgressColor = '#ef4444';
+            } else if (remainingMinutes <= 5) {
+                currentProgressColor = '#f97316';
+            } else if (remainingMinutes <= 10) {
+                currentProgressColor = '#f59e0b';
+            }
+
+            // Set timer display and color
+            if (remaining > 0) {
+                currentTimeDisplay = `${this.app.timer.formatTime(elapsed)} / 1:00:00`;
+                if (remainingMinutes <= 5) {
+                    currentTimerColor = '#f97316';
+                    currentTimerWeight = 'bold';
+                } else if (remainingMinutes <= 10) {
+                    currentTimerColor = '#f59e0b';
+                    currentTimerWeight = 'bold';
+                }
+            } else {
+                currentTimeDisplay = `${this.app.timer.formatTime(elapsed)} (overtime)`;
+                currentTimerColor = '#ef4444';
+                currentTimerWeight = 'bold';
+            }
+        }
+
         return `
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
@@ -411,11 +451,11 @@ class UIRenderer {
                 ${this.app.mode === 'simulation' && this.app.timer.startTime ? `
                 <div style="margin-bottom: 12px; ${this.app.timer.timerVisible ? '' : 'opacity: 0.3;'}">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <div id="timer-display" style="font-size: 16px; font-weight: 600; color: #374151;">
-                            ⏱️ 0:00:00 / 1:00:00
+                        <div id="timer-display" style="font-size: 16px; font-weight: ${currentTimerWeight}; color: ${currentTimerColor};">
+                            ⏱️ ${currentTimeDisplay}
                         </div>
                         <button
-                            onclick="app.timer.toggleVisibility(); app.render();"
+                            onclick="app.timer.toggleVisibility();"
                             style="background: transparent; border: none; cursor: pointer; font-size: 14px; color: #6b7280; padding: 4px 8px;"
                             title="${this.app.timer.timerVisible ? 'Hide timer' : 'Show timer'}"
                         >
@@ -423,7 +463,7 @@ class UIRenderer {
                         </button>
                     </div>
                     <div style="width: 100%; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden;">
-                        <div id="time-progress-bar" style="height: 100%; width: 0%; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s, background 0.3s;"></div>
+                        <div id="time-progress-bar" style="height: 100%; width: ${currentProgressPercent}%; background: ${currentProgressColor}; transition: width 0.3s, background 0.3s;"></div>
                     </div>
                 </div>
                 ` : ''}
@@ -736,6 +776,73 @@ class UIRenderer {
     }
 
     /**
+     * Update only the answer options without re-rendering the entire quiz view
+     * This prevents timer flickering in simulation mode
+     */
+    updateAnswerOptions() {
+        const question = this.app.questions[this.app.currentIndex];
+        const optionElements = document.querySelectorAll('.option');
+
+        if (optionElements.length !== question.options.length) {
+            // If number of options changed, fallback to full render
+            this.render();
+            return;
+        }
+
+        // Use requestAnimationFrame to avoid blocking the main thread
+        requestAnimationFrame(() => {
+            // Update each option element directly (no innerHTML)
+            optionElements.forEach((optionEl, idx) => {
+                const isSelected = this.app.selectedAnswer === idx;
+                const isCorrect = idx === question.correct;
+                const showCorrect = this.app.showResult && isCorrect;
+                const showWrong = this.app.showResult && isSelected && !isCorrect;
+
+                // Update classes
+                optionEl.className = 'option';
+                if (showCorrect) optionEl.classList.add('correct');
+                else if (showWrong) optionEl.classList.add('wrong');
+                else if (isSelected) optionEl.classList.add('selected');
+                if (this.app.showResult) optionEl.classList.add('disabled');
+
+                // Update onclick
+                if (this.app.showResult) {
+                    optionEl.onclick = null;
+                    optionEl.style.cursor = 'not-allowed';
+                }
+
+                // Update aria attributes
+                optionEl.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+                optionEl.setAttribute('tabindex', this.app.showResult ? '-1' : '0');
+
+                // Add/remove answer icons
+                let existingIcon = optionEl.querySelector('.answer-icon');
+                if (showCorrect) {
+                    if (!existingIcon) {
+                        const icon = document.createElement('span');
+                        icon.className = 'answer-icon';
+                        icon.style.cssText = 'color: #10b981; font-weight: bold; font-size: 20px;';
+                        icon.setAttribute('aria-hidden', 'true');
+                        icon.textContent = '✓';
+                        optionEl.appendChild(icon);
+                    }
+                } else if (showWrong) {
+                    if (!existingIcon) {
+                        const icon = document.createElement('span');
+                        icon.className = 'answer-icon';
+                        icon.style.cssText = 'color: #ef4444; font-weight: bold; font-size: 20px;';
+                        icon.setAttribute('aria-hidden', 'true');
+                        icon.textContent = '✗';
+                        optionEl.appendChild(icon);
+                    }
+                } else if (existingIcon) {
+                    existingIcon.remove();
+                }
+            });
+        });
+    }
+
+    /**
      * Attach event listeners after rendering
      */
     attachEventListeners() {
@@ -749,6 +856,12 @@ class UIRenderer {
         if (questionCard && this.app.view === 'quiz') {
             questionCard.addEventListener('touchstart', (e) => this.app.navigation.handleTouchStart(e), { passive: true });
             questionCard.addEventListener('touchend', (e) => this.app.navigation.handleTouchEnd(e), { passive: true });
+        }
+
+        // Start timer if not running (only after full render)
+        if (this.app.view === 'quiz' && this.app.mode === 'simulation' && this.app.timer.startTime && !this.app.timer.timerInterval) {
+            this.app.timer.elapsedTime = Date.now() - this.app.timer.startTime;
+            this.app.timer.start();
         }
     }
 }

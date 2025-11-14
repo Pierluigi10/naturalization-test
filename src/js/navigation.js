@@ -133,7 +133,9 @@ class Navigation {
         };
 
         Storage.saveAnswers(this.app.answers);
-        this.app.render();
+
+        // Just update the answer options directly without full render
+        this.app.renderer.updateAnswerOptions();
 
         // Auto-advance to next question after answering (only in simulation mode)
         if (this.app.mode === 'simulation') {
@@ -149,23 +151,12 @@ class Navigation {
     next() {
         this.app.isNavigatingBack = false; // Reset navigation flag when moving forward
         if (this.app.currentIndex < this.app.questions.length - 1) {
-            // Add slide-out animation
-            const questionCard = document.getElementById('question-card');
-            if (questionCard) {
-                questionCard.classList.add('slide-out');
-                setTimeout(() => {
-                    this.app.currentIndex++;
-                    this.app.selectedAnswer = null;
-                    this.app.showResult = false;
-                    this.app.render();
-                }, 300); // Match animation duration
-            } else {
-                // Fallback if card not found
-                this.app.currentIndex++;
-                this.app.selectedAnswer = null;
-                this.app.showResult = false;
-                this.app.render();
-            }
+            this.app.currentIndex++;
+            this.app.selectedAnswer = null;
+            this.app.showResult = false;
+
+            // Just render normally - timer lives outside and won't be touched
+            this.app.render();
         } else {
             // Auto-transition to stats view when all questions answered
             this.app.view = 'stats';
@@ -178,36 +169,19 @@ class Navigation {
      */
     previous() {
         if (this.app.currentIndex > 0) {
-            // Add slide-out animation
-            const questionCard = document.getElementById('question-card');
-            if (questionCard) {
-                questionCard.classList.add('slide-out');
-                setTimeout(() => {
-                    this.app.currentIndex--;
-                    this.app.isNavigatingBack = true; // Set flag when navigating back
-                    // Check if this question was already answered
-                    if (this.app.answers[this.app.currentIndex]) {
-                        this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
-                        this.app.showResult = true;
-                    } else {
-                        this.app.selectedAnswer = null;
-                        this.app.showResult = false;
-                    }
-                    this.app.render();
-                }, 300); // Match animation duration
+            this.app.currentIndex--;
+            this.app.isNavigatingBack = true; // Set flag when navigating back
+            // Check if this question was already answered
+            if (this.app.answers[this.app.currentIndex]) {
+                this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
+                this.app.showResult = true;
             } else {
-                // Fallback if card not found
-                this.app.currentIndex--;
-                this.app.isNavigatingBack = true;
-                if (this.app.answers[this.app.currentIndex]) {
-                    this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
-                    this.app.showResult = true;
-                } else {
-                    this.app.selectedAnswer = null;
-                    this.app.showResult = false;
-                }
-                this.app.render();
+                this.app.selectedAnswer = null;
+                this.app.showResult = false;
             }
+
+            // Just render normally - timer lives outside and won't be touched
+            this.app.render();
         }
     }
 
