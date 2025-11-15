@@ -112,17 +112,17 @@ class UIRenderer {
         if (!question) return;
 
         const questionId = question.id;
-        const userAnswer = this.app.answers[questionId];
-        const correctAnswer = question.correctAnswer;
-        const showResult = this.app.showResult || userAnswer !== undefined;
+        const userAnswer = this.app.answers[this.app.currentIndex];
+        const correctAnswer = question.correct;
+        const showResult = this.app.showResult;
 
         // Update each answer button individually (faster than full innerHTML)
         ['A', 'B', 'C', 'D'].forEach((option, index) => {
             const button = answersContainer.querySelector(`[data-answer="${option}"]`);
             if (!button) return;
 
-            const isUserAnswer = userAnswer === option;
-            const isCorrect = correctAnswer === option;
+            const isUserAnswer = userAnswer && userAnswer.selected === index;
+            const isCorrect = correctAnswer === index;
 
             // Update classes without re-rendering
             button.className = 'answer-option';

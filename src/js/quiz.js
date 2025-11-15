@@ -280,6 +280,8 @@ class QuizApp {
 
         this.currentIndex = 0;
         this.answers = {};
+        this.selectedAnswer = null;
+        this.showResult = false;
         Storage.saveAnswers(this.answers);
         this.view = 'quiz';
         this.render();
@@ -303,6 +305,8 @@ class QuizApp {
         this.mode = 'topic';
         this.currentIndex = 0;
         this.answers = {};
+        this.selectedAnswer = null;
+        this.showResult = false;
         this.timer.startTime = null;
         this.timer.stop();
 
@@ -330,6 +334,8 @@ class QuizApp {
         this.mode = 'topic';
         this.currentIndex = 0;
         this.answers = {};
+        this.selectedAnswer = null;
+        this.showResult = false;
         this.timer.startTime = null;
         this.timer.stop();
 

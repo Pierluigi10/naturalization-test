@@ -143,6 +143,18 @@ class Navigation {
                 this.next();
             }, 1000);
         }
+
+        // Check if this is the last question and all are answered
+        const isLastQuestion = this.app.currentIndex === this.app.questions.length - 1;
+        const allAnswered = Object.keys(this.app.answers).length === this.app.questions.length;
+
+        // Auto-transition to stats view when last question is answered (for all modes except simulation which already auto-advances)
+        if (isLastQuestion && allAnswered && this.app.mode !== 'simulation') {
+            setTimeout(() => {
+                this.app.view = 'stats';
+                this.app.render();
+            }, 1500);
+        }
     }
 
     /**
