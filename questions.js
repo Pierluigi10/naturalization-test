@@ -773,7 +773,8 @@ const QUESTIONS_DATA = [
       "Sie/Er wählt die Ministerinnen/Minister aus.",
       "Sie/Er schlägt die Kanzlerin/den Kanzler zur Wahl vor."
     ],
-    "correct": 3
+    "correct": 3,
+    "image": "images/q_70.png"
   },
   {
     "id": 71,
@@ -2298,14 +2299,14 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 209,
-    "question": "Welches war das Wappen der Deutschen Demokratischen Republik? Bild 1 Bild 2 Bild 3 Bild 4",
+    "question": "Welches war das Wappen der Deutschen Demokratischen Republik?",
     "options": [
       "Bild 1",
       "Bild 2",
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 4,
+    "correct": 3,
     "image": "images/q_209.png"
   },
   {
@@ -2594,7 +2595,8 @@ const QUESTIONS_DATA = [
       "Frieden und Sicherheit in den Ländern der EU",
       "einheitliche Feiertage in den Ländern der EU"
     ],
-    "correct": 2
+    "correct": 2,
+    "image": "images/q_235.png"
   },
   {
     "id": 236,
