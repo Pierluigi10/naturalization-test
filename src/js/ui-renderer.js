@@ -758,9 +758,21 @@ class UIRenderer {
         return `
             <div class="card">
                 <div style="display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+                    ${stats.answered < stats.total ? `
                     <button class="btn-stats" onclick="app.view = 'quiz'; app.render();">
                         ← Back to Quiz
                     </button>
+                    ` : ''}
+                    ${this.app.mode === 'topic' ? `
+                    <button class="btn-stats" onclick="app.view = 'topicSelection'; app.render();">
+                        🎯 Back to Topic Selection
+                    </button>
+                    ` : ''}
+                    ${this.app.mode === 'full' ? `
+                    <button class="btn-stats" onclick="app.startQuiz('full');">
+                        📚 Restart All Questions
+                    </button>
+                    ` : ''}
                     <button class="btn-stats" onclick="app.returnToHome();" style="border-color: #6b7280; color: #6b7280;">
                         🏠 Home
                     </button>
