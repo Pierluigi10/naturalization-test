@@ -137,19 +137,16 @@ class Navigation {
         // Render to update UI (event listeners will be reattached automatically)
         this.app.render();
 
+        // Check if all questions are answered
+        const allAnswered = Object.keys(this.app.answers).length === this.app.questions.length;
+
         // Auto-advance to next question after answering (only in simulation mode)
         if (this.app.mode === 'simulation') {
             setTimeout(() => {
                 this.next();
             }, 1000);
-        }
-
-        // Check if this is the last question and all are answered
-        const isLastQuestion = this.app.currentIndex === this.app.questions.length - 1;
-        const allAnswered = Object.keys(this.app.answers).length === this.app.questions.length;
-
-        // Auto-transition to stats view when last question is answered (for all modes except simulation which already auto-advances)
-        if (isLastQuestion && allAnswered && this.app.mode !== 'simulation') {
+        } else if (allAnswered) {
+            // Auto-transition to stats view when all questions are answered (for non-simulation modes)
             setTimeout(() => {
                 this.app.view = 'stats';
                 this.app.render();
@@ -164,8 +161,15 @@ class Navigation {
         this.app.isNavigatingBack = false; // Reset navigation flag when moving forward
         if (this.app.currentIndex < this.app.questions.length - 1) {
             this.app.currentIndex++;
-            this.app.selectedAnswer = null;
-            this.app.showResult = false;
+
+            // Check if this question was already answered
+            if (this.app.answers[this.app.currentIndex]) {
+                this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
+                this.app.showResult = true;
+            } else {
+                this.app.selectedAnswer = null;
+                this.app.showResult = false;
+            }
 
             // Force FULL HTML re-render by resetting view cache
             this.app.renderer.lastView = null;

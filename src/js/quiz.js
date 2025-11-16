@@ -365,6 +365,8 @@ class QuizApp {
         this.questions = wrongQuestions;
         this.currentIndex = 0;
         this.answers = {};
+        this.selectedAnswer = null;
+        this.showResult = false;
 
         // No timer for review mode
         this.timer.startTime = null;
