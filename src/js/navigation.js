@@ -15,6 +15,12 @@ class Navigation {
             // Only handle keyboard in quiz view
             if (this.app.view !== 'quiz') return;
 
+            // Ignore keyboard shortcuts if user is typing in an input field
+            const target = e.target;
+            if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+                return;
+            }
+
             switch(e.key) {
                 case 'ArrowLeft':
                     e.preventDefault();
@@ -224,34 +230,22 @@ class Navigation {
 
         const index = this.app.questions.findIndex(q => q.id === id);
         if (index !== -1) {
-            // Add slide-out animation
-            const questionCard = document.getElementById('question-card');
-            if (questionCard) {
-                questionCard.classList.add('slide-out');
-                setTimeout(() => {
-                    this.app.currentIndex = index;
-                    // Check if this question was already answered
-                    if (this.app.answers[this.app.currentIndex]) {
-                        this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
-                        this.app.showResult = true;
-                    } else {
-                        this.app.selectedAnswer = null;
-                        this.app.showResult = false;
-                    }
-                    this.app.render();
-                }, 300); // Match animation duration
+            // Update to the new question index
+            this.app.currentIndex = index;
+
+            // Check if this question was already answered
+            if (this.app.answers[this.app.currentIndex]) {
+                this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
+                this.app.showResult = true;
             } else {
-                // Fallback if card not found
-                this.app.currentIndex = index;
-                if (this.app.answers[this.app.currentIndex]) {
-                    this.app.selectedAnswer = this.app.answers[this.app.currentIndex].selected;
-                    this.app.showResult = true;
-                } else {
-                    this.app.selectedAnswer = null;
-                    this.app.showResult = false;
-                }
-                this.app.render();
+                this.app.selectedAnswer = null;
+                this.app.showResult = false;
             }
+
+            // Force FULL HTML re-render by resetting view cache
+            this.app.renderer.lastView = null;
+            this.app.renderer.lastQuestionIndex = null;
+            this.app.render();
         } else {
             alert(`Question ${id} not found in this mode.`);
         }

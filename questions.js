@@ -2488,7 +2488,7 @@ const QUESTIONS_DATA = [
   },
   {
     "id": 226,
-    "question": "Welche ist die Flagge der Europäischen Union? Bild 1 Bild 2 Bild 3 Bild 4",
+    "question": "Welche ist die Flagge der Europäischen Union?",
     "options": [
       "Bild 1",
       "Bild 2",
