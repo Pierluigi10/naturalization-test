@@ -1,7 +1,7 @@
 // Service Worker for Einbürgerungstest PWA
 // Provides offline functionality and fast loading
 
-const CACHE_NAME = 'einbuergerungstest-v3';
+const CACHE_NAME = 'einbuergerungstest-v4';
 const MAX_CACHE_SIZE = 50 * 1024 * 1024; // 50MB max cache size
 const MAX_CACHE_AGE = 30 * 24 * 60 * 60 * 1000; // 30 days
 
@@ -159,6 +159,21 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // For analytics scripts (GoatCounter), fail fast if blocked by browser
+  if (event.request.url.startsWith('https://gc.zgo.at')) {
+    event.respondWith(
+      fetch(event.request, {
+        mode: 'no-cors',
+        cache: 'no-store'
+      }).catch(() => {
+        // Silently fail for analytics - don't block the app
+        console.log('[Service Worker] Analytics blocked, continuing without tracking');
+        return new Response('', { status: 200 });
+      })
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
@@ -205,8 +220,9 @@ self.addEventListener('fetch', (event) => {
 
           return response;
         }).catch((error) => {
-          console.log('[Service Worker] Fetch failed, serving offline page:', error);
-          // You could return a custom offline page here
+          console.log('[Service Worker] Fetch failed:', error);
+          // For critical app resources, return 503
+          // This should rarely happen since we cache everything
           return new Response('Offline - Please check your connection', {
             status: 503,
             statusText: 'Service Unavailable',

@@ -148,9 +148,19 @@ class Navigation {
 
         // Auto-advance to next question after answering (only in simulation mode)
         if (this.app.mode === 'simulation') {
-            setTimeout(() => {
-                this.next();
-            }, 1000);
+            // Use requestAnimationFrame for more reliable timing in browsers like Brave
+            const startTime = performance.now();
+            const autoAdvance = (currentTime) => {
+                if (currentTime - startTime >= 1000) {
+                    // Double-check we're still in the right state before advancing
+                    if (this.app.mode === 'simulation' && this.app.showResult) {
+                        this.next();
+                    }
+                } else {
+                    requestAnimationFrame(autoAdvance);
+                }
+            };
+            requestAnimationFrame(autoAdvance);
         } else if (allAnswered) {
             // Auto-transition to stats view when all questions are answered (for non-simulation modes)
             setTimeout(() => {
