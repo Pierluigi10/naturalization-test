@@ -5,6 +5,10 @@ class UIRenderer {
         this.app = app;
         this.lastView = null;
         this.lastQuestionIndex = null;
+        // Store references to event handlers to prevent duplicates
+        this.touchStartHandler = null;
+        this.touchEndHandler = null;
+        this.currentQuestionCard = null;
     }
 
     /**
@@ -1050,8 +1054,22 @@ class UIRenderer {
         // Attach touch event listeners for swipe support
         const questionCard = document.getElementById('question-card');
         if (questionCard && this.app.view === 'quiz') {
-            questionCard.addEventListener('touchstart', (e) => this.app.navigation.handleTouchStart(e), { passive: true });
-            questionCard.addEventListener('touchend', (e) => this.app.navigation.handleTouchEnd(e), { passive: true });
+            // Remove old event listeners if they exist
+            if (this.currentQuestionCard && this.touchStartHandler && this.touchEndHandler) {
+                this.currentQuestionCard.removeEventListener('touchstart', this.touchStartHandler);
+                this.currentQuestionCard.removeEventListener('touchend', this.touchEndHandler);
+            }
+
+            // Create new event handlers
+            this.touchStartHandler = (e) => this.app.navigation.handleTouchStart(e);
+            this.touchEndHandler = (e) => this.app.navigation.handleTouchEnd(e);
+
+            // Add new event listeners
+            questionCard.addEventListener('touchstart', this.touchStartHandler, { passive: true });
+            questionCard.addEventListener('touchend', this.touchEndHandler, { passive: true });
+
+            // Store reference to current question card
+            this.currentQuestionCard = questionCard;
         }
 
         // Start timer if not running (only after full render)

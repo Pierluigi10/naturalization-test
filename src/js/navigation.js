@@ -5,6 +5,8 @@ class Navigation {
         this.app = app;
         this.touchStartX = 0;
         this.touchEndX = 0;
+        this.touchStartY = 0;
+        this.touchEndY = 0;
     }
 
     /**
@@ -91,6 +93,7 @@ class Navigation {
      */
     handleTouchStart(e) {
         this.touchStartX = e.changedTouches[0].screenX;
+        this.touchStartY = e.changedTouches[0].screenY;
     }
 
     /**
@@ -99,19 +102,25 @@ class Navigation {
      */
     handleTouchEnd(e) {
         this.touchEndX = e.changedTouches[0].screenX;
+        this.touchEndY = e.changedTouches[0].screenY;
         this.handleSwipe();
     }
 
     /**
      * Handle swipe gesture
+     * Distinguishes between horizontal swipes (navigation) and vertical swipes (scroll)
      */
     handleSwipe() {
         const swipeThreshold = 50; // minimum distance for swipe
-        const diff = this.touchStartX - this.touchEndX;
+        const horizontalDiff = this.touchStartX - this.touchEndX;
+        const verticalDiff = this.touchStartY - this.touchEndY;
 
-        if (Math.abs(diff) < swipeThreshold) return;
+        // Only trigger swipe if horizontal movement is greater than vertical
+        // This prevents triggering navigation during vertical scroll
+        if (Math.abs(horizontalDiff) < swipeThreshold) return;
+        if (Math.abs(verticalDiff) > Math.abs(horizontalDiff)) return; // vertical scroll detected
 
-        if (diff > 0) {
+        if (horizontalDiff > 0) {
             // Swipe left - next question
             this.next();
         } else {

@@ -286,6 +286,13 @@ h1 {
     text-decoration: underline;
 }
 
+/* Enable swipe gestures on question card */
+#question-card {
+    touch-action: pan-y; /* Allow vertical scroll, enable horizontal swipe */
+    user-select: none; /* Prevent text selection during swipe */
+    -webkit-user-select: none;
+}
+
 @media (max-width: 640px) {
     body {
         padding: 12px;
