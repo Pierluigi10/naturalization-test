@@ -3347,7 +3347,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 3,
+    "correct": 2,
     "bundesland": "Sachsen"
   },
   {
