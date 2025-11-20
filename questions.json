@@ -4186,9 +4186,9 @@
       "Ammerland",
       "Altötting",
       "Prignitz",
-      "Main -Taunus -Kreis"
+      "Main-Taunus -Kreis"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 373,
@@ -4200,7 +4200,7 @@
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 374,
@@ -4212,19 +4212,19 @@
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 375,
     "bundesland": "Hessen",
     "question": "Welche Farben hat die Landesflagge von Hessen?",
     "options": [
-      "blau- weiß",
-      "-rot rot-weiß",
-      "schwarz- gold",
-      "grün -weiß"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 376,
@@ -4236,7 +4236,7 @@
       "bei der Verbraucherzentrale",
       "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 377,
@@ -4248,7 +4248,7 @@
       "Frankfurt.",
       "Wiesbaden."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 378,
@@ -4260,7 +4260,7 @@
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_378.png"
   },
   {
@@ -4273,7 +4273,7 @@
       "Bürgermeister/ Bürgermeisterin",
       "Ministerpräsident/ Ministerpräsidentin"
       ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 380,
@@ -4297,7 +4297,7 @@
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_381.png"
   },
   {
@@ -4306,11 +4306,11 @@
     "question": "Welches ist ein Landkreis in Mecklenburg -Vorpommern?",
     "options": [
       "Prignitz",
-      "Mecklenburgische",
+      "Mecklenburgische Seenplatte",
       "Seenplatte",
-      "Vogtlandkreis"
+      "Rhein-Sieg-Kreis"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 383,
@@ -4322,7 +4322,7 @@
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 384,
@@ -4334,19 +4334,19 @@
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 385,
     "bundesland": "Mecklenburg-Vorpommern",
     "question": "Welche Farben hat die Landesflagge von Mecklenburg -Vorpommern?",
     "options": [
-      "schwarz- rot-gold",
-      "blau- weiß",
-      "-gelb -rot",
-      "grün -weiß"
+      "schwarz-rot-gold",
+      "blau-weiß-gelb-rot",
+      "grün-weiß-rot",
+      "schwarz-gelb"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 386,
@@ -4358,7 +4358,7 @@
       "bei der Verbraucherzentrale",
       "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 387,
@@ -4370,7 +4370,7 @@
       "Rostock.",
       "Wismar."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 388,
@@ -4382,7 +4382,7 @@
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_388.png"
   },
   {
@@ -4395,7 +4395,7 @@
       "Bürgermeister/ Bürgermeisterin",
       "Ministerpräsident/ Ministerpräsidentin"
       ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 390,
@@ -4419,7 +4419,7 @@
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_391.png"
   },
   {
@@ -4428,8 +4428,8 @@
     "question": "Welches ist ein Landkreis in Niedersachsen?",
     "options": [
       "Ammerland",
-      "Rhein-",
-      "Sieg -Kreis",
+      "Rhein-Sieg-Kreis",
+      "Vogtlandkreis",
       "Nordfriesland"
     ],
     "correct": 0
@@ -4444,7 +4444,7 @@
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 394,
@@ -4456,19 +4456,19 @@
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 395,
     "bundesland": "Niedersachsen",
     "question": "Welche Farben hat die Landesflagge von Niedersachsen?",
     "options": [
-      "weiß -blau",
-      "schwarz- rot-gold",
-      "schwarz- gelb",
-      "blau- weiß"
+      "weiß-blau",
+      "schwarz-rot-gold",
+      "schwarz-gelb",
+      "blau-weiß-rot"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 396,
@@ -4480,7 +4480,7 @@
       "bei der Verbraucherzentrale",
       "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 397,
@@ -4517,7 +4517,7 @@
       "Bürgermeister/ Bürgermeisterin",
       "Ministerpräsident/ Ministerpräsidentin"
       ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 400,
@@ -4585,10 +4585,10 @@
     "bundesland": "Nordrhein-Westfalen",
     "question": "Welche Farben hat die Landesflagge von Nordrhein- Westfalen?",
     "options": [
-      "rot-weiß grün",
-      "-weiß -rot",
-      "schwarz- gold",
-      "blau- weiß"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
     "correct": 0
   },
@@ -4707,10 +4707,10 @@
     "bundesland": "Rheinland-Pfalz",
     "question": "Welche Farben hat die Landesflagge von R heinland- Pfalz?",
     "options": [
-      "weiß -rot",
-      "schwarz- rot-gold",
-      "schwarz- gelb",
-      "grün -weiß"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
     "correct": 0
   },
@@ -4951,10 +4951,10 @@
     "bundesland": "Sachsen-Anhalt",
     "question": "Welche Farben hat die Landesflagge von Sachsen- Anhalt?",
     "options": [
-      "blau- weiß",
-      "-rot gelb",
-      "-schwarz grün",
-      "-weiß -rot"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
     "correct": 0
   },
@@ -5073,10 +5073,10 @@
     "bundesland": "Schleswig-Holstein",
     "question": "Welche Farben hat die Landesflagge von Schleswig -Holstein?",
     "options": [
-      "weiß -blau",
-      "blau- weiß",
-      "-rot weiß",
-      "-rot grün"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
     "correct": 0
   },
@@ -5195,10 +5195,10 @@
     "bundesland": "Thüringen",
     "question": "Welche Farben hat die Landesflagge von Thüringen?",
     "options": [
-      "blau- weiß",
-      "-rot weiß",
-      "-rot grün",
-      "-weiß -rot"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
     "correct": 0
   },
