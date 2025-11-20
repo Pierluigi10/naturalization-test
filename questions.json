@@ -3451,12 +3451,12 @@
     "bundesland": "Baden-Württemberg",
     "question": "Welches ist ein Landkreis in Baden- Württemberg?",
     "options": [
-      "Mecklenburgische",
-      "Seenplatte",
-      "Neckar -Odenwald-",
-      "Kreis"
+      "Mecklenburgische Seenplatte",
+      "Neckar-Odenwald-Kreis",
+      "Prignitz",
+      "Nordfriesland"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 313,
@@ -3468,7 +3468,7 @@
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 314,
@@ -3480,31 +3480,31 @@
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 315,
     "bundesland": "Baden-Württemberg",
     "question": "Welche Farben hat die Landesflagge von Baden -Württemberg?",
     "options": [
-      "blau- weiß",
-      "-rot schwarz-",
-      "gold weiß",
-      "-blau grün"
+      "blau-weiß-rot",
+      "schwarz-gold",
+      "weiß-blau",
+      "grün-weiß-rot"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 316,
     "bundesland": "Baden-Württemberg",
     "question": "Wo können Sie sich in Baden- Württemberg über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der",
-      "Verbraucherzentrale bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Verbraucherzentrale",
+      "bei der Landeszentrale für politische Bildung",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 317,
@@ -3516,7 +3516,7 @@
       "Karlsruhe.",
       "Mannheim."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 318,
@@ -3536,36 +3536,36 @@
     "bundesland": "Baden-Württemberg",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Baden- Württemberg?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
-    ],
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
+      ],
     "correct": 0
   },
   {
     "id": 320,
     "bundesland": "Baden-Württemberg",
-    "question": "Welche Minister in/ welchen Minister hat Baden -Württemberg nicht ?",
+    "question": "Welche Minister in/ welchen Minister hat Baden -Württemberg nicht?",
     "options": [
-      "Finanzministerin /Finanzminister",
-      "Justizministerin /Justizminister",
+      "Finanzministerin/ Finanzminister",
+      "Justizministerin / Justizminister",
       "Innenministerin/Innenminister",
       "Außenministerin/Außenminister"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 321,
     "bundesland": "Bayern",
-    "question": "Welches Wappen gehört zum Freist aat Bayern?",
+    "question": "Welches Wappen gehört zum Freistaat Bayern?",
     "options": [
       "Bild 1",
       "Bild 2",
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 1,
     "image": "images/q_321.png"
   },
   {
@@ -3574,11 +3574,11 @@
     "question": "Welches ist ein Landkreis in Bayern?",
     "options": [
       "Prignitz",
-      "Rhein-",
-      "Sieg -Kreis",
-      "Nordfriesland"
+      "Rhein-Sieg-Kreis",
+      "Nordfriesland",
+      "Altötting"     
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 323,
@@ -3590,7 +3590,7 @@
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 324,
@@ -3602,31 +3602,31 @@
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 325,
     "bundesland": "Bayern",
     "question": "Welche Farben hat die Landesflagge von Bayern?",
     "options": [
-      "blau- weiß",
-      "-rot weiß",
-      "-blau grün",
-      "-weiß -rot"
+      "blau-weiß-rot",
+      "weiß-blau",
+      "grün-weiß-rot",
+      "schwarz-gelb"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 326,
     "bundesland": "Bayern",
     "question": "Wo können Sie sich in Bayern über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der",
-      "Landeszentrale für politische"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 327,
@@ -3638,7 +3638,7 @@
       "Nürnberg.",
       "München."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 328,
@@ -3650,7 +3650,7 @@
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_328.png"
   },
   {
@@ -3658,12 +3658,12 @@
     "bundesland": "Bayern",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Bayern?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 330,
@@ -3675,7 +3675,7 @@
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 331,
@@ -3687,7 +3687,7 @@
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_331.png"
   },
   {
@@ -3698,9 +3698,9 @@
       "Altona",
       "Prignitz",
       "Pankow",
-      "Mecklenburgische"
+      "Mecklenburgische Seenplatte"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 333,
@@ -3712,7 +3712,7 @@
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 334,
@@ -3724,31 +3724,31 @@
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 335,
     "bundesland": "Berlin",
     "question": "Welche Farben hat die Landesflagge von Berlin?",
     "options": [
-      "blau- weiß",
-      "-rot weiß",
-      "-rot grün",
-      "-weiß -rot"
+     "blau-weiß-rot",
+      "weiß-rot",
+      "grün-weiß-rot",
+      "schwarz-gelb"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 336,
     "bundesland": "Berlin",
     "question": "Wo können Sie sich in Berlin über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei den",
-      "Kirchen bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei den Kirchen",
+      "bei der Verbraucherzentrale",
+      "bei der Landeszentrale für politische Bildung"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 337,
@@ -3757,11 +3757,10 @@
     "options": [
       "Berlin",
       "Saarland",
-      "Brandenb urg",
+      "Brandenburg",
       "Hessen"
     ],
-    "correct": 0,
-    "image": "images/q_337.png"
+    "correct": 0
   },
   {
     "id": 338,
@@ -3773,7 +3772,7 @@
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_338.png"
   },
   {
@@ -3783,10 +3782,10 @@
     "options": [
       "Ministerpräsidentin/Ministerpräsident",
       "Oberbürgermeisterin/Oberbürgermeister",
-      "Präsidentin/Präsident des",
-      "Senates"
+      "Präsidentin/Präsident des Senates",
+      "Regierender Bürgermeister/ Regierende Bürgermeisterin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 340,
@@ -3795,10 +3794,10 @@
     "options": [
       "Finanzsenatorin/Finanzsenator",
       "Innensenatorin/Innensenator",
-      "Senatorin/Senator für",
-      "Außenbeziehungen"
+      "Senatorin/Senator für Außenbeziehungen",
+      "Justizsenator / Justizsenatorin"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 341,
@@ -3819,9 +3818,9 @@
     "question": "Welches ist ein Landkreis in Brandenburg?",
     "options": [
       "Prignitz",
-      "Rhein-",
-      "Sieg -Kreis",
-      "Vogtlandkreis"
+      "Rhein-Sieg -Kreis",
+      "Vogtlandkreis",
+      "Amberg-Sulzbach"
     ],
     "correct": 0
   },
@@ -3835,7 +3834,7 @@
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 344,
@@ -3847,31 +3846,31 @@
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 345,
     "bundesland": "Brandenburg",
     "question": "Welche Farben hat die Landesflagge von Brandenburg?",
     "options": [
-      "blau- weiß",
-      "-rot rot-weiß",
-      "grün -weiß",
-      "-rot schwarz-"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gelb"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 346,
     "bundesland": "Brandenburg",
     "question": "Wo können Sie sich in Brandenburg über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der"
-    ],
-    "correct": 0
+      "bei den Kirchen",
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale"
+      ],
+    "correct": 2
   },
   {
     "id": 347,
@@ -3895,7 +3894,7 @@
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_348.png"
   },
   {
@@ -3903,24 +3902,24 @@
     "bundesland": "Brandenburg",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Brandenburg?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
-    ],
-    "correct": 0
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
+      ],
+    "correct": 3
   },
   {
     "id": 350,
     "bundesland": "Brandenburg",
-    "question": "Welche Minister in/ welchen Minister hat Brandenburg nicht ?",
+    "question": "Welche Minister in/ welchen Minister hat Brandenburg nicht?",
     "options": [
       "Justizministerin /Justizminister",
       "Außenministerin/Außenminister",
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 351,
@@ -3932,7 +3931,7 @@
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_351.png"
   },
   {
@@ -3945,7 +3944,7 @@
       "Pankow",
       "Babelsberg"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 353,
@@ -3957,7 +3956,7 @@
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 354,
@@ -3969,31 +3968,31 @@
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 355,
     "bundesland": "Bremen",
     "question": "Welche Farben hat die Landesflagge von Bremen?",
     "options": [
-      "blau- weiß",
-      "-rot rot-weiß",
-      "grün -weiß",
-      "-rot schwarz-"
+      "blau- weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 356,
     "bundesland": "Bremen",
     "question": "Wo können Sie sich in Bremen über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der",
-      "Landeszentrale für politische"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei den Kirchen",
+      "bei der Verbraucherzentrale"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 357,
@@ -4005,7 +4004,7 @@
       "Frankfurt",
       "Erfurt"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 358,
@@ -4018,29 +4017,29 @@
       "4"
     ],
     "correct": 0,
-    "image": "images/q_358.png"
+    "image": "images/q_338.png"
   },
   {
     "id": 359,
     "bundesland": "Bremen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef des Stadtstaates Bremen?",
     "options": [
-      "Ministerpräsidentin/Ministerpräsident",
-      "Erste",
-      "Bürgermeisterin/Erster",
-      "Bürgermeister"
-    ],
-    "correct": 0
+      "Ministerpräsident/ Ministerpräsidentin",
+      "Erster Bürgermeister/ Erste Bürgermeisterin",
+      "Präsident/ Präsidentin des Senats",
+      "Regierender Bürgermeister/ Regierende Bürgermeisterin"
+      ],
+    "correct": 2
   },
   {
     "id": 360,
     "bundesland": "Bremen",
-    "question": "Welche Senator in/ welchen Senator hat Bremen nicht ?",
+    "question": "Welche Senator in/ welchen Senator hat Bremen nicht?",
     "options": [
-      "Senatorin/Senator für",
-      "Außenbeziehungen",
+      "Senatorin/Senator für Außenbeziehungen",
       "Finanzsenatorin/Finanzsenator",
-      "Justizsenatorin/Justizsenator"
+      "Justizsenatorin/Justizsenator",
+      "Innensenator / Innensenatorin"
     ],
     "correct": 0
   },
@@ -4054,7 +4053,7 @@
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 1,
     "image": "images/q_361.png"
   },
   {
@@ -4079,7 +4078,7 @@
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 364,
@@ -4091,31 +4090,31 @@
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 365,
     "bundesland": "Hamburg",
     "question": "Welche Farben hat die Landesflagge von Hamburg?",
     "options": [
-      "blau- weiß",
-      "-rot weiß",
-      "-rot grün",
-      "-weiß -rot"
+      "blau- weiß-rot",
+      "weiß-rot",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 366,
     "bundesland": "Hamburg",
     "question": "Wo können Sie sich in Hamburg über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der",
-      "Verbraucherzentrale bei den"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 367,
@@ -4124,11 +4123,10 @@
     "options": [
       "Hamburg",
       "Sachsen",
-      "Bayer",
-      "n"
+      "Bayern",
+      "Thüringen"
     ],
-    "correct": 0,
-    "image": "images/q_367.png"
+    "correct": 0
   },
   {
     "id": 368,
@@ -4140,20 +4138,20 @@
       "3",
       "4"
     ],
-    "correct": 0,
-    "image": "images/q_368.png"
+    "correct": 2,
+    "image": "images/q_338.png"
   },
   {
     "id": 369,
     "bundesland": "Hamburg",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef des Stadtstaates Hamburg?",
     "options": [
-      "Ministerpräsidentin/Ministerpräsident",
-      "Erste",
-      "Bürgermeisterin/Erster",
-      "Bürgermeister"
-    ],
-    "correct": 0
+      "Regierender Senator / Regierende Senatorin",
+      "Oberbürgermeister / Oberbürgermeisterin",
+      "Erster Bürgermeister / Erste Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
+      ],
+    "correct": 2
   },
   {
     "id": 370,
@@ -4161,11 +4159,11 @@
     "question": "Welche Senator in/ welchen Senator hat Hamburg nicht ?",
     "options": [
       "Justizsenatorin/Justizsenator",
-      "Senatorin/Senator für",
-      "Außenbeziehungen",
-      "Finanzsenatorin/Finanzsenator"
+      "Senatorin/Senator für Außenbeziehungen",
+      "Finanzsenatorin/Finanzsenator",
+      "Innensenator / Innensenatorin"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 371,
@@ -4233,10 +4231,10 @@
     "bundesland": "Hessen",
     "question": "Wo können Sie sich in Hessen über politische Themen informieren?",
     "options": [
-      "bei der",
-      "Landeszentrale für politische",
-      "Bildung bei der",
-      "Verbraucherzentrale beim"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
     "correct": 0
   },
@@ -4270,11 +4268,11 @@
     "bundesland": "Hessen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Hessen?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
-    ],
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
+      ],
     "correct": 0
   },
   {
@@ -4287,7 +4285,7 @@
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 381,
@@ -4355,10 +4353,10 @@
     "bundesland": "Mecklenburg-Vorpommern",
     "question": "Wo können Sie sich in Mecklenburg -Vorpommern über politische Themen informieren?",
     "options": [
-      "bei der",
-      "Landeszentrale für politische",
-      "Bildung bei den",
-      "Kirchen beim"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
     "correct": 0
   },
@@ -4392,11 +4390,11 @@
     "bundesland": "Mecklenburg-Vorpommern",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Mecklenburg -Vorpommern?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
-    ],
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
+      ],
     "correct": 0
   },
   {
@@ -4409,7 +4407,7 @@
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 391,
@@ -4477,10 +4475,10 @@
     "bundesland": "Niedersachsen",
     "question": "Wo können Sie sich in Niedersachsen über politische Themen informieren?",
     "options": [
-      "bei der",
-      "Landeszentrale für politische",
-      "Bildung beim",
-      "Ordnungsamt der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
     "correct": 0
   },
@@ -4514,11 +4512,11 @@
     "bundesland": "Niedersachsen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Niedersachsen?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
-    ],
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
+      ],
     "correct": 0
   },
   {
@@ -4531,7 +4529,7 @@
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 401,
@@ -4599,10 +4597,10 @@
     "bundesland": "Nordrhein-Westfalen",
     "question": "Wo können Sie sich in Nordrhein- Westfalen über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
     "correct": 0
   },
@@ -4636,11 +4634,11 @@
     "bundesland": "Nordrhein-Westfalen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Nordrhein- Westfalen?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
-    ],
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
+      ],
     "correct": 0
   },
   {
@@ -4653,7 +4651,7 @@
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 411,
@@ -4721,10 +4719,10 @@
     "bundesland": "Rheinland-Pfalz",
     "question": "Wo können Sie sich in Rheinland- Pfalz über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen bei der",
-      "Verbraucherzentrale beim",
-      "Ordnungsamt der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
     "correct": 0
   },
@@ -4757,12 +4755,12 @@
     "id": 419,
     "bundesland": "Rheinland-Pfalz",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Rheinland- Pfalz?",
-    "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
-    ],
+     "options": [
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
+      ],
     "correct": 0
   },
   {
@@ -4843,10 +4841,10 @@
     "bundesland": "Saarland",
     "question": "Wo können Sie sich im Saarland über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen bei der",
-      "Landeszentrale für politische",
-      "Bildung bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
     "correct": 0
   },
@@ -4880,11 +4878,11 @@
     "bundesland": "Saarland",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef des Saarlandes?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
-    ],
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
+      ],
     "correct": 0
   },
   {
@@ -4965,10 +4963,10 @@
     "bundesland": "Sachsen-Anhalt",
     "question": "Wo können Sie sich in Sachsen- Anhalt über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen bei der",
-      "Landeszentrale für politische",
-      "Bildung beim"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
     "correct": 0
   },
@@ -5002,10 +5000,10 @@
     "bundesland": "Sachsen-Anhalt",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Sachsen- Anhalt?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
     "correct": 0
   },
@@ -5087,10 +5085,10 @@
     "bundesland": "Schleswig-Holstein",
     "question": "Wo können Sie sich in Schleswig -Holstein über politische Themen informieren?",
     "options": [
-      "bei der",
-      "Verbraucherzentrale beim",
-      "Ordnungsamt der",
-      "Gemeinde beim bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
     "correct": 0
   },
@@ -5124,10 +5122,10 @@
     "bundesland": "Schleswig-Holstein",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Schleswig -Holstein?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
     "correct": 0
   },
@@ -5209,10 +5207,10 @@
     "bundesland": "Thüringen",
     "question": "Wo können Sie sich in Thüringen über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen bei der",
-      "Verbraucherzentrale bei der",
-      "Landeszentrale für politische"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
     "correct": 0
   },
@@ -5226,7 +5224,7 @@
       "Gera.",
       "Jena."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 458,
@@ -5246,10 +5244,10 @@
     "bundesland": "Thüringen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Thüringen?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
     "correct": 0
   },
@@ -5263,6 +5261,6 @@
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   }
 ]
