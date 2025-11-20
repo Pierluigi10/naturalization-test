@@ -119,6 +119,9 @@ class QuizApp {
     // ==================== DATA LOADING ====================
 
     loadData() {
+        // Check version and clear old data if needed
+        Storage.checkVersion();
+
         // First try to load from localStorage
         const stored = Storage.loadQuestions();
 
@@ -167,8 +170,26 @@ class QuizApp {
             this.mode = storedMode;
             const storedActiveQuestions = Storage.loadActiveQuestions();
             if (storedActiveQuestions) {
-                this.questions = storedActiveQuestions;
+                // Apply renumbering to loaded questions (for regional questions)
+                let regionalCounter = 0;
+                this.questions = storedActiveQuestions.map(q => {
+                    // If question has originalId, it's already been processed
+                    if (q.originalId) {
+                        return q;
+                    }
+                    // If question ID > 300, renumber it to 301+
+                    if (q.id > 300) {
+                        regionalCounter++;
+                        return {
+                            ...q,
+                            id: 300 + regionalCounter,
+                            originalId: q.id
+                        };
+                    }
+                    return q;
+                });
                 this.view = 'quiz';
+                console.log(`[QuizApp] Loaded ${this.questions.length} questions from storage and renumbered regional questions`);
             }
         }
 
@@ -179,6 +200,9 @@ class QuizApp {
         const storedBundesland = Storage.loadBundesland();
         if (storedBundesland) {
             this.selectedBundesland = storedBundesland;
+            console.log(`[QuizApp] Loaded Bundesland from storage: ${this.selectedBundesland}`);
+        } else {
+            console.log(`[QuizApp] No stored Bundesland, using default: ${this.selectedBundesland}`);
         }
 
         // Load start time for simulation
@@ -210,9 +234,26 @@ class QuizApp {
     // ==================== QUIZ MANAGEMENT ====================
 
     selectBundesland(bundesland) {
+        console.log(`[QuizApp] Selecting Bundesland: ${bundesland}`);
         this.selectedBundesland = bundesland;
         Storage.saveBundesland(bundesland);
+
+        // Always clear active session when changing Bundesland
+        Storage.clearSession();
+        this.mode = null;
+        this.questions = [];
+        this.answers = {};
+        this.currentIndex = 0;
+        this.view = 'home';
+
+        console.log(`[QuizApp] Session cleared, Bundesland set to: ${this.selectedBundesland}`);
+
+        // Force full re-render by resetting the view cache
+        console.log(`[QuizApp] Before render: lastView = ${this.renderer.lastView}`);
+        this.renderer.lastView = null;
+        console.log(`[QuizApp] After setting null: lastView = ${this.renderer.lastView}`);
         this.render();
+        console.log(`[QuizApp] After render: lastView = ${this.renderer.lastView}`);
     }
 
     getAvailableBundeslaender() {
@@ -238,7 +279,21 @@ class QuizApp {
                 q.id > 300 && q.bundesland === this.selectedBundesland
             );
 
-            this.questions = [...federalQuestions, ...regionalQuestions];
+            // Renumber regional questions to always be 301-310
+            const renumberedRegionalQuestions = regionalQuestions.map((q, index) => ({
+                ...q,
+                id: 301 + index,
+                originalId: q.id  // Keep original ID for reference
+            }));
+
+            console.log(`[QuizApp] Starting full quiz with Bundesland: ${this.selectedBundesland}`);
+            console.log(`[QuizApp] Federal questions: ${federalQuestions.length}`);
+            console.log(`[QuizApp] Regional questions (${this.selectedBundesland}): ${renumberedRegionalQuestions.length}`);
+            if (renumberedRegionalQuestions.length > 0) {
+                console.log(`[QuizApp] Regional question IDs: ${renumberedRegionalQuestions.map(q => q.id).join(', ')}`);
+            }
+
+            this.questions = [...federalQuestions, ...renumberedRegionalQuestions];
 
             // No timer for full mode
             this.timer.startTime = null;
@@ -258,14 +313,26 @@ class QuizApp {
 
             if (regionalQuestions.length >= 3) {
                 const selectedRegional = this.getRandomQuestions(regionalQuestions, 3);
-                this.questions = [...selectedGeneral, ...selectedRegional];
+                // Renumber regional questions to 301, 302, 303
+                const renumberedRegionalQuestions = selectedRegional.map((q, index) => ({
+                    ...q,
+                    id: 301 + index,
+                    originalId: q.id
+                }));
+                this.questions = [...selectedGeneral, ...renumberedRegionalQuestions];
             } else {
                 alert(`Sorry, regional questions for ${this.selectedBundesland} are not yet available. Using Sachsen questions instead.`);
                 const fallbackRegional = this.allQuestions.filter(q =>
                     q.id > 300 && q.bundesland === 'Sachsen'
                 );
                 const selectedRegional = this.getRandomQuestions(fallbackRegional, 3);
-                this.questions = [...selectedGeneral, ...selectedRegional];
+                // Renumber regional questions to 301, 302, 303
+                const renumberedRegionalQuestions = selectedRegional.map((q, index) => ({
+                    ...q,
+                    id: 301 + index,
+                    originalId: q.id
+                }));
+                this.questions = [...selectedGeneral, ...renumberedRegionalQuestions];
             }
 
             // Start timer for simulation mode
@@ -321,14 +388,21 @@ class QuizApp {
 
     startTopicQuizByBundesland(bundesland) {
         // Filter questions by Bundesland
-        this.questions = this.allQuestions.filter(q =>
+        const regionalQuestions = this.allQuestions.filter(q =>
             q.id > 300 && q.bundesland === bundesland
         );
 
-        if (this.questions.length === 0) {
+        if (regionalQuestions.length === 0) {
             alert(`No questions found for ${bundesland}!`);
             return;
         }
+
+        // Renumber regional questions to always be 301-310
+        this.questions = regionalQuestions.map((q, index) => ({
+            ...q,
+            id: 301 + index,
+            originalId: q.id
+        }));
 
         // Set mode to 'topic' for practice mode (no timer)
         this.mode = 'topic';

@@ -237,17 +237,30 @@ class Navigation {
     goToQuestion(questionId) {
         const id = parseInt(questionId);
 
+        console.log(`[Navigation] Jump to question ${id} requested`);
+        console.log(`[Navigation] Current questions count: ${this.app.questions.length}`);
+        console.log(`[Navigation] Question IDs: ${this.app.questions.map(q => q.id).slice(0, 5).join(', ')}...${this.app.questions.map(q => q.id).slice(-5).join(', ')}`);
+
         if (!questionId || isNaN(id)) {
             alert('Please enter a valid question number.');
             return;
         }
 
-        if (id < 1 || id > 310) {
-            alert('Question number must be between 1 and 310.');
+        // Get the min and max question IDs from current questions
+        const questionIds = this.app.questions.map(q => q.id);
+        const minId = Math.min(...questionIds);
+        const maxId = Math.max(...questionIds);
+
+        console.log(`[Navigation] Valid range: ${minId} - ${maxId}`);
+
+        if (id < minId || id > maxId) {
+            alert(`Question number must be between ${minId} and ${maxId}.`);
             return;
         }
 
         const index = this.app.questions.findIndex(q => q.id === id);
+        console.log(`[Navigation] Found question at index: ${index}`);
+
         if (index !== -1) {
             // Update to the new question index
             this.app.currentIndex = index;

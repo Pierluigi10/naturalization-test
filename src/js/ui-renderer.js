@@ -19,8 +19,15 @@ class UIRenderer {
         const appElement = document.getElementById('app');
         const currentView = this.getCurrentViewKey();
 
-        // Only do full render if view changed
-        if (this.lastView !== currentView) {
+        console.log(`[UIRenderer] render() called - lastView: ${this.lastView}, currentView: ${currentView}`);
+
+        // Check if we need to force a full render (when lastView is explicitly set to null)
+        const forceRender = this.lastView === null;
+        console.log(`[UIRenderer] forceRender: ${forceRender}`);
+
+        // Only do full render if view changed OR forced
+        if (this.lastView !== currentView || forceRender) {
+            console.log(`[UIRenderer] Full render triggered (view: ${currentView}, forced: ${forceRender})`);
             if (this.app.allQuestions.length === 0) {
                 appElement.innerHTML = this.renderImport();
             } else if (this.app.view === 'home') {
@@ -267,6 +274,10 @@ class UIRenderer {
         const regionalQuestionsCount = this.app.allQuestions.filter(q =>
             q.id > 300 && q.bundesland === this.app.selectedBundesland
         ).length;
+
+        console.log(`[UIRenderer] renderHome() called`);
+        console.log(`[UIRenderer] Selected Bundesland: ${this.app.selectedBundesland}`);
+        console.log(`[UIRenderer] Regional questions count: ${regionalQuestionsCount}`);
 
         // Check if there's any saved quiz data to show Stats button
         const savedMode = Storage.loadMode();

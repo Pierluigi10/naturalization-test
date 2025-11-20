@@ -14,7 +14,23 @@ const Storage = {
         REVIEW_QUESTIONS: 'quiz-review-questions',
         DARK_MODE: 'dark-mode',
         ACHIEVEMENTS: 'achievements',
-        STATS_HISTORY: 'stats-history'
+        STATS_HISTORY: 'stats-history',
+        VERSION: 'app-version'
+    },
+
+    // Current app version - increment this to force localStorage clear
+    APP_VERSION: '2.0.0',
+
+    /**
+     * Check version and clear localStorage if needed
+     */
+    checkVersion() {
+        const storedVersion = localStorage.getItem(this.KEYS.VERSION);
+        if (storedVersion !== this.APP_VERSION) {
+            console.log(`[Storage] Version mismatch (${storedVersion} → ${this.APP_VERSION}). Clearing session...`);
+            this.clearSession();
+            localStorage.setItem(this.KEYS.VERSION, this.APP_VERSION);
+        }
     },
 
     /**
