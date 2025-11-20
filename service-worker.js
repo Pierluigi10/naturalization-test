@@ -1,7 +1,7 @@
 // Service Worker for Einbürgerungstest PWA
 // Provides offline functionality and fast loading
 
-const CACHE_NAME = 'einbuergerungstest-v5';
+const CACHE_NAME = 'einbuergerungstest-v6';
 const MAX_CACHE_SIZE = 50 * 1024 * 1024; // 50MB max cache size
 const MAX_CACHE_AGE = 30 * 24 * 60 * 60 * 1000; // 30 days
 

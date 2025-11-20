@@ -13,13 +13,12 @@ const Storage = {
         FONT_SIZE: 'font-size',
         REVIEW_QUESTIONS: 'quiz-review-questions',
         DARK_MODE: 'dark-mode',
-        ACHIEVEMENTS: 'achievements',
         STATS_HISTORY: 'stats-history',
         VERSION: 'app-version'
     },
 
     // Current app version - increment this to force localStorage clear
-    APP_VERSION: '2.0.0',
+    APP_VERSION: '2.1.0',
 
     /**
      * Check version and clear localStorage if needed
@@ -348,51 +347,6 @@ const Storage = {
      */
     loadDarkMode() {
         return localStorage.getItem(this.KEYS.DARK_MODE) === 'true';
-    },
-
-    // ==================== ACHIEVEMENTS ====================
-
-    /**
-     * Save achievements data
-     * @param {Object} achievements - Achievements object
-     */
-    saveAchievements(achievements) {
-        return this.safeSetItem(this.KEYS.ACHIEVEMENTS, JSON.stringify(achievements));
-    },
-
-    /**
-     * Load achievements data
-     * @returns {Object} Achievements object
-     */
-    loadAchievements() {
-        try {
-            const stored = localStorage.getItem(this.KEYS.ACHIEVEMENTS);
-            return stored ? JSON.parse(stored) : this.getDefaultAchievements();
-        } catch (error) {
-            console.error('[Storage] Failed to load achievements:', error);
-            return this.getDefaultAchievements();
-        }
-    },
-
-    /**
-     * Get default achievements structure
-     * @returns {Object} Default achievements
-     */
-    getDefaultAchievements() {
-        return {
-            firstTestCompleted: false,
-            tenTestsCompleted: false,
-            perfectScore: false,
-            sevenDayStreak: false,
-            allQuestionsSeen: false,
-            speedDemon: false,
-            // Stats for tracking
-            testsCompleted: 0,
-            lastTestDate: null,
-            currentStreak: 0,
-            questionsSeen: [],
-            bestTime: null
-        };
     },
 
     // ==================== STATS HISTORY ====================

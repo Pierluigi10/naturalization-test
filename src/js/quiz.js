@@ -24,16 +24,6 @@ class QuizApp {
         this.fontSize = Storage.loadFontSize();
         this.darkMode = Storage.loadDarkMode();
 
-        // Achievements - with error handling
-        try {
-            this.achievements = Storage.loadAchievements();
-        } catch (error) {
-            console.error('[QuizApp] Failed to load achievements:', error);
-            // Clear corrupted achievements data
-            localStorage.removeItem(Storage.KEYS.ACHIEVEMENTS);
-            this.achievements = Storage.getDefaultAchievements();
-        }
-
         // Bundesländer list
         this.bundeslaender = [
             'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg',
@@ -544,7 +534,7 @@ class QuizApp {
     }
 
     /**
-     * Save test result to history for achievements tracking
+     * Save test result to history
      */
     saveTestResultToHistory() {
         const stats = this.statistics.getStats();
