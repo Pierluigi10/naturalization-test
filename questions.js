@@ -3453,12 +3453,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Baden-Württemberg",
     "question": "Welches ist ein Landkreis in Baden- Württemberg?",
     "options": [
-      "Mecklenburgische",
-      "Seenplatte",
-      "Neckar -Odenwald-",
-      "Kreis"
+      "Mecklenburgische Seenplatte",
+      "Neckar-Odenwald-Kreis",
+      "Prignitz",
+      "Nordfriesland"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 313,
@@ -3470,7 +3470,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 314,
@@ -3482,31 +3482,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 315,
     "bundesland": "Baden-Württemberg",
     "question": "Welche Farben hat die Landesflagge von Baden -Württemberg?",
     "options": [
-      "blau- weiß",
-      "-rot schwarz-",
-      "gold weiß",
-      "-blau grün"
+      "blau-weiß-rot",
+      "schwarz-gold",
+      "weiß-blau",
+      "grün-weiß-rot"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 316,
     "bundesland": "Baden-Württemberg",
     "question": "Wo können Sie sich in Baden- Württemberg über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der",
-      "Verbraucherzentrale bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Verbraucherzentrale",
+      "bei der Landeszentrale für politische Bildung",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 317,
@@ -3518,7 +3518,7 @@ const QUESTIONS_DATA = [
       "Karlsruhe.",
       "Mannheim."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 318,
@@ -3538,36 +3538,36 @@ const QUESTIONS_DATA = [
     "bundesland": "Baden-Württemberg",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Baden- Württemberg?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
     "correct": 0
   },
   {
     "id": 320,
     "bundesland": "Baden-Württemberg",
-    "question": "Welche Minister in/ welchen Minister hat Baden -Württemberg nicht ?",
+    "question": "Welche Minister in/ welchen Minister hat Baden -Württemberg nicht?",
     "options": [
-      "Finanzministerin /Finanzminister",
-      "Justizministerin /Justizminister",
+      "Finanzministerin/ Finanzminister",
+      "Justizministerin / Justizminister",
       "Innenministerin/Innenminister",
       "Außenministerin/Außenminister"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 321,
     "bundesland": "Bayern",
-    "question": "Welches Wappen gehört zum Freist aat Bayern?",
+    "question": "Welches Wappen gehört zum Freistaat Bayern?",
     "options": [
       "Bild 1",
       "Bild 2",
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 1,
     "image": "images/q_321.png"
   },
   {
@@ -3576,11 +3576,11 @@ const QUESTIONS_DATA = [
     "question": "Welches ist ein Landkreis in Bayern?",
     "options": [
       "Prignitz",
-      "Rhein-",
-      "Sieg -Kreis",
-      "Nordfriesland"
+      "Rhein-Sieg-Kreis",
+      "Nordfriesland",
+      "Altötting"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 323,
@@ -3592,7 +3592,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 324,
@@ -3604,31 +3604,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 325,
     "bundesland": "Bayern",
     "question": "Welche Farben hat die Landesflagge von Bayern?",
     "options": [
-      "blau- weiß",
-      "-rot weiß",
-      "-blau grün",
-      "-weiß -rot"
+      "blau-weiß-rot",
+      "weiß-blau",
+      "grün-weiß-rot",
+      "schwarz-gelb"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 326,
     "bundesland": "Bayern",
     "question": "Wo können Sie sich in Bayern über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der",
-      "Landeszentrale für politische"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 327,
@@ -3640,7 +3640,7 @@ const QUESTIONS_DATA = [
       "Nürnberg.",
       "München."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 328,
@@ -3652,7 +3652,7 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_328.png"
   },
   {
@@ -3660,12 +3660,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Bayern",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Bayern?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 330,
@@ -3677,7 +3677,7 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 331,
@@ -3689,7 +3689,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_331.png"
   },
   {
@@ -3700,9 +3700,9 @@ const QUESTIONS_DATA = [
       "Altona",
       "Prignitz",
       "Pankow",
-      "Mecklenburgische"
+      "Mecklenburgische Seenplatte"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 333,
@@ -3714,7 +3714,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 334,
@@ -3726,31 +3726,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 335,
     "bundesland": "Berlin",
     "question": "Welche Farben hat die Landesflagge von Berlin?",
     "options": [
-      "blau- weiß",
-      "-rot weiß",
-      "-rot grün",
-      "-weiß -rot"
+      "blau-weiß-rot",
+      "weiß-rot",
+      "grün-weiß-rot",
+      "schwarz-gelb"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 336,
     "bundesland": "Berlin",
     "question": "Wo können Sie sich in Berlin über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei den",
-      "Kirchen bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei den Kirchen",
+      "bei der Verbraucherzentrale",
+      "bei der Landeszentrale für politische Bildung"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 337,
@@ -3759,11 +3759,10 @@ const QUESTIONS_DATA = [
     "options": [
       "Berlin",
       "Saarland",
-      "Brandenb urg",
+      "Brandenburg",
       "Hessen"
     ],
-    "correct": 0,
-    "image": "images/q_337.png"
+    "correct": 0
   },
   {
     "id": 338,
@@ -3775,7 +3774,7 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_338.png"
   },
   {
@@ -3785,10 +3784,10 @@ const QUESTIONS_DATA = [
     "options": [
       "Ministerpräsidentin/Ministerpräsident",
       "Oberbürgermeisterin/Oberbürgermeister",
-      "Präsidentin/Präsident des",
-      "Senates"
+      "Präsidentin/Präsident des Senates",
+      "Regierender Bürgermeister/ Regierende Bürgermeisterin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 340,
@@ -3797,10 +3796,10 @@ const QUESTIONS_DATA = [
     "options": [
       "Finanzsenatorin/Finanzsenator",
       "Innensenatorin/Innensenator",
-      "Senatorin/Senator für",
-      "Außenbeziehungen"
+      "Senatorin/Senator für Außenbeziehungen",
+      "Justizsenator / Justizsenatorin"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 341,
@@ -3821,9 +3820,9 @@ const QUESTIONS_DATA = [
     "question": "Welches ist ein Landkreis in Brandenburg?",
     "options": [
       "Prignitz",
-      "Rhein-",
-      "Sieg -Kreis",
-      "Vogtlandkreis"
+      "Rhein-Sieg -Kreis",
+      "Vogtlandkreis",
+      "Amberg-Sulzbach"
     ],
     "correct": 0
   },
@@ -3837,7 +3836,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 344,
@@ -3849,31 +3848,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 345,
     "bundesland": "Brandenburg",
     "question": "Welche Farben hat die Landesflagge von Brandenburg?",
     "options": [
-      "blau- weiß",
-      "-rot rot-weiß",
-      "grün -weiß",
-      "-rot schwarz-"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gelb"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 346,
     "bundesland": "Brandenburg",
     "question": "Wo können Sie sich in Brandenburg über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der"
+      "bei den Kirchen",
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 347,
@@ -3897,7 +3896,7 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_348.png"
   },
   {
@@ -3905,24 +3904,24 @@ const QUESTIONS_DATA = [
     "bundesland": "Brandenburg",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Brandenburg?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 350,
     "bundesland": "Brandenburg",
-    "question": "Welche Minister in/ welchen Minister hat Brandenburg nicht ?",
+    "question": "Welche Minister in/ welchen Minister hat Brandenburg nicht?",
     "options": [
       "Justizministerin /Justizminister",
       "Außenministerin/Außenminister",
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 351,
@@ -3934,7 +3933,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_351.png"
   },
   {
@@ -3947,7 +3946,7 @@ const QUESTIONS_DATA = [
       "Pankow",
       "Babelsberg"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 353,
@@ -3959,7 +3958,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 354,
@@ -3971,31 +3970,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 355,
     "bundesland": "Bremen",
     "question": "Welche Farben hat die Landesflagge von Bremen?",
     "options": [
-      "blau- weiß",
-      "-rot rot-weiß",
-      "grün -weiß",
-      "-rot schwarz-"
+      "blau- weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 356,
     "bundesland": "Bremen",
     "question": "Wo können Sie sich in Bremen über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der",
-      "Landeszentrale für politische"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei den Kirchen",
+      "bei der Verbraucherzentrale"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 357,
@@ -4007,7 +4006,7 @@ const QUESTIONS_DATA = [
       "Frankfurt",
       "Erfurt"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 358,
@@ -4020,29 +4019,29 @@ const QUESTIONS_DATA = [
       "4"
     ],
     "correct": 0,
-    "image": "images/q_358.png"
+    "image": "images/q_338.png"
   },
   {
     "id": 359,
     "bundesland": "Bremen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef des Stadtstaates Bremen?",
     "options": [
-      "Ministerpräsidentin/Ministerpräsident",
-      "Erste",
-      "Bürgermeisterin/Erster",
-      "Bürgermeister"
+      "Ministerpräsident/ Ministerpräsidentin",
+      "Erster Bürgermeister/ Erste Bürgermeisterin",
+      "Präsident/ Präsidentin des Senats",
+      "Regierender Bürgermeister/ Regierende Bürgermeisterin"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 360,
     "bundesland": "Bremen",
-    "question": "Welche Senator in/ welchen Senator hat Bremen nicht ?",
+    "question": "Welche Senator in/ welchen Senator hat Bremen nicht?",
     "options": [
-      "Senatorin/Senator für",
-      "Außenbeziehungen",
+      "Senatorin/Senator für Außenbeziehungen",
       "Finanzsenatorin/Finanzsenator",
-      "Justizsenatorin/Justizsenator"
+      "Justizsenatorin/Justizsenator",
+      "Innensenator / Innensenatorin"
     ],
     "correct": 0
   },
@@ -4056,7 +4055,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 1,
     "image": "images/q_361.png"
   },
   {
@@ -4081,7 +4080,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 364,
@@ -4093,31 +4092,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 365,
     "bundesland": "Hamburg",
     "question": "Welche Farben hat die Landesflagge von Hamburg?",
     "options": [
-      "blau- weiß",
-      "-rot weiß",
-      "-rot grün",
-      "-weiß -rot"
+      "blau- weiß-rot",
+      "weiß-rot",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 366,
     "bundesland": "Hamburg",
     "question": "Wo können Sie sich in Hamburg über politische Themen informieren?",
     "options": [
-      "beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der",
-      "Verbraucherzentrale bei den"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 367,
@@ -4126,11 +4125,10 @@ const QUESTIONS_DATA = [
     "options": [
       "Hamburg",
       "Sachsen",
-      "Bayer",
-      "n"
+      "Bayern",
+      "Thüringen"
     ],
-    "correct": 0,
-    "image": "images/q_367.png"
+    "correct": 0
   },
   {
     "id": 368,
@@ -4142,20 +4140,20 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 0,
-    "image": "images/q_368.png"
+    "correct": 2,
+    "image": "images/q_338.png"
   },
   {
     "id": 369,
     "bundesland": "Hamburg",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef des Stadtstaates Hamburg?",
     "options": [
-      "Ministerpräsidentin/Ministerpräsident",
-      "Erste",
-      "Bürgermeisterin/Erster",
-      "Bürgermeister"
+      "Regierender Senator / Regierende Senatorin",
+      "Oberbürgermeister / Oberbürgermeisterin",
+      "Erster Bürgermeister / Erste Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 370,
@@ -4163,11 +4161,11 @@ const QUESTIONS_DATA = [
     "question": "Welche Senator in/ welchen Senator hat Hamburg nicht ?",
     "options": [
       "Justizsenatorin/Justizsenator",
-      "Senatorin/Senator für",
-      "Außenbeziehungen",
-      "Finanzsenatorin/Finanzsenator"
+      "Senatorin/Senator für Außenbeziehungen",
+      "Finanzsenatorin/Finanzsenator",
+      "Innensenator / Innensenatorin"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 371,
@@ -4190,9 +4188,9 @@ const QUESTIONS_DATA = [
       "Ammerland",
       "Altötting",
       "Prignitz",
-      "Main -Taunus -Kreis"
+      "Main-Taunus -Kreis"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 373,
@@ -4204,7 +4202,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 374,
@@ -4216,31 +4214,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 375,
     "bundesland": "Hessen",
     "question": "Welche Farben hat die Landesflagge von Hessen?",
     "options": [
-      "blau- weiß",
-      "-rot rot-weiß",
-      "schwarz- gold",
-      "grün -weiß"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 376,
     "bundesland": "Hessen",
     "question": "Wo können Sie sich in Hessen über politische Themen informieren?",
     "options": [
-      "bei der",
-      "Landeszentrale für politische",
-      "Bildung bei der",
-      "Verbraucherzentrale beim"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 377,
@@ -4252,7 +4250,7 @@ const QUESTIONS_DATA = [
       "Frankfurt.",
       "Wiesbaden."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 378,
@@ -4264,7 +4262,7 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_378.png"
   },
   {
@@ -4272,12 +4270,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Hessen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Hessen?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 380,
@@ -4289,7 +4287,7 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 381,
@@ -4301,7 +4299,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_381.png"
   },
   {
@@ -4310,11 +4308,11 @@ const QUESTIONS_DATA = [
     "question": "Welches ist ein Landkreis in Mecklenburg -Vorpommern?",
     "options": [
       "Prignitz",
-      "Mecklenburgische",
+      "Mecklenburgische Seenplatte",
       "Seenplatte",
-      "Vogtlandkreis"
+      "Rhein-Sieg-Kreis"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 383,
@@ -4326,7 +4324,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 384,
@@ -4338,31 +4336,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 385,
     "bundesland": "Mecklenburg-Vorpommern",
     "question": "Welche Farben hat die Landesflagge von Mecklenburg -Vorpommern?",
     "options": [
-      "schwarz- rot-gold",
-      "blau- weiß",
-      "-gelb -rot",
-      "grün -weiß"
+      "schwarz-rot-gold",
+      "blau-weiß-gelb-rot",
+      "grün-weiß-rot",
+      "schwarz-gelb"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 386,
     "bundesland": "Mecklenburg-Vorpommern",
     "question": "Wo können Sie sich in Mecklenburg -Vorpommern über politische Themen informieren?",
     "options": [
-      "bei der",
-      "Landeszentrale für politische",
-      "Bildung bei den",
-      "Kirchen beim"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 387,
@@ -4374,7 +4372,7 @@ const QUESTIONS_DATA = [
       "Rostock.",
       "Wismar."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 388,
@@ -4386,7 +4384,7 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_388.png"
   },
   {
@@ -4394,12 +4392,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Mecklenburg-Vorpommern",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Mecklenburg -Vorpommern?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 390,
@@ -4411,7 +4409,7 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 391,
@@ -4423,7 +4421,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_391.png"
   },
   {
@@ -4432,8 +4430,8 @@ const QUESTIONS_DATA = [
     "question": "Welches ist ein Landkreis in Niedersachsen?",
     "options": [
       "Ammerland",
-      "Rhein-",
-      "Sieg -Kreis",
+      "Rhein-Sieg-Kreis",
+      "Vogtlandkreis",
       "Nordfriesland"
     ],
     "correct": 0
@@ -4448,7 +4446,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 394,
@@ -4460,31 +4458,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 395,
     "bundesland": "Niedersachsen",
     "question": "Welche Farben hat die Landesflagge von Niedersachsen?",
     "options": [
-      "weiß -blau",
-      "schwarz- rot-gold",
-      "schwarz- gelb",
-      "blau- weiß"
+      "weiß-blau",
+      "schwarz-rot-gold",
+      "schwarz-gelb",
+      "blau-weiß-rot"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 396,
     "bundesland": "Niedersachsen",
     "question": "Wo können Sie sich in Niedersachsen über politische Themen informieren?",
     "options": [
-      "bei der",
-      "Landeszentrale für politische",
-      "Bildung beim",
-      "Ordnungsamt der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 397,
@@ -4516,12 +4514,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Niedersachsen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Niedersachsen?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 400,
@@ -4533,7 +4531,7 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 401,
@@ -4545,7 +4543,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 1,
     "image": "images/q_401.png"
   },
   {
@@ -4554,11 +4552,11 @@ const QUESTIONS_DATA = [
     "question": "Welches ist ein Landkreis in Nordrhein- Westfalen?",
     "options": [
       "Ammerland",
-      "Rhein-",
-      "Sieg -Kreis",
+      "Rhein-Sieg -Kreis",
+      "Vogtlandkreis",
       "Nordfriesland"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 403,
@@ -4570,7 +4568,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 404,
@@ -4582,31 +4580,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 405,
     "bundesland": "Nordrhein-Westfalen",
     "question": "Welche Farben hat die Landesflagge von Nordrhein- Westfalen?",
     "options": [
-      "rot-weiß grün",
-      "-weiß -rot",
-      "schwarz- gold",
-      "blau- weiß"
+      "blau-weiß-rot",
+      "rot-weiß",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 406,
     "bundesland": "Nordrhein-Westfalen",
     "question": "Wo können Sie sich in Nordrhein- Westfalen über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen beim",
-      "Ordnungsamt der",
-      "Gemeinde bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 407,
@@ -4618,7 +4616,7 @@ const QUESTIONS_DATA = [
       "Düsseldorf.",
       "Dortmund."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 408,
@@ -4630,7 +4628,7 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_408.png"
   },
   {
@@ -4638,12 +4636,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Nordrhein-Westfalen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Nordrhein- Westfalen?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 410,
@@ -4655,7 +4653,7 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 411,
@@ -4692,7 +4690,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 414,
@@ -4704,31 +4702,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 415,
     "bundesland": "Rheinland-Pfalz",
     "question": "Welche Farben hat die Landesflagge von R heinland- Pfalz?",
     "options": [
-      "weiß -rot",
-      "schwarz- rot-gold",
-      "schwarz- gelb",
-      "grün -weiß"
+      "weiß-rot",
+      "schwarz-rot-gold",
+      "schwarz-gelb",
+      "grün-weiß-rot"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 416,
     "bundesland": "Rheinland-Pfalz",
     "question": "Wo können Sie sich in Rheinland- Pfalz über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen bei der",
-      "Verbraucherzentrale beim",
-      "Ordnungsamt der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 417,
@@ -4760,12 +4758,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Rheinland-Pfalz",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Rheinland- Pfalz?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 420,
@@ -4777,7 +4775,7 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 421,
@@ -4789,7 +4787,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_421.png"
   },
   {
@@ -4797,12 +4795,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Saarland",
     "question": "Welches ist ein Landkreis im Saarland?",
     "options": [
-      "Mecklenburgische",
-      "Seenplatte",
+      "Mecklenburgische Seenplatte",
       "Altötting",
-      "Neunkirchen"
+      "Neunkirchen",
+      "Rhein-Sieg-Kreis"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 423,
@@ -4814,7 +4812,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 424,
@@ -4826,31 +4824,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 425,
     "bundesland": "Saarland",
     "question": "Welche Farben hat die Landesflagge des Saarlandes?",
     "options": [
-      "weiß -blau",
-      "schwarz- rot-gold",
-      "schwarz- gelb",
-      "grün -weiß"
+      "weiß-blau",
+      "schwarz-rot-gold",
+      "schwarz-gelb",
+      "grün-weiß"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 426,
     "bundesland": "Saarland",
     "question": "Wo können Sie sich im Saarland über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen bei der",
-      "Landeszentrale für politische",
-      "Bildung bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 427,
@@ -4862,7 +4860,7 @@ const QUESTIONS_DATA = [
       "Saarbrücken.",
       "Völklingen."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 428,
@@ -4882,12 +4880,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Saarland",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef des Saarlandes?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 430,
@@ -4899,7 +4897,7 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 431,
@@ -4911,7 +4909,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_431.png"
   },
   {
@@ -4924,7 +4922,7 @@ const QUESTIONS_DATA = [
       "Uckermark",
       "Börde"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 433,
@@ -4936,7 +4934,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 434,
@@ -4948,31 +4946,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 435,
     "bundesland": "Sachsen-Anhalt",
     "question": "Welche Farben hat die Landesflagge von Sachsen- Anhalt?",
     "options": [
-      "blau- weiß",
-      "-rot gelb",
-      "-schwarz grün",
-      "-weiß -rot"
+      "blau-weiß-rot",
+      "gelb-schwarz",
+      "grün-weiß-rot",
+      "weiß-rot"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 436,
     "bundesland": "Sachsen-Anhalt",
     "question": "Wo können Sie sich in Sachsen- Anhalt über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen bei der",
-      "Landeszentrale für politische",
-      "Bildung beim"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 437,
@@ -4982,9 +4980,9 @@ const QUESTIONS_DATA = [
       "Halle.",
       "Dessau.",
       "Magdeburg",
-      "."
+      "Wittenberg."
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 438,
@@ -5004,12 +5002,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Sachsen-Anhalt",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Sachsen- Anhalt?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 440,
@@ -5021,32 +5019,32 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 441,
     "bundesland": "Schleswig-Holstein",
-    "question": "Welches Wappen gehört zum Bundesland Schleswig -Holstein?",
+    "question": "Welches Wappen gehört zum Bundesland Schleswig-Holstein?",
     "options": [
       "Bild 1",
       "Bild 2",
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 2,
     "image": "images/q_441.png"
   },
   {
     "id": 442,
     "bundesland": "Schleswig-Holstein",
-    "question": "Welches ist ein Landkreis in Schleswig -Holstein?",
+    "question": "Welches ist ein Landkreis in Schleswig-Holstein?",
     "options": [
       "Ammerland",
-      "Mecklenburgische",
-      "Seenplatte",
-      "Nordfriesland"
+      "Mecklenburgische Seenplatte",
+      "Nordfriesland",
+      "Rhein-Sieg-Kreis"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 443,
@@ -5058,7 +5056,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 444,
@@ -5070,48 +5068,48 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 445,
     "bundesland": "Schleswig-Holstein",
     "question": "Welche Farben hat die Landesflagge von Schleswig -Holstein?",
     "options": [
-      "weiß -blau",
-      "blau- weiß",
-      "-rot weiß",
-      "-rot grün"
+      "weiß-blau",
+      "blau-weiß-rot",
+      "weiß-rot",
+      "grün-weiß-rot"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 446,
     "bundesland": "Schleswig-Holstein",
-    "question": "Wo können Sie sich in Schleswig -Holstein über politische Themen informieren?",
+    "question": "Wo können Sie sich in Schleswig-Holstein über politische Themen informieren?",
     "options": [
-      "bei der",
-      "Verbraucherzentrale beim",
-      "Ordnungsamt der",
-      "Gemeinde beim bei der"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 447,
     "bundesland": "Schleswig-Holstein",
-    "question": "Die Landeshauptstadt von Schleswig -Holstein heißt …",
+    "question": "Die Landeshauptstadt von Schleswig-Holstein heißt …",
     "options": [
       "Husum.",
       "Flensburg.",
       "Lübeck.",
       "Kiel."
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 448,
     "bundesland": "Schleswig-Holstein",
-    "question": "Welches Bundesland ist Schleswig -Holstein?",
+    "question": "Welches Bundesland ist Schleswig-Holstein?",
     "options": [
       "1",
       "2",
@@ -5126,12 +5124,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Schleswig-Holstein",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Schleswig -Holstein?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 450,
@@ -5143,7 +5141,7 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 451,
@@ -5155,7 +5153,7 @@ const QUESTIONS_DATA = [
       "Bild 3",
       "Bild 4"
     ],
-    "correct": 0,
+    "correct": 3,
     "image": "images/q_451.png"
   },
   {
@@ -5168,7 +5166,7 @@ const QUESTIONS_DATA = [
       "Nordfriesland",
       "Wartburgkreis"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 453,
@@ -5180,7 +5178,7 @@ const QUESTIONS_DATA = [
       "5",
       "6"
     ],
-    "correct": 0
+    "correct": 2
   },
   {
     "id": 454,
@@ -5192,31 +5190,31 @@ const QUESTIONS_DATA = [
       "18",
       "20"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 455,
     "bundesland": "Thüringen",
     "question": "Welche Farben hat die Landesflagge von Thüringen?",
     "options": [
-      "blau- weiß",
-      "-rot weiß",
-      "-rot grün",
-      "-weiß -rot"
+      "blau-weiß-rot",
+      "weiß-rot",
+      "grün-weiß-rot",
+      "schwarz-gold"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 456,
     "bundesland": "Thüringen",
     "question": "Wo können Sie sich in Thüringen über politische Themen informieren?",
     "options": [
-      "bei den",
-      "Kirchen bei der",
-      "Verbraucherzentrale bei der",
-      "Landeszentrale für politische"
+      "beim Ordnungsamt der Gemeinde",
+      "bei der Landeszentrale für politische Bildung",
+      "bei der Verbraucherzentrale",
+      "bei den Kirchen"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 457,
@@ -5228,7 +5226,7 @@ const QUESTIONS_DATA = [
       "Gera.",
       "Jena."
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "id": 458,
@@ -5240,7 +5238,7 @@ const QUESTIONS_DATA = [
       "3",
       "4"
     ],
-    "correct": 0,
+    "correct": 1,
     "image": "images/q_458.png"
   },
   {
@@ -5248,12 +5246,12 @@ const QUESTIONS_DATA = [
     "bundesland": "Thüringen",
     "question": "Wie nennt man die Regierungschefin/den Regierungschef in Thüringen?",
     "options": [
-      "Erste",
-      "Ministerin/Erster",
-      "Minister",
-      "Premierministerin /Premierminister"
+      "Erster Minister/ Erste Ministerin",
+      "Premierministerin /Premierminister",
+      "Bürgermeister/ Bürgermeisterin",
+      "Ministerpräsident/ Ministerpräsidentin"
     ],
-    "correct": 0
+    "correct": 3
   },
   {
     "id": 460,
@@ -5265,7 +5263,7 @@ const QUESTIONS_DATA = [
       "Finanzministerin /Finanzminister",
       "Innenministerin/Innenminister"
     ],
-    "correct": 0
+    "correct": 1
   }
 ];
 
